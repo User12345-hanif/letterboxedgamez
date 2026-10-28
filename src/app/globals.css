@@ -159,6 +159,11 @@ body {
   outline-color: var(--color-gold);
 }
 
+/* Footer links also sit on the dark forest background. */
+footer :focus-visible {
+  outline-color: var(--color-gold);
+}
+
 /* Side patterns: shape + texture, not colour alone. */
 .side-pattern-top {
   background-image: linear-gradient(0deg, rgb(26 92 52 / 0.08), rgb(26 92 52 / 0.08));
