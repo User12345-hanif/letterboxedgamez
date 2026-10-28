@@ -1,20 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { canonical, SITE } from "@/lib/site";
 import "./globals.css";
 
-const display = Fraunces({
-  subsets: ["latin"],
+// Self-hosted fonts (latin variable files, OFL-licensed Inter and Fraunces).
+// The files are committed as base64 text (`*.woff2.b64`) and decoded to
+// `.woff2` by scripts/prepare-fonts.mjs via the prebuild/predev hooks,
+// because the GitHub snapshot push rejects binary files. The build must
+// not depend on fetching and parsing live Google Fonts CSS: on Vercel
+// that fetch produced a response `next/font/google` could not parse,
+// crashing the build with "TypeError: Cannot read properties of null
+// (reading '1')" in its loader. These are the same files the Google
+// Fonts build emitted, so the rendered typography is unchanged.
+const display = localFont({
+  src: [
+    { path: "./fonts/fraunces-latin.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/fraunces-latin.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-display",
   display: "swap",
-  weight: ["600", "700"],
 });
 
-const sans = Inter({
-  subsets: ["latin"],
+const sans = localFont({
+  src: [
+    { path: "./fonts/inter-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/inter-latin.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/inter-latin.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/inter-latin.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

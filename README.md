@@ -142,3 +142,13 @@ and recorded in `docs/seo-keyword-map.md`:
 Deploy as a standard Next.js app (Vercel, or `next build` + `next start`
 anywhere Node 20+ runs). Set the production domain in `src/lib/site.ts`
 (`SITE.url`) — it is already `https://letterboxedgamez.com`.
+
+Fonts are self-hosted: `src/app/fonts/` holds the latin variable files for
+Fraunces (600/700) and Inter (400–700) as base64 text (`*.woff2.b64`),
+loaded with `next/font/local`. `scripts/prepare-fonts.mjs` (run by the
+`predev`/`prebuild` hooks) decodes them to `.woff2` at build time; the
+binaries are generated artifacts and are not committed, because snapshot
+pushes reject non-UTF-8 files. Do not switch back to `next/font/google`
+— the build must not depend on fetching and parsing live Google Fonts
+CSS at build time (a response `next/font` could not parse crashed the
+first Vercel build).
