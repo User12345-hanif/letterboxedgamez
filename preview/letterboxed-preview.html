@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letterboxed Gamez — playable preview</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f6eeda; background-image: radial-gradient(700px 380px at 88% -8%, rgba(227,185,62,.22), transparent 60%), radial-gradient(600px 340px at -10% -4%, rgba(26,92,52,.16), transparent 55%); color: #1d2b20; font-family: Georgia, "Times New Roman", serif; }
+.wrap { max-width: 620px; margin: 0 auto; padding: 18px 16px 28px; }
+.badge { display: inline-block; border: 1px solid rgba(193,154,46,.55); background: #f8ecc9; border-radius: 999px; padding: 4px 12px; font-family: system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #0f3d22; }
+h1 { font-size: 30px; line-height: 1.1; margin: 12px 0 4px; }
+.sub { font-family: system-ui, sans-serif; font-size: 14px; line-height: 1.5; color: #5c6b5f; margin: 0 0 14px; }
+.try { background: #fffdf6; border: 1px solid #e3dcc8; border-radius: 16px; padding: 12px 14px; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.55; color: #3d4a40; }
+.try b { color: #1e4d2b; }
+select { font: inherit; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; padding: 10px 12px; border-radius: 12px; border: 1px solid #c9c2a8; background: #fff; color: #1c2b21; width: 100%; margin: 12px 0 4px; }
+.board { position: relative; width: 100%; max-width: 460px; aspect-ratio: 1; margin: 14px auto 6px; background: #0b2e1a; background-image: radial-gradient(rgba(248,236,201,.14) 1.1px, transparent 1.3px); background-size: 18px 18px; border: 3px solid #c19a2e; border-radius: 22px; box-shadow: 0 3px 0 rgba(156,122,29,.55), 0 24px 48px rgba(11,46,26,.35); }
+.tile { position: absolute; transform: translate(-50%,-50%); width: clamp(48px, 15vw, 62px); height: clamp(48px, 15vw, 62px); border-radius: 16px; border: 2px solid #e8d9a8; background: linear-gradient(#ffffff, #fdf3d7); box-shadow: 0 4px 0 rgba(156,122,29,.28), 0 8px 16px rgba(11,46,26,.28); font-family: Georgia, serif; font-size: 26px; font-weight: 700; color: #1c2b21; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; padding: 0; }
+.tile small { font-family: system-ui, sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #5c6b5f; margin-top: 3px; }
+.tile.side-top { background-image: linear-gradient(#ffffff, #fdf3d7); }
+.tile.side-right { background-image: repeating-linear-gradient(45deg, rgba(26,92,52,.08) 0 4px, transparent 4px 9px), linear-gradient(#ffffff, #fdf3d7); }
+.tile.side-bottom { background-image: radial-gradient(rgba(26,92,52,.15) 1.5px, transparent 1.6px), linear-gradient(#ffffff, #fdf3d7); background-size: 9px 9px, auto; }
+.tile.side-left { background-image: repeating-linear-gradient(45deg, rgba(26,92,52,.08) 0 3px, transparent 3px 7px), repeating-linear-gradient(-45deg, rgba(26,92,52,.08) 0 3px, transparent 3px 7px), linear-gradient(#ffffff, #fdf3d7); }
+.tile:disabled { opacity: 1; background-color: #3d5c46; background-image: none; border-color: #8a9a86; color: #eef2e4; cursor: not-allowed; }
+.tile:disabled small { color: #c8d4c2; }
+.tile.picked { background-color: transparent; background-image: linear-gradient(#e3b93e, #c19a2e); color: #1d2b20; border-color: #9c7a1d; }
+.tile.picked small { color: #0f3d22; }
+.tile.hinted { outline: 4px solid #e3b93e; outline-offset: 2px; }
+.tile .order { position: absolute; top: -8px; right: -8px; width: 22px; height: 22px; border-radius: 999px; background: #1a5c34; color: #fff; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; color: #5c6b5f; margin-bottom: 8px; }
+.word { text-align: center; font-size: 38px; font-weight: 800; letter-spacing: .08em; min-height: 50px; color: #0f3d22; }
+.word span.dim { color: #b8b49a; }
+.msg { min-height: 42px; text-align: center; font-family: system-ui, sans-serif; font-size: 14px; line-height: 1.45; padding: 8px 10px; border-radius: 12px; margin: 6px 0; }
+.msg.error { background: #fbe9e7; color: #7a2e1d; }
+.msg.ok { background: #e7ecdf; color: #1e4d2b; }
+.msg.info { background: #eef0ea; color: #3d4a40; }
+.controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 8px 0; }
+.controls button { min-height: 44px; border-radius: 999px; border: 1px solid #c9c2a8; background: #fff; font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; color: #1c2b21; cursor: pointer; padding: 0 4px; }
+.controls button.primary { background: linear-gradient(#2f7d4e, #1a5c34); border-color: #0f3d22; color: #fff; }
+.controls button:disabled { opacity: .45; cursor: not-allowed; }
+.progress { height: 10px; border-radius: 999px; background: #e7e2cf; overflow: hidden; }
+.progress > div { height: 100%; background: linear-gradient(90deg, #2f7d4e, #1a5c34, #c19a2e); border-radius: 999px; transition: width .2s; }
+.stats-row { display: flex; justify-content: space-between; font-family: system-ui, sans-serif; font-size: 13px; color: #5c6b5f; margin: 8px 0 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.chip { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; border: 1px solid #c9c2a8; background: #fff; border-radius: 999px; padding: 5px 10px; }
+.chip.used { background: #e7ecdf; border-color: #1e4d2b; color: #1e4d2b; text-decoration: line-through; }
+h2 { font-size: 19px; margin: 18px 0 6px; }
+.words { font-family: system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+.words li { margin-bottom: 4px; }
+.win { background: linear-gradient(#f8ecc9, #e9f2e4); border: 2px solid #c19a2e; border-radius: 16px; padding: 14px; font-family: system-ui, sans-serif; }
+.note { font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: #5c6b5f; margin-top: 16px; }
+kbd { background: #fff; border: 1px solid #c9c2a8; border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">Playable preview &middot; not a deployment</span>
+  <h1>Today&rsquo;s daily word puzzle</h1>
+  <p class="sub">Use every letter at least once. Two letters in a row must come from different sides. This preview uses the same puzzles, dictionary and rules as the Next.js site.</p>
+  <div class="try"><b>Try it in order:</b> 1. Tap letters to spell a word. 2. Tap <b>Submit</b>. 3. Start the next word with the last letter of the last one. 4. Tap <b>Hint</b> once for a nudge, again to reveal a word. 5. Tap <b>Undo</b> to remove one letter, <b>Clear</b> to start the word again. 6. Keep going until every letter is used. You can also type with your keyboard: letters, <kbd>Enter</kbd> to submit, <kbd>Backspace</kbd> to undo, <kbd>Esc</kbd> to clear.</div>
+  <label class="sub" for="puzzleSelect" style="display:block;margin-top:12px;font-weight:700;color:#1e4d2b;">Choose a puzzle</label>
+  <select id="puzzleSelect" aria-label="Choose a puzzle"></select>
+  <div class="legend" aria-label="How to tell the sides apart">
+    <span>Top &middot; solid</span><span>Right &#9670; diagonal</span><span>Bottom &#9650; dotted</span><span>Left &#9632; crosshatch</span>
+  </div>
+  <div class="board" id="board" role="group" aria-label="Puzzle board"></div>
+  <div class="word" id="word" aria-live="polite"><span class="dim">&mdash;</span></div>
+  <div class="msg info" id="msg" role="status">Pick letters in order. The first letter can be any letter on the board.</div>
+  <div class="controls">
+    <button type="button" id="submitBtn" class="primary">Submit</button>
+    <button type="button" id="undoBtn">Undo</button>
+    <button type="button" id="clearBtn">Clear</button>
+    <button type="button" id="hintBtn">Hint</button>
+    <button type="button" id="newBtn">New Game</button>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Letters used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div id="progressFill" style="width:0%"></div></div>
+  <div class="stats-row"><span id="usedCount">0 of 12 letters used</span><span id="hintsLeft">Hints: 3 left</span></div>
+  <h2>Letters</h2>
+  <div class="chips" id="chips"></div>
+  <h2>Words found <span id="wordCount">(0)</span></h2>
+  <ol class="words" id="words"></ol>
+  <div id="winBox" hidden></div>
+  <p class="note">Preview build generated from <code>src/lib/puzzles.ts</code>, <code>src/lib/dictionary.ts</code> and the rules in <code>src/lib/game.ts</code>. Solutions are never shown before you win. To play the actual Next.js site, run it locally — see the message with this preview for the exact commands. Nothing here is deployed.</p>
+</div>
+<script>
+var PUZZLES = [{"id":"capture-enjoys","label":"Puzzle 1","sides":[["C","U","J"],["A","R","O"],["P","E","Y"],["T","N","S"]],"solution":["CAPTURE","ENJOYS"],"hint":"Start with a word for seizing something, then a word for liking it."},{"id":"gardens-switch","label":"Puzzle 2","sides":[["G","E","I"],["A","N","T"],["R","S","C"],["D","W","H"]],"solution":["GARDENS","SWITCH"],"hint":"Begin in a place where flowers grow, then change something over."},{"id":"journey-yachts","label":"Puzzle 3","sides":[["J","N","C"],["O","E","H"],["U","Y","T"],["R","A","S"]],"solution":["JOURNEY","YACHTS"],"hint":"A long trip first, then the boats that might take you on one."},{"id":"fathoms-sliced","label":"Puzzle 4","sides":[["F","O","I"],["A","M","C"],["T","S","E"],["H","L","D"]],"solution":["FATHOMS","SLICED"],"hint":"Think of measuring deep water, then cutting bread."},{"id":"dolphin-nature","label":"Puzzle 5","sides":[["D","H","T"],["O","I","U"],["L","N","R"],["P","A","E"]],"solution":["DOLPHIN","NATURE"],"hint":"A clever sea mammal first, then the world around it."},{"id":"crystal-lounge","label":"Puzzle 6","sides":[["C","T","U"],["R","A","N"],["Y","L","G"],["S","O","E"]],"solution":["CRYSTAL","LOUNGE"],"hint":"A clear, sparkling mineral, then a place to relax in."},{"id":"overlap-punchy","label":"Puzzle 7","sides":[["O","L","N"],["V","A","C"],["E","P","H"],["R","U","Y"]],"solution":["OVERLAP","PUNCHY"],"hint":"Parts that cover each other, then something with a lively bite."}];
+var DICTIONARY = ["CAPTURE","ENJOYS","GARDENS","SWITCH","JOURNEY","YACHTS","FATHOMS","SLICED","DOLPHIN","NATURE","CRYSTAL","LOUNGE","OVERLAP","PUNCHY","ACE","ACT","ADD","AGO","AID","AIM","AIR","ALE","ALL","AMP","AND","ANT","APE","APT","ARC","ARE","ARM","ART","ASH","ASK","ASP","ATE","AWE","AXE","AYE","BAG","BAN","BAR","BAT","BAY","BED","BEE","BEG","BET","BIB","BID","BIG","BIN","BIO","BIT","BOW","BOX","BOY","BUD","BUG","BUN","BUS","BUT","BUY","CAB","CAD","CAM","CAN","CAP","CAR","CAT","COG","CON","COP","COT","COW","COY","CRY","CUB","CUE","CUP","CUR","CUT","DAB","DAM","DAY","DEN","DEW","DID","DIE","DIG","DIM","DIP","DOC","DOG","DOT","DRY","DUB","DUE","DUG","EAR","EAT","EEL","EGG","EGO","ELF","ELM","END","ERA","EVE","EYE","FAN","FAR","FAT","FEE","FEW","FIG","FIN","FIR","FIT","FIX","FLU","FLY","FOE","FOG","FOR","FUN","FUR","GAG","GAL","GAP","GAS","GEM","GET","GIG","GIN","GOT","GUM","GUN","GUT","GUY","GYM","HAM","HAT","HAY","HEN","HER","HEY","HID","HIP","HIS","HIT","HOG","HOP","HOT","HOW","HUB","HUE","HUG","HUT","ICE","ILL","INK","INN","ION","ITS","JAM","JAR","JAW","JET","JIG","JOB","JOG","JOY","JUG","JUT","KEG","KEN","KEY","KID","KIN","KIT","LAB","LAD","LAG","LAP","LAW","LAY","LEG","LET","LID","LIE","LIP","LIT","LOG","LOT","LOW","MAD","MAN","MAP","MAT","MAY","MEN","MET","MIX","MOB","MOM","MOP","MUD","MUG","MUM","NAP","NET","NEW","NIL","NIP","NIT","NOD","NOR","NOT","NOW","NUT","OAK","OAR","OAT","ODD","OFF","OIL","OLD","ONE","OPT","ORB","ORE","OUR","OUT","OWL","OWN","PAD","PAL","PAN","PAP","PAR","PAT","PAW","PAY","PEA","PEG","PEN","PER","PET","PIE","PIG","PIN","PIT","PLY","POD","POP","POT","PRO","PRY","PUB","PUN","PUP","PUT","RAG","RAM","RAN","RAP","RAT","RAW","RAY","RED","REP","RIB","RID","RIG","RIM","RIP","ROB","ROD","ROT","ROW","RUB","RUG","RUM","RUN","RUT","SAD","SAG","SAP","SAT","SAW","SAY","SEA","SEE","SET","SEW","SHE","SHY","SIP","SIR","SIT","SIX","SKI","SKY","SLY","SOB","SOD","SON","SOP","SOW","SOY","SPA","SPY","STY","SUB","SUM","SUN","TAB","TAD","TAG","TAN","TAP","TAR","TEA","TEN","THE","TIE","TIN","TIP","TOE","TON","TOP","TOT","TOW","TOY","TRY","TUB","TUG","TWO","USE","VAN","VAT","VET","VIA","VOW","WAR","WAS","WAX","WAY","WEB","WET","WHO","WHY","WIG","WIN","WIT","WOK","WON","WOW","YAK","YAM","YAP","YAW","YEN","YES","YET","YOU","ZAP","ZIP","ZOO","ABLE","ABOUT","ABOVE","ABUSE","ACCENT","ACCEPT","ACCESS","ACCORD","ACCUSE","ACROSS","ACTION","ACTIVE","ACTOR","ACTUAL","ADAPT","ADDED","ADDRESS","ADJUST","ADMIRE","ADMIT","ADOPT","ADULT","ADVICE","ADVISE","AFFAIR","AFFECT","AFRAID","AFTER","AGAIN","AGAINST","AGENCY","AGENT","AGREE","AHEAD","ALARM","ALBUM","ALERT","ALIKE","ALIVE","ALLOW","ALMOST","ALONE","ALONG","ALOUD","ALREADY","ALSO","ALTER","ALWAYS","AMAZE","AMOUNT","ANCIENT","ANGER","ANGLE","ANGRY","ANIMAL","ANSWER","APART","APPEAL","APPEAR","APPLE","APPLY","APPOINT","APPROACH","APPROVE","APRIL","AREA","ARGUE","ARISE","ARMY","AROUND","ARRANGE","ARREST","ARRIVE","ARROW","ARTIST","ASHAMED","ASLEEP","ASPECT","ASSESS","ASSET","ASSIGN","ASSIST","ASSUME","ASSURE","ATHLETE","ATTACH","ATTACK","ATTEMPT","ATTEND","ATTRACT","AUCTION","AUTHOR","AUTUMN","AVERAGE","AVOID","AWAKE","AWARD","AWARE","AWAY","AWFUL","BABY","BACK","BADGE","BAKE","BALANCE","BALL","BAND","BANK","BARE","BARGAIN","BARRIER","BASE","BASIC","BASKET","BATH","BATTLE","BEACH","BEAM","BEAN","BEAR","BEAT","BEAUTY","BECAUSE","BECOME","BEEF","BEFORE","BEGIN","BEHAVE","BEHIND","BEING","BELIEF","BELL","BELONG","BELOW","BELT","BENCH","BEND","BENEFIT","BERRY","BESIDE","BEST","BETTER","BETWEEN","BEYOND","BICYCLE","BIKE","BILL","BIRD","BIRTH","BITE","BITTER","BLACK","BLADE","BLAME","BLANK","BLAST","BLEED","BLEND","BLESS","BLIND","BLOCK","BLOOD","BLOW","BLUE","BOARD","BOAT","BODY","BOIL","BOLD","BOLT","BOMB","BOND","BONE","BONUS","BOOK","BOOST","BOOT","BORDER","BORING","BORN","BORROW","BOSS","BOTH","BOTHER","BOTTLE","BOTTOM","BOUNCE","BOUND","BOWL","BRAIN","BRANCH","BRAND","BRAVE","BREAD","BREAK","BREATH","BREEZE","BRICK","BRIDE","BRIDGE","BRIEF","BRIGHT","BRING","BROAD","BROKEN","BROTHER","BROWN","BRUSH","BUBBLE","BUCKET","BUDGET","BUILD","BULK","BULLET","BUNCH","BURDEN","BURN","BURST","BURY","BUSH","BUSINESS","BUSY","BUTTER","BUTTON","BUZZ","CABIN","CABLE","CAKE","CALL","CALM","CAMERA","CAMP","CAMPUS","CANAL","CANCEL","CANCER","CANDLE","CANDY","CAPABLE","CAPITAL","CAPTAIN","CARBON","CARD","CARE","CAREER","CAREFUL","CARPET","CARRY","CART","CASE","CASH","CAST","CASTLE","CASUAL","CATCH","CATTLE","CAUSE","CAUTION","CEASE","CEILING","CELEBRATE","CELL","CENT","CENTER","CENTRAL","CENTURY","CERTAIN","CHAIN","CHAIR","CHALK","CHALLENGE","CHANCE","CHANGE","CHAOS","CHAPTER","CHARGE","CHARITY","CHART","CHASE","CHEAP","CHECK","CHEESE","CHEF","CHEST","CHICKEN","CHIEF","CHILD","CHILL","CHIP","CHOICE","CHOOSE","CHOP","CHURCH","CIRCLE","CITIZEN","CITY","CIVIL","CLAIM","CLASH","CLASS","CLAUSE","CLEAN","CLEAR","CLERK","CLEVER","CLICK","CLIENT","CLIFF","CLIMATE","CLIMB","CLINIC","CLIP","CLOCK","CLOSE","CLOTH","CLOUD","CLUB","COACH","COAST","COAT","CODE","COFFEE","COIN","COLD","COLLAPSE","COLLECT","COLLEGE","COLOR","COLUMN","COMBINE","COME","COMEDY","COMFORT","COMIC","COMMAND","COMMENT","COMMIT","COMMON","COMPANY","COMPARE","COMPETE","COMPLAIN","COMPLETE","COMPLEX","COMPOSE","COMPUTER","CONCEPT","CONCERN","CONCERT","CONDITION","CONDUCT","CONFIRM","CONFLICT","CONFUSE","CONNECT","CONSENT","CONSIDER","CONSIST","CONSTANT","CONSULT","CONTACT","CONTAIN","CONTENT","CONTEST","CONTEXT","CONTINUE","CONTRACT","CONTRAST","CONTROL","CONVERT","CONVINCE","COOK","COOKIE","COOKING","COOL","COPE","COPY","CORE","CORN","CORNER","CORRECT","COST","COTTON","COUCH","COULD","COUNT","COUPLE","COURSE","COURT","COUSIN","COVER","CRACK","CRAFT","CRASH","CRAZY","CREAM","CREATE","CREDIT","CREW","CRIME","CRISIS","CRITIC","CROP","CROSS","CROWD","CRUCIAL","CRUEL","CRUSH","CULTURAL","CURE","CURIOUS","CURRENT","CURTAIN","CURVE","CUSTOM","CYCLE","DAILY","DAMAGE","DANCE","DANGER","DARE","DARK","DATA","DATE","DAUGHTER","DAWN","DEAD","DEAL","DEAR","DEATH","DEBATE","DEBT","DECADE","DECIDE","DECLARE","DECLINE","DECREASE","DEEP","DEFEAT","DEFEND","DEFINE","DEGREE","DELAY","DELIVER","DEMAND","DEMONSTRATE","DENSE","DENY","DEPART","DEPEND","DEPOSIT","DEPTH","DEPUTY","DERIVE","DESCRIBE","DESERT","DESIGN","DESIRE","DESK","DESPITE","DETAIL","DETECT","DETERMINE","DEVELOP","DEVICE","DEVOTE","DIAGRAM","DIAL","DIAMOND","DIARY","DIET","DIFFER","DIFFICULT","DIGITAL","DINNER","DIRECT","DIRECTION","DIRT","DIRTY","DISAGREE","DISASTER","DISCOUNT","DISCOVER","DISCUSS","DISEASE","DISH","DISMISS","DISPLAY","DISTANCE","DISTINCT","DISTRICT","DIVE","DIVIDE","DIVORCE","DOCTOR","DOCUMENT","DOLLAR","DOMAIN","DONATE","DOOR","DOUBLE","DOUBT","DOWN","DOZEN","DRAFT","DRAG","DRAIN","DRAMA","DRAW","DREAM","DRESS","DRIFT","DRILL","DRINK","DRIVE","DROP","DRUM","DUCK","DULL","DUMP","DURING","DUST","DUTY","EAGER","EAGLE","EARLY","EARN","EARTH","EASE","EAST","EASY","ECHO","ECONOMY","EDGE","EDIT","EDUCATION","EFFECT","EFFORT","EIGHT","EITHER","ELBOW","ELDER","ELECT","ELEGANT","ELEMENT","ELEPHANT","ELITE","ELSE","EMAIL","EMBRACE","EMERGE","EMOTION","EMPLOY","EMPTY","ENABLE","ENCOUNTER","ENEMY","ENERGY","ENGAGE","ENGINE","ENJOY","ENOUGH","ENSURE","ENTER","ENTIRE","ENTRY","ENVELOPE","EQUAL","EQUIP","ERASE","ERROR","ESCAPE","ESSAY","ESSENTIAL","ESTABLISH","ESTATE","ESTIMATE","ETHICS","EVEN","EVENING","EVENT","EVERY","EVIDENCE","EVIL","EXACT","EXAM","EXAMINE","EXAMPLE","EXCEED","EXCEPT","EXCHANGE","EXCITE","EXCUSE","EXERCISE","EXIST","EXIT","EXPAND","EXPECT","EXPENSE","EXPERIENCE","EXPERT","EXPLAIN","EXPLODE","EXPLORE","EXPORT","EXPOSE","EXPRESS","EXTEND","EXTRA","EXTREME","FABRIC","FACE","FACILITY","FACT","FACTOR","FAIL","FAINT","FAIR","FAITH","FALL","FALSE","FAME","FAMILY","FAMOUS","FANCY","FARM","FASHION","FAST","FATE","FATHER","FAULT","FAVOR","FEAR","FEATHER","FEATURE","FEBRUARY","FEDERAL","FEED","FEEL","FELLOW","FEMALE","FENCE","FESTIVAL","FIBER","FICTION","FIELD","FIERCE","FIFTEEN","FIFTH","FIFTY","FIGHT","FIGURE","FILE","FILL","FILM","FINAL","FINANCE","FIND","FINE","FINGER","FINISH","FIRE","FIRM","FIRST","FISCAL","FISH","FITNESS","FIVE","FLAG","FLAME","FLASH","FLAT","FLAVOR","FLEE","FLEET","FLESH","FLIGHT","FLOAT","FLOOD","FLOOR","FLOUR","FLOW","FLOWER","FLUID","FOCUS","FOLD","FOLK","FOLLOW","FOND","FOOD","FOOL","FOOT","FORCE","FORECAST","FOREST","FORGET","FORK","FORM","FORMAL","FORMER","FORTH","FORTUNE","FORWARD","FOSSIL","FOUND","FOUR","FRAME","FREE","FREEZE","FREQUENT","FRESH","FRIEND","FRIGHTEN","FROG","FROM","FRONT","FROST","FRUIT","FUEL","FULL","FUNCTION","FUND","FUNNY","FURNITURE","FURTHER","FUTURE","GAIN","GALAXY","GALLERY","GAME","GARAGE","GARDEN","GARLIC","GATE","GATHER","GAZE","GEAR","GENDER","GENE","GENERAL","GENIUS","GENTLE","GESTURE","GHOST","GIANT","GIFT","GIRL","GIVE","GLAD","GLANCE","GLASS","GLOBAL","GLORY","GLOVE","GLOW","GLUE","GOAL","GOAT","GOLD","GOLF","GOOD","GOVERN","GRAB","GRACE","GRADE","GRAIN","GRAND","GRANT","GRAPE","GRAPH","GRASP","GRASS","GRATEFUL","GRAVE","GRAY","GREAT","GREEN","GREET","GREY","GRID","GRIEF","GRIN","GRIP","GROCERY","GROUND","GROUP","GROW","GROWTH","GUARANTEE","GUARD","GUESS","GUEST","GUIDE","GUILT","GUITAR","HABIT","HAIR","HALF","HALL","HAND","HANDLE","HANG","HAPPEN","HAPPY","HARBOR","HARD","HARM","HARVEST","HATE","HAVE","HAZARD","HEAD","HEALTH","HEAR","HEART","HEAT","HEAVEN","HEAVY","HEEL","HEIGHT","HELL","HELLO","HELMET","HELP","HERB","HERE","HERITAGE","HERO","HERS","HERSELF","HESITATE","HIDDEN","HIDE","HIGH","HIGHLIGHT","HIGHWAY","HILL","HINT","HIRE","HISTORY","HOBBY","HOCKEY","HOLD","HOLE","HOLIDAY","HOLLOW","HOLY","HOME","HONEST","HONEY","HONOR","HOOK","HOPE","HORIZON","HORN","HORROR","HORSE","HOSPITAL","HOST","HOTEL","HOUR","HOUSE","HOWEVER","HUGE","HUMAN","HUMOR","HUNDRED","HUNT","HURRY","HURT","HUSBAND","ICON","IDEA","IDEAL","IDENTIFY","IDLE","IGNORE","ILLEGAL","ILLNESS","IMAGE","IMAGINE","IMMEDIATE","IMPACT","IMPLEMENT","IMPLY","IMPORT","IMPORTANT","IMPOSE","IMPROVE","IMPULSE","INCH","INCIDENT","INCLUDE","INCOME","INCREASE","INDEED","INDEX","INDICATE","INDOOR","INDUSTRY","INFANT","INFECTION","INFLATION","INFLUENCE","INFORM","INGREDIENT","INITIAL","INJURY","INNER","INNOCENT","INPUT","INQUIRY","INSECT","INSIDE","INSIGHT","INSIST","INSPIRE","INSTALL","INSTANCE","INSTEAD","INSTRUMENT","INSULT","INSURANCE","INTACT","INTAKE","INTEGER","INTEND","INTENSE","INTERACT","INTEREST","INTERNAL","INTERNET","INTERPRET","INTERRUPT","INTERVAL","INTERVIEW","INTO","INTRODUCE","INVENT","INVEST","INVITE","INVOLVE","IRON","ISLAND","ISOLATE","ISSUE","ITEM","ITSELF","JACKET","JANUARY","JAZZ","JEALOUS","JEANS","JELLY","JEWEL","JOIN","JOINT","JOKE","JOURNAL","JUDGE","JUICE","JULY","JUMP","JUNE","JUNIOR","JURY","JUST","JUSTICE","KEEN","KEEP","KETTLE","KICK","KILL","KIND","KING","KISS","KITCHEN","KNEE","KNIFE","KNOCK","KNOW","LABEL","LABOR","LACK","LADDER","LADY","LAKE","LAMP","LAND","LANDSCAPE","LANE","LANGUAGE","LARGE","LARGELY","LASER","LAST","LATE","LAUGH","LAUNCH","LAWN","LAYER","LAZY","LEAD","LEAF","LEAGUE","LEAN","LEARN","LEATHER","LEAVE","LECTURE","LEFT","LEGAL","LEGEND","LEISURE","LEMON","LEND","LENGTH","LENS","LESS","LESSON","LETTER","LEVEL","LIBERAL","LIBERTY","LIBRARY","LICENSE","LIFE","LIFT","LIGHT","LIKE","LIKELY","LIMB","LIMIT","LINE","LINK","LION","LIQUID","LIST","LISTEN","LITERATURE","LITTLE","LIVE","LOAD","LOAN","LOCAL","LOCATE","LOCK","LOGIC","LONELY","LONG","LOOK","LOOSE","LOSE","LOSS","LOUD","LOVE","LUCK","LUGGAGE","LUNCH","LUNG","LUXURY","MACHINE","MAGAZINE","MAGIC","MAIL","MAIN","MAINTAIN","MAJOR","MAKE","MALE","MALL","MANAGE","MANNER","MANUAL","MANY","MARCH","MARGIN","MARINE","MARK","MARKET","MARRIAGE","MARRIED","MARRY","MASK","MASS","MASTER","MATCH","MATE","MATH","MATTER","MAYBE","MAYOR","MEAL","MEAN","MEASURE","MEAT","MEDIA","MEDICAL","MEDIUM","MEET","MELODY","MELT","MEMBER","MEMORY","MENTAL","MENTION","MENU","MERCY","MERE","MERGE","MERIT","MESS","MESSAGE","METAL","METER","METHOD","MIDDLE","MIGHT","MILD","MILE","MILK","MILL","MIND","MINE","MINIMUM","MINOR","MINUTE","MIRACLE","MIRROR","MISS","MISTAKE","MOBILE","MODE","MODEL","MODERN","MODEST","MODIFY","MOMENT","MONEY","MONITOR","MONTH","MOOD","MOON","MORAL","MORE","MORNING","MORTGAGE","MOST","MOTHER","MOTION","MOTOR","MOUNT","MOUSE","MOUTH","MOVE","MOVIE","MUCH","MULTIPLE","MUSCLE","MUSEUM","MUSIC","MUST","MUTUAL","MYSELF","MYSTERY","MYTH","NAIL","NAME","NARROW","NATION","NATIVE","NATURAL","NEAR","NEAT","NECESSARY","NECK","NEED","NEGATIVE","NEGLECT","NEIGHBOR","NEITHER","NERVE","NETWORK","NEUTRAL","NEVER","NEWS","NEXT","NICE","NIGHT","NINE","NOBLE","NOISE","NONE","NOON","NORMAL","NORTH","NOSE","NOTABLE","NOTE","NOTHING","NOTICE","NOTION","NOVEL","NUCLEAR","NUMBER","NURSE","OBEY","OBJECT","OBLIGE","OBSERVE","OBTAIN","OBVIOUS","OCCASION","OCCUPY","OCCUR","OCEAN","OCTOBER","ODOR","OFFER","OFFICE","OFFICER","OFFICIAL","OFTEN","OKAY","OLIVE","OLYMPIC","ONCE","ONION","ONLY","ONTO","OPEN","OPERATE","OPINION","OPPONENT","OPPORTUNITY","OPPOSE","OPTION","ORANGE","ORBIT","ORDER","ORDINARY","ORGAN","ORGANIC","ORGANIZE","ORIGIN","OTHER","OUGHT","OUNCE","OUTCOME","OUTER","OUTFIT","OUTLINE","OUTPUT","OUTSIDE","OVEN","OVER","OVERALL","OVERCOME","OWNER","OXYGEN","PACE","PACK","PACKAGE","PAGE","PAIN","PAINT","PAIR","PALACE","PALE","PANEL","PANIC","PAPER","PARADE","PARENT","PARK","PART","PARTICIPATE","PARTNER","PARTY","PASS","PASSAGE","PASSENGER","PASSION","PAST","PASTE","PATH","PATIENCE","PATIENT","PATTERN","PAUSE","PEACE","PEACH","PEAK","PEANUT","PEAR","PENCIL","PEOPLE","PEPPER","PERCEIVE","PERFECT","PERFORM","PERHAPS","PERIOD","PERMANENT","PERMISSION","PERMIT","PERSON","PERSPECTIVE","PHASE","PHONE","PHOTO","PHRASE","PHYSICAL","PIANO","PICK","PICNIC","PICTURE","PIECE","PILE","PILOT","PINK","PIONEER","PIPE","PITCH","PITY","PLACE","PLAIN","PLAN","PLANE","PLANET","PLANT","PLASTIC","PLATE","PLATFORM","PLAY","PLEASANT","PLEASE","PLEASURE","PLENTY","PLOT","PLUG","PLUS","POCKET","POEM","POET","POINT","POLAR","POLICE","POLICY","POLISH","POLITE","POLITICS","POLL","POLLUTION","POND","POOL","POOR","POPULAR","POPULATION","PORK","PORT","PORTION","PORTRAIT","POSE","POSITION","POSITIVE","POSSESS","POSSIBLE","POST","POTATO","POTENTIAL","POUND","POUR","POWDER","POWER","PRACTICAL","PRAISE","PRAY","PRECISE","PREDICT","PREFER","PREPARE","PRESENT","PRESIDENT","PRESS","PRESSURE","PRETEND","PRETTY","PREVENT","PREVIOUS","PRICE","PRIDE","PRIEST","PRIMARY","PRIME","PRINCE","PRINCIPLE","PRINT","PRIOR","PRISON","PRIVATE","PRIZE","PROBABLY","PROBLEM","PROCEDURE","PROCEED","PROCESS","PRODUCE","PRODUCT","PROFESSION","PROFILE","PROFIT","PROGRAM","PROGRESS","PROJECT","PROMISE","PROMOTE","PROMPT","PROOF","PROPER","PROPERTY","PROPOSE","PROTECT","PROUD","PROVE","PROVIDE","PUBLIC","PUBLISH","PULL","PULSE","PUMP","PUNCH","PUNISH","PUPIL","PURCHASE","PURE","PURPLE","PURPOSE","PURSUE","PUSH","PUZZLE","PYRAMID","QUALITY","QUANTITY","QUARTER","QUEEN","QUESTION","QUICK","QUIET","QUIT","QUITE","QUOTE","RABBIT","RACE","RACK","RADIO","RAIL","RAIN","RAISE","RALLY","RANDOM","RANGE","RANK","RAPID","RARE","RATE","RATHER","RATING","RATIO","REACH","REACT","READ","READY","REAL","REALM","REAR","REASON","REBEL","RECALL","RECEIVE","RECENT","RECIPE","RECKON","RECOGNIZE","RECOMMEND","RECORD","RECOVER","RECYCLE","REDUCE","REFER","REFLECT","REFORM","REFUSE","REGARD","REGION","REGISTER","REGRET","REGULAR","REGULATE","REJECT","RELATE","RELAX","RELEASE","RELEVANT","RELIEF","RELY","REMAIN","REMARK","REMIND","REMOTE","REMOVE","RENDER","RENT","REPAIR","REPEAT","REPLACE","REPLY","REPORT","REPRESENT","REQUEST","REQUIRE","RESCUE","RESEARCH","RESEMBLE","RESERVE","RESIDENT","RESIST","RESOLVE","RESORT","RESOURCE","RESPECT","RESPOND","RESPONSE","REST","RESTAURANT","RESTORE","RESTRICT","RESULT","RESUME","RETAIN","RETIRE","RETURN","REVEAL","REVENUE","REVIEW","REWARD","RHYTHM","RICE","RICH","RIDE","RIFLE","RIGHT","RIGID","RING","RIOT","RISE","RISK","RIVER","ROAD","ROAST","ROBOT","ROCK","ROCKET","ROLE","ROLL","ROOF","ROOM","ROOT","ROPE","ROSE","ROUGH","ROUND","ROUTE","ROUTINE","ROYAL","RUDE","RULE","RURAL","RUSH","RUST","SAFE","SAIL","SALAD","SALARY","SALE","SALT","SAME","SAMPLE","SAND","SATELLITE","SAUCE","SAVE","SCALE","SCAN","SCANDAL","SCARE","SCENE","SCHEDULE","SCHEME","SCHOLAR","SCHOOL","SCIENCE","SCISSORS","SCOPE","SCORE","SCRAP","SCRATCH","SCREAM","SCREEN","SCREW","SCRIPT","SEAL","SEARCH","SEASON","SEAT","SECOND","SECRET","SECTION","SECURE","SEED","SEEK","SEEM","SEGMENT","SEIZE","SELECT","SELF","SELL","SEMINAR","SEND","SENIOR","SENSE","SENTENCE","SEPARATE","SEQUENCE","SERIES","SERIOUS","SERVE","SESSION","SETTLE","SEVEN","SEVERAL","SEVERE","SHADE","SHADOW","SHAKE","SHALL","SHAME","SHAPE","SHARE","SHARP","SHEEP","SHEET","SHELF","SHELL","SHELTER","SHIFT","SHINE","SHIP","SHIRT","SHOCK","SHOE","SHOOT","SHOP","SHORE","SHORT","SHOT","SHOULD","SHOULDER","SHOUT","SHOW","SHOWER","SHRINK","SHUT","SICK","SIDE","SIGH","SIGHT","SIGN","SIGNAL","SILENCE","SILK","SILLY","SILVER","SIMILAR","SIMPLE","SINCE","SING","SINGLE","SINK","SISTER","SITE","SITUATION","SIZE","SKILL","SKIN","SKIRT","SLAVE","SLEEP","SLICE","SLIDE","SLIGHT","SLIM","SLIP","SLOPE","SLOW","SMALL","SMART","SMELL","SMILE","SMOKE","SMOOTH","SNAKE","SNAP","SNOW","SOAP","SOCCER","SOCIAL","SOCK","SODA","SOFT","SOIL","SOLAR","SOLDIER","SOLID","SOLUTION","SOLVE","SOME","SONG","SOON","SORRY","SORT","SOUL","SOUND","SOUP","SOURCE","SOUTH","SPACE","SPARE","SPARK","SPEAK","SPECIAL","SPECIES","SPECIFIC","SPEECH","SPEED","SPELL","SPEND","SPHERE","SPIN","SPIRIT","SPLIT","SPONSOR","SPOON","SPORT","SPOT","SPRAY","SPREAD","SPRING","SQUARE","SQUEEZE","STABLE","STADIUM","STAFF","STAGE","STAIN","STAIR","STAKE","STAND","STANDARD","STAR","START","STATE","STATION","STAY","STEADY","STEAL","STEAM","STEEL","STEEP","STEM","STEP","STEREO","STICK","STILL","STING","STIR","STOCK","STOMACH","STONE","STOP","STORE","STORM","STORY","STOVE","STRAIGHT","STRANGE","STRAP","STRATEGY","STRAW","STREAM","STREET","STRENGTH","STRESS","STRETCH","STRICT","STRIKE","STRING","STRIP","STROKE","STRONG","STRUCTURE","STRUGGLE","STUDENT","STUDIO","STUDY","STUFF","STUPID","STYLE","SUBJECT","SUBMIT","SUBSCRIBE","SUBSTANCE","SUCCEED","SUCCESS","SUCH","SUDDEN","SUFFER","SUGAR","SUGGEST","SUIT","SUMMER","SUPER","SUPPLY","SUPPORT","SUPPOSE","SUPREME","SURE","SURFACE","SURPRISE","SURROUND","SURVEY","SURVIVE","SUSPECT","SUSTAIN","SWAP","SWEAR","SWEEP","SWEET","SWIM","SWING","SYMBOL","SYMPTOM","SYSTEM","TABLE","TACKLE","TAIL","TAKE","TALE","TALENT","TALK","TALL","TANK","TAPE","TARGET","TASK","TASTE","TEACH","TEAM","TEAR","TECHNICAL","TECHNIQUE","TECHNOLOGY","TEEN","TELL","TEMPERATURE","TEMPLE","TEMPORARY","TEND","TENNIS","TENSION","TENT","TERM","TERRIBLE","TERRITORY","TERROR","TEST","TEXT","THAN","THANK","THAT","THEIR","THEM","THEME","THEN","THEORY","THERAPY","THERE","THEREFORE","THESE","THEY","THICK","THIEF","THIN","THING","THINK","THIRD","THIRST","THIRTY","THIS","THOROUGH","THOSE","THOUGH","THOUGHT","THOUSAND","THREAT","THREE","THROAT","THROUGH","THROW","THUMB","THURSDAY","THUS","TICKET","TIDE","TIGER","TIGHT","TILE","TILL","TIMBER","TIME","TINY","TIRED","TISSUE","TITLE","TOAST","TOBACCO","TODAY","TOGETHER","TOILET","TOMATO","TOMORROW","TONE","TONGUE","TONIGHT","TOOL","TOOTH","TOPIC","TORCH","TOTAL","TOUCH","TOUGH","TOUR","TOWARD","TOWEL","TOWER","TOWN","TRACE","TRACK","TRADE","TRADITION","TRAFFIC","TRAGEDY","TRAIL","TRAIN","TRANSFER","TRANSFORM","TRANSIT","TRANSLATE","TRANSMIT","TRANSPORT","TRAP","TRAVEL","TRAY","TREAD","TREASURE","TREAT","TREE","TREND","TRIAL","TRIBE","TRICK","TRIP","TROOP","TROUBLE","TRUCK","TRUE","TRUST","TRUTH","TUBE","TUESDAY","TUNE","TUNNEL","TURKEY","TURN","TURTLE","TUTOR","TWELVE","TWENTY","TWICE","TWIN","TYPE","TYPICAL","UGLY","ULTIMATE","UNABLE","UNCLE","UNDER","UNDERGO","UNDERSTAND","UNFAIR","UNIFORM","UNION","UNIQUE","UNIT","UNITED","UNIVERSE","UNIVERSITY","UNKNOWN","UNLESS","UNLIKE","UNLIKELY","UNTIL","UNUSUAL","UPON","UPPER","UPSET","URBAN","URGE","USED","USEFUL","USER","USUAL","VACATION","VAGUE","VALID","VALLEY","VALUABLE","VALUE","VARIOUS","VARY","VAST","VEGETABLE","VEHICLE","VENDOR","VENTURE","VERB","VERIFY","VERSION","VERY","VESSEL","VETERAN","VICTIM","VICTORY","VIDEO","VIEW","VILLAGE","VIOLATE","VIOLENCE","VIRTUAL","VIRUS","VISIBLE","VISION","VISIT","VISUAL","VITAL","VITAMIN","VIVID","VOICE","VOLUME","VOTE","VOYAGE","WAGE","WAIT","WAKE","WALK","WALL","WANDER","WANT","WARM","WARN","WASH","WASTE","WATCH","WATER","WAVE","WEAK","WEALTH","WEAPON","WEAR","WEATHER","WEDDING","WEEK","WEEKEND","WEIGH","WEIGHT","WEIRD","WELCOME","WELFARE","WELL","WEST","WHAT","WHATEVER","WHEAT","WHEEL","WHEN","WHERE","WHEREAS","WHETHER","WHICH","WHILE","WHISPER","WHITE","WHOLE","WHOM","WHOSE","WIDE","WIFE","WILD","WILL","WIND","WINDOW","WINE","WING","WINNER","WINTER","WIPE","WIRE","WISDOM","WISE","WISH","WITH","WITHIN","WITHOUT","WITNESS","WOLF","WOMAN","WONDER","WONDERFUL","WOOD","WOOL","WORD","WORK","WORLD","WORRY","WORTH","WOULD","WOUND","WRAP","WRIST","WRITE","WRONG","YARD","YEAR","YELLOW","YESTERDAY","YIELD","YOUNG","YOUR","YOUTH","ZONE","CAPTOR","CAPER","CARP","CATS","COLT","CONE","COOP","COTE","COVE","COWL","COWS","CRAB","CRAG","CRAM","CRAN","CRATE","CRAWL","CRAZE","CREST","CRIB","CRISP","CRUST","CUBE","CULT","CURL","CURSE","CUTE","DART","DASH","DAYS","DECK","DEED","DEER","DELI","DEMO","DENT","DICE","DIME","DINE","DINGO","DINT","DISK","DOCK","DOES","DOLL","DOME","DONE","DOSE","DOVE","DREAD","DRIED","DRIP","DRONE","DROVE","DUCT","DUDE","DUEL","DUES","DUKE","DUNE","DUNK","DUSK","EACH","EARS","EATS","EGGS","EMIT","ENDS","ENVY","EPIC","EXCEL","EXCESS","EXERT","EXILE","EXOTIC","EXPIRE","FADE","FAKE","FALLS","FANS","FARE","FARMS","FATAL","FEAST","FEAT","FEELS","FEET","FELL","FELT","FERN","FETCH","FEVER","FLAW","FLEA","FLED","FLEW","FLEX","FLING","FLIP","FLOCK","FLOP","FLUENT","FLUSH","FLUTTER","FOAM","FOIL","FORD","FORGE","FORUM","FRENCH","FURY","FUSE","FUSS","GAINS","GALA","GASP","GAVE","GEMS","GENTLY","GETS","GIVEN","GIVES","GLEE","GLIDE","GLOOM","GOES","GONE","GOODS","GOOSE","GORGE","GOSSIP","GREED","GREW","GRIND","GRIT","GROAN","GROOM","GROVE","GROWN","GUILD","GULF","GUST","HACK","HAIL","HALT","HANDS","HARDLY","HARP","HARSH","HAS","HAUL","HAVEN","HAWK","HAZE","HEAL","HEARD","HEDGE","HELD","HELM","HELPS","HENCE","HERD","HIKE","HILLS","HINTS","HITS","HOLES","HOOD","HOPES","HOSE","HOUND","HOURS","HOVER","HULL","HUMP","HUNG","HUSH","HYBRID","HYMN","IDEAS","IDOL","IMITATE","IMMENSE","IMPRESS","INCHES","INTENT","ITEMS","IVORY","JAIL","JAMES","JAN","JERK","JOBS","JOKES","JOLLY","JOLT","JOYFUL","JUMPS","JUNGLE","JUNK","JUSTIFY","KEEPS","KEPT","KEYS","KIDS","KINDS","KINGS","KITE","KITTEN","KNEEL","KNEW","KNIGHT","KNIT","KNOT","KNOWN","KNOWS","LACE","LAID","LAKES","LAMB","LANDS","LATER","LATEST","LAUNDRY","LAWS","LEADER","LEASE","LEAST","LEAVES","LED","LEGION","LENT","LETS","LEVELS","LEVER","LIAR","LIES","LIMITS","LINEN","LINES","LINGO","LINKS","LIPS","LITER","LIVED","LIVES","LIVING","LOADS","LOANS","LOBBY","LOCKED","LOCKS","LODGE","LOFT","LOGO","LONGER","LOOKS","LOOM","LOOP","LORD","LOSES","LOST","LOTS","LOVED","LOVELY","LOVER","LOVES","LOWER","LOYAL","LUCKY","LUNGS","LURE","LURK","LUSH","LUST","LUTE","LYING","LYRIC"];
+var POS = [{x:22,y:10},{x:50,y:10},{x:78,y:10},{x:90,y:22},{x:90,y:50},{x:90,y:78},{x:78,y:90},{x:50,y:90},{x:22,y:90},{x:10,y:78},{x:10,y:50},{x:10,y:22}];
+var SIDE_NAMES = ["Top","Right","Bottom","Left"];
+var SIDE_CLASSES = ["side-top","side-right","side-bottom","side-left"];
+function flatLetters(p){ var t=p.sides[0], r=p.sides[1], b=p.sides[2], l=p.sides[3]; return [t[0],t[1],t[2],r[0],r[1],r[2],b[2],b[1],b[0],l[2],l[1],l[0]]; }
+function sideOf(p){ var m={}; p.sides.forEach(function(side,i){ side.forEach(function(l){ m[l]=i; }); }); return m; }
+function dayIndex(){ var parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Karachi",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()); var y,m,d; parts.forEach(function(p){ if(p.type==="year")y=+p.value; if(p.type==="month")m=+p.value; if(p.type==="day")d=+p.value; }); var day=Math.floor(Date.UTC(y,m-1,d)/86400000); return day % PUZZLES.length; }
+function validate(p, word, submitted){
+  var letters = word.split("");
+  if (letters.length < 3) return {ok:false, message:"Words need at least 3 letters. Keep going."};
+  var allowed = {}; flatLetters(p).forEach(function(l){ allowed[l]=1; });
+  if (letters.some(function(l){ return !allowed[l]; })) return {ok:false, message:"That word uses a letter that is not on this board."};
+  if (new Set(letters).size !== letters.length) return {ok:false, message:"Use each letter at most once in a word. Pick a different letter next."};
+  var sides = sideOf(p);
+  for (var i=1;i<letters.length;i++){ if (sides[letters[i]]===sides[letters[i-1]]) return {ok:false, message:"Two letters in a row cannot come from the same side. Pick a letter from a different side next."}; }
+  if (submitted.length>0){ var req=submitted[submitted.length-1].slice(-1); if (letters[0]!==req) return {ok:false, message:"Your next word must start with \u201c"+req+"\u201d \u2014 the last letter of \u201c"+submitted[submitted.length-1]+"\u201d."}; }
+  if (submitted.indexOf(word)>=0) return {ok:false, message:"You have already used that word in this puzzle."};
+  if (DICTIONARY.indexOf(word)<0) return {ok:false, message:"That word is not in our curated word list yet. Try a more common word \u2014 the list is growing, and this is not a judgement on the word itself."};
+  return {ok:true};
+}
+function findHint(p, submitted, current){
+  var requiredStart = current.length>0 ? null : (submitted.length>0 ? submitted[submitted.length-1].slice(-1) : null);
+  var used={}; submitted.forEach(function(w){ w.split("").forEach(function(l){ used[l]=1; }); });
+  var unused={}; flatLetters(p).forEach(function(l){ if(!used[l]) unused[l]=1; });
+  var sides=sideOf(p); var best=null, bestScore=-1;
+  for (var k=0;k<DICTIONARY.length;k++){
+    var word=DICTIONARY[k];
+    if (word.length<3) continue;
+    if (submitted.indexOf(word)>=0) continue;
+    if (requiredStart && word[0]!==requiredStart) continue;
+    if (current.length>0 && word.indexOf(current.join(""))!==0) continue;
+    var letters=word.split("");
+    if (new Set(letters).size!==letters.length) continue;
+    if (letters.some(function(l){ return sides[l]===undefined; })) continue;
+    var ok=true; for (var i=1;i<letters.length;i++){ if (sides[letters[i]]===sides[letters[i-1]]){ ok=false; break; } }
+    if (!ok) continue;
+    var newCount=0; letters.forEach(function(l){ if (unused[l]) newCount++; });
+    if (newCount===0) continue;
+    var score=newCount*10-word.length;
+    if (score>bestScore){ bestScore=score; best=word; }
+  }
+  return best;
+}
+// --- persistent-ish state: widget bridge when present, memory otherwise ---
+var bridgeState = { progress: {}, solved: [] };
+var bridgeOK = false;
+try {
+  if (window.hatchWidget && window.hatchWidget.getState) {
+    var s = window.hatchWidget.getState({ progress: {}, solved: [] });
+    if (s && typeof s === "object") { bridgeState = s; bridgeOK = true; }
+  }
+} catch(e) {}
+function saveBridge(){
+  try { if (window.hatchWidget && window.hatchWidget.setState) window.hatchWidget.setState(bridgeState); } catch(e) {}
+}
+if (window.hatchWidget) {
+  window.addEventListener("hatch-widget-state", function(e){ if (e.detail && e.detail.state) bridgeState = e.detail.state; render(); });
+}
+var puzzleIndex = dayIndex();
+var current = [], currentIndices = [], submitted = [], hintsUsed = 0, hintTarget = null, hintStage = 0, hintIndex = null, solved = false, lastMsg = null;
+var $ = function(id){ return document.getElementById(id); };
+function puzzle(){ return PUZZLES[puzzleIndex]; }
+function loadPuzzle(idx){
+  puzzleIndex = idx; var p = puzzle();
+  var saved = (bridgeState.progress && bridgeState.progress[p.id]) || { submitted: [], hints: 0 };
+  submitted = saved.submitted.slice(); hintsUsed = saved.hints || 0;
+  current = []; currentIndices = []; hintTarget = null; hintStage = 0; hintIndex = null;
+  solved = submitted.length>0 && flatLetters(p).every(function(l){ return submitted.join("").indexOf(l)>=0; });
+  lastMsg = solved ? {kind:"ok", text:"Solved! Well played."} : null;
+  render();
+}
+function persist(){
+  if (!bridgeState.progress) bridgeState.progress = {};
+  bridgeState.progress[puzzle().id] = { submitted: submitted.slice(), hints: hintsUsed };
+  if (solved && bridgeState.solved.indexOf(puzzle().id)<0) bridgeState.solved.push(puzzle().id);
+  saveBridge();
+}
+function canPick(letter){
+  var p=puzzle();
+  if (current.indexOf(letter)>=0) return false;
+  if (current.length===0 && submitted.length>0){ var req=submitted[submitted.length-1].slice(-1); if (letter!==req) return false; }
+  if (current.length===0) return true;
+  var sides=sideOf(p);
+  return sides[letter]!==sides[current[current.length-1]];
+}
+function pick(idx){
+  if (solved) return;
+  var letter=flatLetters(puzzle())[idx];
+  if (!canPick(letter)) return;
+  current.push(letter); currentIndices.push(idx); hintStage=0; hintTarget=null; hintIndex=null;
+  render();
+}
+function setMsg(kind, text){ lastMsg={kind:kind, text:text}; var el=$("msg"); el.className="msg "+kind; el.textContent=text; }
+function submit(){
+  if (solved) return;
+  var word=current.join("");
+  var v=validate(puzzle(), word, submitted);
+  if (!v.ok){ setMsg("error", v.message); return; }
+  submitted.push(word); current=[]; currentIndices=[]; hintTarget=null; hintStage=0; hintIndex=null;
+  var remaining=flatLetters(puzzle()).filter(function(l){ return submitted.join("").indexOf(l)<0; });
+  solved = remaining.length===0;
+  if (solved){ setMsg("ok", "Solved in "+submitted.length+" word"+(submitted.length===1?"":"s")+" \u2014 every letter used. Well played."); }
+  else { setMsg("ok", "\u201c"+word+"\u201d accepted. "+remaining.length+" letter"+(remaining.length===1?"":"s")+" still to use."); }
+  persist(); render();
+}
+function undo(){ if (solved) return; current.pop(); currentIndices.pop(); render(); }
+function clearWord(){ if (solved) return; current=[]; currentIndices=[]; hintTarget=null; hintStage=0; hintIndex=null; render(); }
+function useHint(){
+  if (solved) return;
+  if (hintsUsed>=3){ setMsg("info","You have used all 3 hints for this puzzle."); return; }
+  if (hintTarget && hintStage===1){
+    hintStage=2; hintsUsed++;
+    setMsg("info","Hint revealed: \u201c"+hintTarget+"\u201d would work here. It is only one option \u2014 your own word is just as good.");
+    persist(); render(); return;
+  }
+  var target=findHint(puzzle(), submitted, current);
+  if (!target){ setMsg("info","No hint word found for this position. Puzzle hint: "+puzzle().hint); return; }
+  hintTarget=target; hintStage=1; hintsUsed++;
+  var flat=flatLetters(puzzle());
+  hintIndex=flat.indexOf(target[0]);
+  var prefix=current.length>0 ? " Continue \u201c"+current.join("")+"\u201d" : "";
+  setMsg("info","Hint: try a "+target.length+"-letter word starting with \u201c"+target[0]+"\u201d that uses a letter you still need."+prefix+" Tap Hint again to reveal it.");
+  persist(); render();
+}
+function render(){
+  var p=puzzle();
+  var flat=flatLetters(p);
+  var sides=sideOf(p);
+  var sideForPos=[0,0,0,1,1,1,2,2,2,3,3,3];
+  var board=$("board"); board.innerHTML="";
+  flat.forEach(function(letter, idx){
+    var btn=document.createElement("button");
+    btn.type="button";
+    btn.className="tile "+SIDE_CLASSES[sideForPos[idx]]+(currentIndices.indexOf(idx)>=0?" picked":"")+(hintIndex===idx?" hinted":"");
+    btn.disabled = solved || !canPick(letter);
+    btn.setAttribute("aria-label","Letter "+letter+", "+SIDE_NAMES[sideForPos[idx]]+" side");
+    btn.innerHTML="<span>"+letter+"</span><small>"+SIDE_NAMES[sideForPos[idx]].toUpperCase()+"</small>";
+    var order=currentIndices.indexOf(idx);
+    if (order>=0){ var b=document.createElement("span"); b.className="order"; b.textContent=String(order+1); btn.appendChild(b); }
+    btn.addEventListener("click", function(){ pick(idx); });
+    btn.style.left=POS[idx].x+"%"; btn.style.top=POS[idx].y+"%";
+    board.appendChild(btn);
+  });
+  var wordEl=$("word");
+  wordEl.innerHTML = current.length ? current.join("") : '<span class="dim">&mdash;</span>';
+  if (lastMsg) { var el=$("msg"); el.className="msg "+lastMsg.kind; el.textContent=lastMsg.text; }
+  else if (current.length===0) setMsg("info", submitted.length>0 ? "Your next word must start with \u201c"+submitted[submitted.length-1].slice(-1)+"\u201d." : "Pick letters in order. The first letter can be any letter on the board.");
+  var usedCount=flat.filter(function(l){ return submitted.join("").indexOf(l)>=0; }).length;
+  $("progressFill").style.width=Math.round(usedCount/12*100)+"%";
+  $("progressBar").setAttribute("aria-valuenow", String(Math.round(usedCount/12*100)));
+  $("usedCount").textContent=usedCount+" of 12 letters used";
+  $("hintsLeft").textContent="Hints: "+(3-hintsUsed)+" left";
+  $("submitBtn").disabled = solved || current.length<3;
+  $("undoBtn").disabled = solved || current.length===0;
+  $("clearBtn").disabled = solved || current.length===0;
+  $("hintBtn").textContent="Hint ("+(3-hintsUsed)+" left)";
+  $("hintBtn").disabled = solved || hintsUsed>=3;
+  var chips=$("chips"); chips.innerHTML="";
+  flat.forEach(function(l){ var c=document.createElement("span"); var used=submitted.join("").indexOf(l)>=0; c.className="chip"+(used?" used":""); c.textContent=l; chips.appendChild(c); });
+  var words=$("words"); words.innerHTML="";
+  submitted.forEach(function(w, i){
+    var li=document.createElement("li");
+    var prev=i===0 ? "" : submitted.slice(0,i).join("");
+    var fresh=w.split("").filter(function(l){ return prev.indexOf(l)<0; }).length;
+    li.textContent=w+" \u2014 "+fresh+" new letter"+(fresh===1?"":"s");
+    words.appendChild(li);
+  });
+  $("wordCount").textContent="("+submitted.length+")";
+  var win=$("winBox");
+  if (solved){
+    win.hidden=false; win.className="win";
+    win.innerHTML="<strong>Puzzle solved!</strong> You used every letter in "+submitted.length+" word"+(submitted.length===1?"":"s")+": "+submitted.join(" \u2192 ")+". Try another puzzle from the list above, or tap New Game for a practice puzzle.";
+  } else { win.hidden=true; win.innerHTML=""; }
+  var sel=$("puzzleSelect");
+  if (sel.options.length===0){
+    PUZZLES.forEach(function(pp, i){
+      var o=document.createElement("option"); o.value=String(i);
+      o.textContent = (i===dayIndex() ? "Daily puzzle \u2014 " : "") + pp.label + " (" + pp.id + ")";
+      sel.appendChild(o);
+    });
+    sel.addEventListener("change", function(){ loadPuzzle(Number(sel.value)); });
+  }
+  sel.value=String(puzzleIndex);
+  var title=document.querySelector("h1");
+  title.textContent = puzzleIndex===dayIndex() ? "Today\u2019s daily word puzzle" : "Practice word puzzle \u2014 "+p.label;
+}
+$("submitBtn").addEventListener("click", submit);
+$("undoBtn").addEventListener("click", undo);
+$("clearBtn").addEventListener("click", clearWord);
+$("hintBtn").addEventListener("click", useHint);
+$("newBtn").addEventListener("click", function(){
+  var next=(puzzleIndex+1)%PUZZLES.length;
+  loadPuzzle(next);
+  setMsg("info","Practice puzzle loaded. Your other puzzles keep their progress in this preview.");
+});
+document.addEventListener("keydown", function(e){
+  if (e.target && (e.target.tagName==="SELECT" || e.target.tagName==="INPUT")) return;
+  if (/^[a-zA-Z]$/.test(e.key)){ var letter=e.key.toUpperCase(); var idx=flatLetters(puzzle()).indexOf(letter); if (idx>=0) pick(idx); }
+  else if (e.key==="Enter"){ e.preventDefault(); submit(); }
+  else if (e.key==="Backspace"){ e.preventDefault(); undo(); }
+  else if (e.key==="Escape"){ clearWord(); }
+});
+loadPuzzle(dayIndex());
+</script>
+</body>
+</html>
