@@ -81,6 +81,23 @@ in gold tiles with dark letters, and found words use dark green
 text on white — the same fixes were applied to the preview, where
 a stylesheet bug had made unpicked tiles nearly invisible.
 
+On 2026-10-29 the owner approved a full visual redesign (plan
+presented first, then implemented): a playful storybook puzzle
+world. Rounded self-hosted typography (Fredoka headings, Nunito
+body), forest green kept primary with warm ivory plus restrained
+pastel accents — sky for hints, coral for attention, sunny yellow
+for rewards and selected letters, mint for success, lavender for
+practice — each with a contrast-checked deep variant for text.
+The dotted background became layered washes with small decorative
+sprinkles and a smiling sun in the masthead; homepage sections
+became tinted panels instead of identical white cards. The board
+kept its geometry and rules; tiles became toy-like with a chunkier
+edge, selected letters turn sunny yellow with a sparkle on the
+newest pick, and the side legend chips carry matching tints.
+Playing gained an encouraging progress line, a kinder invalid-word
+card, and a framed win celebration. No copy, heading, route,
+metadata, or game-logic change was made for the redesign.
+
 Features beyond the original brief: a solve timer (starts on the
 first picked letter, fastest solve kept in local statistics), a
 star rating against par (the stored solution's word count), a
@@ -156,11 +173,15 @@ anywhere Node 20+ runs). Set the production domain in `src/lib/site.ts`
 (`SITE.url`) — it is already `https://letterboxedgamez.com`.
 
 Fonts are self-hosted: `src/app/fonts/` holds the latin variable files for
-Fraunces (600/700) and Inter (400–700) as base64 text (`*.woff2.b64`),
-loaded with `next/font/local`. `scripts/prepare-fonts.mjs` (run by the
+Fredoka (500/600/700) and Nunito (400/600/700/800) as base64 text
+(`display-latin.woff2.b64`, `sans-latin.woff2.b64`), loaded with
+`next/font/local`. `scripts/prepare-fonts.mjs` (run by the
 `predev`/`prebuild` hooks) decodes them to `.woff2` at build time; the
 binaries are generated artifacts and are not committed, because snapshot
-pushes reject non-UTF-8 files. Do not switch back to `next/font/google`
+pushes reject non-UTF-8 files. (The older `fraunces-latin` and
+`inter-latin` base64 files remain in the repository because snapshot
+pushes cannot delete files; they are decoded but no longer referenced.)
+Do not switch back to `next/font/google`
 — the build must not depend on fetching and parsing live Google Fonts
 CSS at build time (a response `next/font` could not parse crashed the
 first Vercel build).

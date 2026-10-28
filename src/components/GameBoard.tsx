@@ -7,6 +7,8 @@ export interface SideMeta {
   patternClass: string;
   edgeClass: string;
   description: string;
+  /** Soft tint for the side's legend chip (color is never the only signal). */
+  tintClass: string;
 }
 
 export const SIDE_META: SideMeta[] = [
@@ -17,6 +19,7 @@ export const SIDE_META: SideMeta[] = [
     patternClass: "side-pattern-top",
     edgeClass: "border-t-[6px] border-t-forest",
     description: "Solid edge",
+    tintClass: "bg-sky-wash",
   },
   {
     key: "right",
@@ -25,6 +28,7 @@ export const SIDE_META: SideMeta[] = [
     patternClass: "side-pattern-right",
     edgeClass: "border-r-[6px] border-r-forest",
     description: "Diagonal stripes",
+    tintClass: "bg-mint",
   },
   {
     key: "bottom",
@@ -33,6 +37,7 @@ export const SIDE_META: SideMeta[] = [
     patternClass: "side-pattern-bottom",
     edgeClass: "border-b-[6px] border-b-forest",
     description: "Dotted edge",
+    tintClass: "bg-butter",
   },
   {
     key: "left",
@@ -41,6 +46,7 @@ export const SIDE_META: SideMeta[] = [
     patternClass: "side-pattern-left",
     edgeClass: "border-l-[6px] border-l-forest",
     description: "Crosshatch edge",
+    tintClass: "bg-lavender-wash",
   },
 ];
 
@@ -97,21 +103,21 @@ export function GameBoard({
         {SIDE_META.map((side) => (
           <div
             key={side.key}
-            className={`flex min-h-11 items-center gap-2 rounded-xl border border-gold/40 bg-cream px-2.5 py-1.5 shadow-sm ${side.patternClass}`}
+            className={`flex min-h-11 items-center gap-2 rounded-xl border border-gold/40 px-2.5 py-1.5 shadow-sm ${side.patternClass} ${side.tintClass}`}
           >
             <span aria-hidden="true" className="text-base leading-none text-gold-deep">
               {side.glyph}
             </span>
             <span className="text-left leading-tight">
               <span className="block text-[13px] font-bold text-ink">{side.label}</span>
-              <span className="block text-[11px] text-moss">{side.description}</span>
+              <span className="block text-[11px] text-pine">{side.description}</span>
             </span>
           </div>
         ))}
       </div>
 
       {/* Gold frame around a deep-forest board: the board is the centrepiece. */}
-      <div className="mx-auto w-full max-w-[540px] rounded-[32px] bg-gradient-to-br from-gold-bright via-gold to-gold-deep p-[3px] shadow-board">
+      <div className="mx-auto w-full max-w-[540px] rounded-[32px] bg-gradient-to-br from-gold-bright via-gold to-gold-deep p-[3px] shadow-board ring-4 ring-gold/30">
         <div
           role="group"
           aria-label="Puzzle board. Twelve letters on four sides. Use Tab to move between letters, Enter or Space to pick one."
@@ -174,12 +180,12 @@ export function GameBoard({
               aria-label={`Letter ${letter}, ${SIDE_NAMES[sideIndex]} side, position ${flatIndex % 3 + 1} of 3${isSelected ? `, picked ${order + 1} in the current word` : ""}${pickable ? "" : ", not available next"}`}
               aria-pressed={isSelected}
               className={[
-                "absolute z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[18px] border-2 font-display font-bold shadow-tile transition-all duration-150 sm:h-[68px] sm:w-[68px] md:h-[72px] md:w-[72px]",
+                "board-tile absolute z-10 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[22px] border-[3px] font-display font-bold shadow-tile transition-all duration-150 sm:h-[68px] sm:w-[68px] md:h-[72px] md:w-[72px]",
                 "text-[26px] leading-none sm:text-[30px] md:text-[32px]",
                 isSelected
-                  ? "border-gold-deep bg-gradient-to-b from-gold-bright to-gold text-ink scale-[1.08]"
+                  ? "border-gold-deep bg-gradient-to-b from-sunny-light to-sunny text-ink scale-[1.08]"
                   : pickable
-                    ? "cursor-pointer border-[#e8d9a8] bg-gradient-to-b from-white to-[#fdf3d7] text-ink hover:-translate-y-0.5 hover:border-forest-light hover:shadow-lift hover:ring-[3px] hover:ring-gold/70 active:scale-[0.97]"
+                    ? "cursor-pointer border-[#e8d9a8] bg-gradient-to-b from-white to-[#fdf3d7] text-ink hover:-translate-y-0.5 hover:border-forest-light hover:shadow-lift hover:ring-[3px] hover:ring-gold/70 active:scale-[0.96]"
                     : "cursor-not-allowed border-[#8a9a86] bg-[#3d5c46] text-[#eef2e4] saturate-75",
                 isHinted && !isSelected
                   ? "ring-4 ring-gold-bright animate-ring-pulse border-gold"
@@ -188,7 +194,7 @@ export function GameBoard({
               ].join(" ")}
               style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
             >
-              <span aria-hidden="true" className="leading-none">{letter}</span>
+              <span aria-hidden="true" className={`leading-none ${isSelected ? "animate-tile-pop" : ""}`}>{letter}</span>
               <span
                 aria-hidden="true"
                 className={`mt-[3px] flex items-center gap-1 text-[8px] font-sans font-bold uppercase tracking-wider sm:text-[9px] ${isSelected ? "text-forest-dark" : pickable ? "text-moss" : "text-[#c8d4c2]"}`}
@@ -202,6 +208,14 @@ export function GameBoard({
                   className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-forest font-sans text-[12px] font-bold text-white shadow animate-pop"
                 >
                   {order + 1}
+                </span>
+              )}
+              {isSelected && order === selectedIndices.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-1 -top-2 text-[15px] leading-none text-sunny animate-sparkle-pop [filter:drop-shadow(0_1px_2px_rgb(0_0_0/0.45))]"
+                >
+                  ✦
                 </span>
               )}
             </button>

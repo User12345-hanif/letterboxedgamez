@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { Sprinkles } from "./Decorations";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-parchment/60">
-      <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+    <footer className="relative overflow-hidden border-t border-line bg-parchment/60">
+      <Sprinkles tone="ink" />
+      <div className="relative mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
             <p className="font-display text-xl font-bold text-ink">

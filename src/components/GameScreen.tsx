@@ -30,6 +30,7 @@ import {
 } from "@/lib/stats";
 import { GameBoard, SIDE_META } from "./GameBoard";
 import { HowToPlayModal, StatsModal } from "./Modals";
+import { Sprinkles, SunDecoration } from "./Decorations";
 
 type Feedback = { kind: "error" | "success" | "info"; message: string } | null;
 type Mode = "daily" | "practice";
@@ -387,14 +388,16 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
 
   return (
     <section aria-label="Daily word puzzle game" className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-      {/* Puzzle identity — deep forest masthead with gold accents. */}
-      <div className="relative mt-8 overflow-hidden rounded-[28px] bg-gradient-to-br from-forest-deep via-forest-dark to-forest p-6 text-cream shadow-lift sm:p-8">
+      {/* Puzzle identity — deep forest storybook masthead with gold accents. */}
+      <div className="relative mt-8 overflow-hidden rounded-[32px] border-[3px] border-gold/60 bg-gradient-to-br from-forest-deep via-forest-dark to-forest p-6 text-cream shadow-lift sm:p-8">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <span className="absolute -right-10 -top-16 h-56 w-56 rounded-full bg-gold-bright/25 blur-2xl animate-glow" />
           <span className="absolute -bottom-20 left-1/3 h-48 w-48 rounded-full bg-forest-light/40 blur-2xl" />
           <span className="absolute right-8 top-6 hidden h-3 w-3 rotate-45 bg-gold-bright/70 sm:block" />
           <span className="absolute bottom-8 right-24 hidden h-2 w-2 rotate-45 bg-gold-light/60 sm:block" />
         </div>
+        <Sprinkles tone="light" />
+        <SunDecoration className="pointer-events-none absolute right-8 top-1/2 hidden h-20 w-20 -translate-y-1/2 opacity-90 lg:block" />
         <div className="relative flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
             <p className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-gold/15 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-gold-light">
@@ -402,7 +405,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               {mode === "daily" ? "Daily Puzzle" : "Practice Puzzle"}
               <span className="font-normal normal-case tracking-normal text-sage">· {puzzle.label}</span>
             </p>
-            <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.05] tracking-tight text-cream sm:text-[44px]">
+            <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.05] tracking-tight text-cream sm:text-[48px]">
               {mode === "daily" ? "Letter Boxed — Play a Free Daily Word Puzzle" : "Practice word puzzle"}
             </h1>
             <p className="mt-2 text-sm font-bold uppercase tracking-[0.12em] text-gold-light">
@@ -423,7 +426,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               <button
                 type="button"
                 onClick={backToDaily}
-                className="min-h-11 cursor-pointer rounded-full border border-cream/40 bg-transparent px-4 text-sm font-semibold text-cream shadow-sm transition hover:bg-white/10"
+                className="min-h-11 cursor-pointer rounded-full border border-cream/40 bg-transparent px-4 text-sm font-semibold text-cream shadow-sm transition hover:bg-white/10 active:scale-[0.98]"
               >
                 ← Back to daily
               </button>
@@ -431,7 +434,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
             <button
               type="button"
               onClick={() => setShowHowTo(true)}
-              className="min-h-11 cursor-pointer rounded-full bg-cream px-4 text-sm font-bold text-forest-dark shadow-sm transition hover:bg-gold-light"
+              className="min-h-11 cursor-pointer rounded-full bg-cream px-4 text-sm font-bold text-forest-dark shadow-sm transition hover:bg-gold-light active:scale-[0.98]"
             >
               How to Play
             </button>
@@ -439,24 +442,28 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
         </div>
         <dl className="relative mt-5 flex flex-wrap gap-2">
           <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm">
+            <span aria-hidden="true" className="text-sm leading-none text-sage">◷</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-sage">Time</dt>
             <dd className="font-display text-[15px] font-bold tabular-nums text-cream">
               {formatElapsed(displayTimeMs)}
             </dd>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm">
+            <span aria-hidden="true" className="text-sm leading-none text-sage">★</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-sage">Par</dt>
             <dd className="font-display text-[15px] font-bold text-cream">
               {par} word{par === 1 ? "" : "s"}
             </dd>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm">
+            <span aria-hidden="true" className="text-sm leading-none">🔥</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-sage">Streak</dt>
             <dd className="font-display text-[15px] font-bold text-cream">
               {stats.currentStreak} day{stats.currentStreak === 1 ? "" : "s"}
             </dd>
           </div>
           <div className="flex items-center gap-2 rounded-full border border-gold/50 bg-gold/15 px-3.5 py-1.5 backdrop-blur-sm">
+            <span aria-hidden="true" className="text-sm leading-none">🏆</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-gold-light">Best</dt>
             <dd className="font-display text-[15px] font-bold text-gold-light">
               {stats.fastestSolveMs === null ? "—" : formatElapsed(stats.fastestSolveMs)}
@@ -488,7 +495,8 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
           <p className="sr-only">Loading the puzzle…</p>
         </div>
       ) : (
-        <div className="mt-7 grid items-start gap-6 pb-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
+        <div className="mt-7 rounded-[32px] border-2 border-dashed border-gold/50 bg-white/50 p-3 shadow-sm sm:p-5">
+        <div className="grid items-start gap-6 pb-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
           {/* Board column */}
           <div className="min-w-0">
             <GameBoard
@@ -519,7 +527,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     current.map((letter, i) => (
                       <span
                         key={`${letter}-${i}`}
-                        className="grid h-[52px] w-12 shrink-0 place-items-center rounded-xl border-2 border-gold-deep bg-gradient-to-b from-gold-bright to-gold text-[28px] leading-none text-ink shadow-tile animate-tile-pop"
+                        className="grid h-[52px] w-12 shrink-0 place-items-center rounded-xl border-2 border-gold-deep bg-gradient-to-b from-sunny-light to-sunny text-[28px] leading-none text-ink shadow-tile animate-tile-pop"
                       >
                         {letter}
                       </span>
@@ -547,7 +555,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                   type="button"
                   onClick={submitWord}
                   disabled={current.length < 3 || isChecking || solved}
-                  className="col-span-3 min-h-13 cursor-pointer rounded-full bg-gradient-to-b from-forest-light to-forest py-3.5 text-[16px] font-bold text-white shadow-lift transition hover:from-forest hover:to-forest-dark disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-1 sm:order-1"
+                  className="col-span-3 min-h-13 cursor-pointer rounded-full bg-gradient-to-b from-forest-light to-forest py-3.5 text-[16px] font-bold text-white shadow-lift transition hover:from-forest hover:to-forest-dark disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98] sm:col-span-1 sm:order-1"
                 >
                   {isChecking ? "Checking…" : "Submit ✓"}
                 </button>
@@ -555,7 +563,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                   type="button"
                   onClick={undo}
                   disabled={current.length === 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-line bg-white px-3 text-[15px] font-semibold text-pine transition hover:border-forest/40 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="min-h-12 cursor-pointer rounded-full border border-line bg-white px-3 text-[15px] font-semibold text-pine transition hover:border-forest/40 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
                 >
                   Undo
                 </button>
@@ -563,7 +571,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                   type="button"
                   onClick={clearCurrent}
                   disabled={current.length === 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-line bg-white px-3 text-[15px] font-semibold text-pine transition hover:border-forest/40 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="min-h-12 cursor-pointer rounded-full border border-line bg-white px-3 text-[15px] font-semibold text-pine transition hover:border-forest/40 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
                 >
                   Clear
                 </button>
@@ -571,14 +579,14 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                   type="button"
                   onClick={useHint}
                   disabled={solved || hintsLeft <= 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-gold-deep/50 bg-gradient-to-b from-gold-light to-[#f3e2ac] px-3 text-[15px] font-semibold text-pine shadow-sm transition hover:border-gold-deep disabled:cursor-not-allowed disabled:opacity-40"
+                  className="min-h-12 cursor-pointer rounded-full border border-gold-deep/50 bg-gradient-to-b from-gold-light to-[#f3e2ac] px-3 text-[15px] font-semibold text-pine shadow-sm transition hover:border-gold-deep disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
                 >
                   Hint ({hintsLeft} left)
                 </button>
                 <button
                   type="button"
                   onClick={startNewGame}
-                  className="col-span-2 min-h-12 cursor-pointer rounded-full border-2 border-forest bg-cream px-3 text-[15px] font-bold text-forest-dark shadow-sm transition hover:bg-gold-light hover:border-gold-deep sm:col-span-1"
+                  className="col-span-2 min-h-12 cursor-pointer rounded-full border-2 border-forest bg-cream px-3 text-[15px] font-bold text-forest-dark shadow-sm transition hover:bg-gold-light hover:border-gold-deep sm:col-span-1 active:scale-[0.98]"
                 >
                   New Game
                 </button>
@@ -603,8 +611,8 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     feedback.kind === "error"
                       ? "border-clay/40 bg-clay-light text-pine animate-shake"
                       : feedback.kind === "success"
-                        ? "border-forest/30 bg-sage-light text-pine"
-                        : "border-gold/40 bg-gold-light text-pine"
+                        ? "border-mint-deep/30 bg-mint text-pine"
+                        : "border-sky-deep/30 bg-sky-wash text-pine"
                   }`}
                 >
                   <p>
@@ -613,6 +621,11 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     </span>
                     {feedback.message}
                   </p>
+                  {feedback.kind === "error" && (
+                    <p className="mt-2 text-sm font-semibold text-coral-deep">
+                      Every miss narrows it down — try a different angle.
+                    </p>
+                  )}
                   {hintTarget && hintStage === 2 && (
                     <p className="mt-2 font-display text-lg font-bold text-ink">
                       Suggested word: {hintTarget}
@@ -624,7 +637,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
 
             {/* Win state */}
             {solved && (
-              <div role="status" className="relative overflow-hidden rounded-3xl border-2 border-gold bg-gradient-to-b from-gold-light via-butter to-mint p-5 shadow-lift animate-fade-up">
+              <div role="status" className="relative overflow-hidden rounded-3xl border-[3px] border-gold-deep bg-gradient-to-b from-sunny-light via-butter to-mint p-5 shadow-lift ring-4 ring-sunny/60 animate-fade-up">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
                   {CONFETTI_COLORS.map((color, i) => (
                     <span
@@ -640,7 +653,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                   ))}
                 </div>
                 <div className="relative">
-                  <p aria-hidden="true" className="text-[28px] leading-none tracking-[0.18em]">
+                  <p aria-hidden="true" className="text-[34px] leading-none tracking-[0.18em]">
                     {[1, 2, 3].map((n) => (
                       <span
                         key={n}
@@ -662,6 +675,9 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     </strong>
                     : {submitted.join(", ")}.
                   </p>
+                  <p className="mt-2 text-[15px] font-semibold text-forest-dark">
+                    <span aria-hidden="true">✦ </span>Every letter found — what a journey!<span aria-hidden="true"> ✦</span>
+                  </p>
                   {puzzle.solution.join(" ") !== submitted.join(" ") && (
                     <p className="mt-2 text-sm leading-relaxed text-pine">
                       One verified two-word route was{" "}
@@ -678,21 +694,21 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     <button
                       type="button"
                       onClick={shareResult}
-                      className="min-h-11 cursor-pointer rounded-full border-2 border-gold-deep bg-gradient-to-b from-gold-bright to-gold px-4 text-sm font-bold text-ink shadow-lift hover:from-gold hover:to-gold-deep"
+                      className="min-h-11 cursor-pointer rounded-full border-2 border-gold-deep bg-gradient-to-b from-gold-bright to-gold px-4 text-sm font-bold text-ink shadow-lift transition hover:from-gold hover:to-gold-deep active:scale-[0.98]"
                     >
                       {shareCopied ? "Copied ✓" : "Share result"}
                     </button>
                     <button
                       type="button"
                       onClick={startNewGame}
-                      className="min-h-11 cursor-pointer rounded-full border border-forest bg-cream px-4 text-sm font-bold text-forest-dark hover:bg-white"
+                      className="min-h-11 cursor-pointer rounded-full border border-forest bg-cream px-4 text-sm font-bold text-forest-dark transition hover:bg-white active:scale-[0.98]"
                     >
                       Play a practice puzzle
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowStats(true)}
-                      className="min-h-11 cursor-pointer rounded-full border border-line bg-white px-4 text-sm font-semibold text-pine hover:border-forest/40"
+                      className="min-h-11 cursor-pointer rounded-full border border-line bg-white px-4 text-sm font-semibold text-pine transition hover:border-forest/40 active:scale-[0.98]"
                     >
                       View statistics
                     </button>
@@ -702,7 +718,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
             )}
 
             {/* Progress */}
-            <div className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
+            <div className="rounded-3xl border-2 border-line bg-cream p-5 shadow-soft">
               <div className="flex items-baseline justify-between">
                 <h2 className="font-display text-lg font-bold text-ink">Your progress</h2>
                 <p className="text-sm font-bold text-forest">{percent}%</p>
@@ -725,6 +741,21 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                 <strong className="text-ink">{remaining.length}</strong> remaining ·{" "}
                 <strong className="text-ink">{submitted.length}</strong> word{submitted.length === 1 ? "" : "s"} (par {par}) ·{" "}
                 <strong className="tabular-nums text-ink">{formatElapsed(displayTimeMs)}</strong>
+              </p>
+              <p className="mt-2 text-sm font-semibold text-forest-dark">
+                <span aria-hidden="true" className="mr-1.5">✦</span>
+                {solved
+                  ? "All twelve letters found!"
+                  : remaining.length === 1
+                    ? "One letter to go — you've got this!"
+                    : used.size >= 6
+                      ? "Halfway there — keep going!"
+                      : used.size === 0
+                        ? "A fresh board — pick any letter to begin."
+                        : "Warming up — nice chaining!"}
+                {used.size >= 6 && !solved && (
+                  <span aria-hidden="true" className="ml-1.5 text-sunny animate-sparkle-pop">✦</span>
+                )}
               </p>
               <div className="mt-4">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-moss">Letters used</p>
@@ -756,11 +787,12 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
             </div>
 
             {/* Choose a puzzle — all seven, any time, as practice. */}
-            <div className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
+            <div className="rounded-3xl border-2 border-line bg-gradient-to-b from-cream to-lavender-wash/70 p-5 shadow-soft">
               <h2 className="font-display text-lg font-bold text-ink">Practice More Letter Box Puzzles for Free</h2>
-              <p className="mt-1 text-sm leading-relaxed text-moss">
+              <p className="mt-1 text-sm leading-relaxed text-pine">
                 Pick any board to play as practice. Your daily puzzle stays untouched.
               </p>
+              <p aria-hidden="true" className="mt-2 text-sm tracking-[0.3em] text-lavender-deep">● ◆ ▲ ■</p>
               <ul className="mt-3 grid grid-cols-2 gap-2">
                 {PUZZLES.map((candidate, index) => {
                   const isCurrent = candidate.id === puzzle.id;
@@ -771,7 +803,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                         onClick={() => selectPuzzle(index)}
                         aria-label={`${index + 1}. ${candidate.label}${index === dailyIndex ? " · daily" : ""}${isCurrent ? " (current puzzle)" : ""}`}
                         aria-current={isCurrent ? "true" : undefined}
-                        className={`min-h-11 w-full cursor-pointer rounded-full border px-3 py-2 text-left text-[13px] font-semibold transition ${
+                        className={`min-h-11 w-full cursor-pointer rounded-full border px-3 py-2 text-left text-[13px] font-semibold transition active:scale-[0.98] ${
                           isCurrent
                             ? "border-gold-deep bg-gradient-to-b from-gold-bright to-gold text-ink shadow-sm"
                             : "border-line bg-white text-pine hover:border-forest/50 hover:bg-sage-light"
@@ -789,7 +821,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
             </div>
 
             {/* Submitted words */}
-            <div className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
+            <div className="rounded-3xl border-2 border-line bg-cream p-5 shadow-soft">
               <h2 className="font-display text-lg font-bold text-ink">
                 Words found <span className="text-sm font-sans font-semibold text-moss">({submitted.length})</span>
               </h2>
@@ -806,7 +838,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     return (
                       <li
                         key={`${word}-${i}`}
-                        className="flex items-center justify-between gap-3 rounded-xl border border-gold/40 bg-white px-3.5 py-2.5 shadow-sm"
+                        className="flex items-center justify-between gap-3 rounded-xl border border-gold/40 bg-white px-3.5 py-2.5 shadow-sm animate-fade-up"
                       >
                         <span className="flex items-center gap-2.5">
                           <span aria-hidden="true" className="grid h-6 w-6 place-items-center rounded-full bg-gold text-xs font-bold text-ink">
@@ -832,7 +864,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
             </div>
 
             {/* Quick rules */}
-            <div className="rounded-3xl border border-line bg-parchment/50 p-5">
+            <div className="rounded-3xl border-2 border-sky/50 bg-sky-wash/70 p-5">
               <h2 className="font-display text-lg font-bold text-ink">In short</h2>
               <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-pine marker:text-forest">
                 <li>Words need at least 3 letters.</li>
@@ -850,6 +882,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               </button>
             </div>
           </aside>
+        </div>
         </div>
       )}
 

@@ -6,6 +6,7 @@ import { GameScreen } from "@/components/GameScreen";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HowToPlayModal, StatsModal } from "@/components/Modals";
+import { Sprinkles } from "@/components/Decorations";
 import { loadStats, type Stats } from "@/lib/stats";
 import { SITE } from "@/lib/site";
 
@@ -84,8 +85,8 @@ export default function HomePage() {
 
         {/* Editorial homepage content — readable by search engines, useful to players. */}
         <div className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6">
-          <section aria-labelledby="how-it-works" className="mt-14 border-t border-line pt-10">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-forest">How it works</p>
+          <section aria-labelledby="how-it-works" className="mt-14 rounded-[32px] border-[3px] border-sky-deep/20 bg-sky-wash/60 p-6 sm:p-8">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-sky-deep">How it works</p>
             <h2 id="how-it-works" className="mt-2 max-w-2xl font-display text-[28px] font-bold leading-tight tracking-tight text-ink sm:text-[34px]">
               How to Play the Letter Box Word Game
             </h2>
@@ -99,18 +100,22 @@ export default function HomePage() {
               {[
                 {
                   title: "1. Pick letters in order",
+                  accent: "bg-sky",
                   body: "Tap a tile, or type on your keyboard. Your word appears above the board, with the path drawn between the letters you chose.",
                 },
                 {
                   title: "2. Change sides every time",
+                  accent: "bg-mint-deep",
                   body: "Two letters in a row must come from different sides. Each side is labelled by name, shape and pattern, so you never have to guess by colour alone.",
                 },
                 {
                   title: "3. Chain to the finish",
+                  accent: "bg-sunny",
                   body: "Each new word starts with the last letter of the one before it. When all twelve letters are used, the puzzle is solved — in as few words as you can manage.",
                 },
               ].map((card) => (
-                <article key={card.title} className="rounded-3xl border border-line bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift">
+                <article key={card.title} className="rounded-3xl border-2 border-line bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift">
+                  <span aria-hidden="true" className={`mb-3 block h-2.5 w-10 rounded-full ${card.accent}`} />
                   <h3 className="font-display text-lg font-bold text-ink">{card.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-moss">{card.body}</p>
                 </article>
@@ -119,7 +124,9 @@ export default function HomePage() {
           </section>
 
           <section aria-labelledby="why-clear" className="mt-14 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl bg-forest p-6 text-white shadow-soft sm:p-8">
+            <div className="relative overflow-hidden rounded-3xl bg-forest p-6 text-white shadow-soft sm:p-8">
+              <Sprinkles tone="light" />
+              <div className="relative">
               <h2 id="why-clear" className="font-display text-[26px] font-bold leading-tight">
                 Built to be read at a glance
               </h2>
@@ -135,8 +142,9 @@ export default function HomePage() {
                 <li>✓ &nbsp;Clear feedback when a word cannot be played — and why</li>
                 <li>✓ &nbsp;Your progress stays in your browser, and only there</li>
               </ul>
+              </div>
             </div>
-            <div className="rounded-3xl border border-line bg-cream p-6 shadow-soft sm:p-8">
+            <div className="rounded-3xl border-2 border-line bg-gradient-to-b from-cream to-butter/70 p-6 shadow-soft sm:p-8">
               <h2 className="font-display text-[26px] font-bold leading-tight text-ink">
                 Play Today's Daily Letter Box Puzzle
               </h2>
@@ -161,7 +169,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section aria-labelledby="example" className="mt-14">
+          <section aria-labelledby="example" className="mt-14 rounded-[32px] border-[3px] border-gold/50 bg-mint/60 p-6 sm:p-8">
             <h2 id="example" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
               Letter Box Puzzle Tips and Strategies
             </h2>
@@ -171,7 +179,7 @@ export default function HomePage() {
               not need to find the same two words as anyone else — any chain that uses all twelve
               letters solves the puzzle.
             </p>
-            <figure className="mt-5 overflow-hidden rounded-3xl border border-line bg-cream shadow-soft">
+            <figure className="mt-5 overflow-hidden rounded-3xl border-[3px] border-gold/50 bg-cream shadow-soft">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-2 px-5 py-4 sm:px-6">
                 <span className="rounded-full bg-forest px-3 py-1 font-display text-sm font-bold tracking-wide text-white">CAPTURE</span>
                 <span aria-hidden="true" className="text-xl font-bold text-forest">→</span>
@@ -185,13 +193,13 @@ export default function HomePage() {
             </figure>
           </section>
 
-          <section aria-labelledby="home-faq" className="mt-14">
+          <section aria-labelledby="home-faq" className="mt-14 rounded-[32px] border-[3px] border-lavender-deep/20 bg-lavender-wash/50 p-6 sm:p-8">
             <h2 id="home-faq" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
               Frequently Asked Questions
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {HOME_FAQS.map(([question, answer]) => (
-                <article key={question} className="rounded-3xl border border-line bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift">
+              {HOME_FAQS.map(([question, answer], i) => (
+                <article key={question} className={`rounded-3xl border-2 border-line border-l-4 bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift ${["border-l-sky-deep", "border-l-mint-deep", "border-l-coral-deep", "border-l-lavender-deep"][i % 4]}`}>
                   <h3 className="font-display text-[18px] font-bold leading-snug text-ink">{question}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-moss">{answer}</p>
                 </article>

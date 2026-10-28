@@ -1,8 +1,8 @@
 /**
  * Decode the self-hosted font files from their committed base64 sources.
  *
- * The latin variable files for Inter and Fraunces live in this directory as
- * `*.woff2.b64` (plain text) because the GitHub snapshot push used for this
+ * The latin variable files for the display and sans fonts
+ * live in this directory as `*.woff2.b64` (plain text) because the GitHub snapshot push used for this
  * project rejects non-UTF-8 files, so binary `.woff2` files cannot be
  * committed through it. This script writes the binary `.woff2` files next
  * to their sources before `dev`/`build` (via the `predev`/`prebuild`

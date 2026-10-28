@@ -340,6 +340,18 @@ cannot win on relevance.
    non-affiliation statement is unchanged apart from the brand
    name.
 
+8. **Storybook visual redesign (29 October 2026,
+   owner-approved plan):** typography, palette, background,
+   card, board-tile, feedback, and section styling only.
+   Headings use self-hosted Fredoka and body text self-hosted
+   Nunito; forest green stays primary with ivory plus
+   restrained sky/coral/sunny/mint/lavender accents, each with
+   one consistent job. No title, H1, H2, meta description,
+   canonical, structured-data, robots, sitemap, route, page
+   content, or game-logic change; all rendered heading and
+   metadata checks still pass, and the keyword classifier in
+   §§2–4 is untouched.
+
 ## 8. Audit (re-checked 28 October 2026, after the export analysis)
 
 - One H1 per page; homepage H1 "Letter Boxed — Play a Free Daily

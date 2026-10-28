@@ -41,7 +41,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
 
 export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-b-gold/60 bg-ivory/95 shadow-sm backdrop-blur">
+    <header className="sticky top-0 z-40 border-b-[3px] border-b-gold bg-ivory/95 shadow-sm backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 sm:px-6">
         <Logo />
         <nav aria-label="Main" className="ml-auto flex items-center gap-1 sm:gap-2">
@@ -54,7 +54,7 @@ export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderPro
           <button
             type="button"
             onClick={onHowToPlay}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-line bg-cream px-3.5 text-sm font-semibold text-pine shadow-sm transition hover:border-forest/40 hover:text-forest-dark sm:px-4"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-line bg-cream px-3.5 text-sm font-semibold text-pine shadow-sm transition hover:border-forest/40 hover:text-forest-dark active:scale-[0.98] sm:px-4"
           >
             <span aria-hidden="true">?</span> How to Play
           </button>
@@ -62,7 +62,7 @@ export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderPro
             type="button"
             onClick={onStatistics}
             aria-label={`Statistics${solvedCount ? `, ${solvedCount} puzzles solved` : ""}`}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full bg-gradient-to-b from-forest-light to-forest px-3.5 text-sm font-semibold text-white shadow-sm transition hover:from-forest hover:to-forest-dark sm:px-4"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full bg-gradient-to-b from-forest-light to-forest px-3.5 text-sm font-semibold text-white shadow-sm transition hover:from-forest hover:to-forest-dark active:scale-[0.98] sm:px-4"
           >
             <span aria-hidden="true">▦</span> Statistics
           </button>
