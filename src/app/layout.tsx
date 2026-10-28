@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import { canonical, SITE } from "@/lib/site";
+import { ConsentBanner } from "@/components/ConsentBanner";
+import { GoogleTag, PageViewTracker } from "@/components/GoogleTag";
 import "./globals.css";
 
 // Self-hosted fonts (latin variable files, OFL-licensed Fredoka and Nunito).
@@ -101,6 +104,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to the puzzle
         </a>
         {children}
+        <GoogleTag />
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
+        <ConsentBanner />
       </body>
     </html>
   );

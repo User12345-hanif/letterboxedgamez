@@ -10,5 +10,5 @@
 - [Hints](https://letterboxedgamez.com/hints): How hints work, without spoilers.
 - [FAQ](https://letterboxedgamez.com/faq): Straight answers to common questions.
 - [About](https://letterboxedgamez.com/about): How puzzles are made and verified, and contact details.
-- [Privacy Policy](https://letterboxedgamez.com/privacy-policy): No accounts, no tracking; progress stays in the browser.
+- [Privacy Policy](https://letterboxedgamez.com/privacy-policy): No accounts; progress stays in the browser, with anonymous analytics only if you accept.
 - [Terms](https://letterboxedgamez.com/terms): Plain-language terms for free personal play.

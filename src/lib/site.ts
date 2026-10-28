@@ -16,6 +16,14 @@ export const SITE = {
   domain: "letterboxedgamez.com",
   locale: "en_US",
   email: "hello@letterboxedgamez.com",
+  /**
+   * Google Analytics 4 Measurement ID for the "Letter Box Game"
+   * property (account 413903856, property 561327365). This is a
+   * public identifier — it appears in the served page source — not
+   * a secret. The tag only measures anything after the visitor
+   * accepts analytics cookies; see src/lib/analytics.ts.
+   */
+  gaMeasurementId: "G-0E9NTNWGWY",
   /** Edit this list to add or remove pages from navigation, sitemap and footer. */
   nav: [
     { label: "Play", href: "/" },

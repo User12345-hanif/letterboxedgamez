@@ -179,10 +179,30 @@ async function main() {
     const page = await context.newPage();
     page.on("pageerror", (e) => consoleErrors.push(String(e)));
     page.on("console", (m) => {
-      if (m.type() === "error") consoleErrors.push(m.text());
+      // The third-party Google tag is best-effort: if its script cannot
+      // be fetched (offline sandbox, blocker), the game must still work,
+      // so tag-host load failures are not game errors. Chrome reports
+      // those as bare "Failed to load resource" messages whose location
+      // carries the failing URL, so filter on both text and location.
+      // Everything else is recorded exactly as before.
+      if (m.type() === "error") {
+        const where = m.location()?.url ?? "";
+        if (!/googletagmanager\.com|google-analytics\.com/.test(where) && !/googletagmanager\.com|google-analytics\.com/.test(m.text())) {
+          consoleErrors.push(m.text());
+        }
+      }
     });
     await page.setViewport({ width: 1280, height: 900 });
     await page.goto(BASE, { waitUntil: "load", timeout: 30000 });
+
+    // Dismiss the cookie consent banner (Reject: no analytics in tests)
+    // so it can never cover game controls during the run. The choice
+    // persists in this context, so later reloads stay banner-free.
+    await page
+      .waitForSelector('button[aria-label="Reject analytics"]', { timeout: 5000 })
+      .then((btn) => btn.click())
+      .catch(() => {});
+    await new Promise((r) => setTimeout(r, 300));
 
     const boardLetters = async () =>
       page.$$eval('button[aria-label^="Letter "]', (btns) =>

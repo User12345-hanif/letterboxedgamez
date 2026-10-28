@@ -6,7 +6,7 @@ import { SITE, canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Letter Box Game: an independent, original daily word puzzle built to be clear, calm and accessible — no account, no tracking.",
+    "About Letter Box Game: an independent, original daily word puzzle built to be clear, calm and accessible — no account needed, and anonymous analytics only with your consent.",
   alternates: { canonical: canonical("/about") },
   openGraph: {
     title: "About",
@@ -55,10 +55,13 @@ export default function AboutPage() {
 
       <h2>Privacy, plainly</h2>
       <p>
-        There are no accounts, no analytics trackers and no advertising profiles. Your
-        statistics and in-progress puzzles are stored in your own browser, and only there. The
-        full details are in the <Link href="/privacy-policy">Privacy Policy</Link>, which is short
-        because there is very little to say.
+        There are no accounts and no advertising profiles. Your statistics and in-progress
+        puzzles are stored in your own browser, and only there. If you accept analytics cookies,
+        Google Analytics collects anonymous, aggregate information about how the site is used;
+        it never receives the words you type or anything that identifies you, and you can change
+        your choice at any time from “Cookie choices” in the footer. The full details are in
+        the <Link href="/privacy-policy">Privacy Policy</Link>, which is short because there is
+        very little to say.
       </p>
 
       <h2>Contact</h2>

@@ -31,6 +31,13 @@ import {
 import { GameBoard, SIDE_META } from "./GameBoard";
 import { HowToPlayModal, StatsModal } from "./Modals";
 import { Sprinkles, SunDecoration } from "./Decorations";
+import {
+  CONSENT_GRANTED_EVENT,
+  trackHintUsed,
+  trackPuzzleActivated,
+  trackPuzzleCompleted,
+  trackWordSubmitted,
+} from "@/lib/analytics";
 
 type Feedback = { kind: "error" | "success" | "info"; message: string } | null;
 type Mode = "daily" | "practice";
@@ -88,6 +95,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
   const solvedRecordedRef = useRef(false);
   const startedRecordedRef = useRef<string | null>(null);
   const startedAtRef = useRef<number | null>(null);
+  const activationFiredRef = useRef<string | null>(null);
 
   const storageKey = useMemo(() => progressKey(puzzle.id, mode), [puzzle.id, mode]);
   const letters = useMemo(() => puzzleLetters(puzzle), [puzzle]);
@@ -159,6 +167,30 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
     setFeedback((f) => (saved ? f : null));
     setIsLoading(false);
   }, [puzzle, storageKey, onStatsChange]);
+
+  // Analytics: one puzzle_started / practice_puzzle_started event per
+  // puzzle activation, once the puzzle has finished loading. The
+  // isLoading guard skips the first render pass, when a restored
+  // session may still replace the puzzle being shown. The ref is
+  // only marked when the event was actually sent, so a puzzle that
+  // was presented before consent is reported when consent is granted.
+  const activationKey = `${mode}:${puzzle.id}`;
+  useEffect(() => {
+    if (isLoading) return;
+    if (activationFiredRef.current === activationKey) return;
+    if (trackPuzzleActivated(mode, puzzle.id)) activationFiredRef.current = activationKey;
+  }, [isLoading, activationKey, mode, puzzle.id]);
+
+  // If consent is granted while this puzzle is already on screen, the
+  // activation above was gated; report the current puzzle now, once.
+  useEffect(() => {
+    const onGranted = () => {
+      if (activationFiredRef.current === activationKey) return;
+      if (trackPuzzleActivated(mode, puzzle.id)) activationFiredRef.current = activationKey;
+    };
+    window.addEventListener(CONSENT_GRANTED_EVENT, onGranted);
+    return () => window.removeEventListener(CONSENT_GRANTED_EVENT, onGranted);
+  }, [activationKey, mode, puzzle.id]);
 
   // Persist progress.
   useEffect(() => {
@@ -239,6 +271,8 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
       const next = [...submitted, word];
       const newlySolved = isSolved(puzzle, next);
       const solveMs = startedAtRef.current === null ? 0 : Date.now() - startedAtRef.current;
+      // Analytics payloads never include the word itself.
+      trackWordSubmitted(mode, puzzle.id, word.length, next.length);
       setSubmitted(next);
       setCurrent([]);
       setCurrentIndices([]);
@@ -264,6 +298,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
         setSolved(true);
         setElapsedMs(solveMs);
         setSolveTimeMs(solveMs);
+        trackPuzzleCompleted(mode, puzzle.id, next.length, hintsUsedInGame, Math.round(solveMs / 1000));
         setFeedback({
           kind: "success",
           message: `Solved in ${next.length} word${next.length === 1 ? "" : "s"} and ${formatElapsed(solveMs)} — every letter used. Well played.`,
@@ -290,6 +325,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
     if (hintTarget && hintStage === 1) {
       setHintStage(2);
       setHintsUsedInGame((n) => n + 1);
+      trackHintUsed(mode, puzzle.id, hintsUsedInGame + 1);
       setFeedback({
         kind: "info",
         message: `Hint revealed: “${hintTarget}” would work here. It is only one option — your own word is just as good.`,
@@ -307,6 +343,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
     setHintTarget(target);
     setHintStage(1);
     setHintsUsedInGame((n) => n + 1);
+    trackHintUsed(mode, puzzle.id, hintsUsedInGame + 1);
     const firstLetterIndex = flatIndexOf(puzzle, target[0]);
     setHintIndex(firstLetterIndex);
     const prefix = current.length > 0 ? ` Continue “${current.join("")}”` : "";

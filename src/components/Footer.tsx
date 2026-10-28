@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { CookieChoicesButton } from "./CookieChoicesButton";
 import { Sprinkles } from "./Decorations";
 
 const linkClassName =
@@ -89,6 +90,9 @@ export function Footer() {
                     </span>
                     Terms
                   </Link>
+                </li>
+                <li>
+                  <CookieChoicesButton />
                 </li>
                 <li>
                   <a
