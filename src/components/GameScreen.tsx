@@ -403,7 +403,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               <span className="font-normal normal-case tracking-normal text-sage">· {puzzle.label}</span>
             </p>
             <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.05] tracking-tight text-cream sm:text-[44px]">
-              {mode === "daily" ? "Today's daily word puzzle" : "Practice word puzzle"}
+              {mode === "daily" ? "Play a free letter box word game" : "Practice word puzzle"}
             </h1>
             <p className="mt-2 text-sm font-bold uppercase tracking-[0.12em] text-gold-light">
               {formatPuzzleDate(today)} · {puzzle.label}
@@ -756,7 +756,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                       <button
                         type="button"
                         onClick={() => selectPuzzle(index)}
-                        aria-label={`Play puzzle ${index + 1}: ${candidate.label}${isCurrent ? " (current puzzle)" : ""}`}
+                        aria-label={`${index + 1}. ${candidate.label}${index === dailyIndex ? " · daily" : ""}${isCurrent ? " (current puzzle)" : ""}`}
                         aria-current={isCurrent ? "true" : undefined}
                         className={`min-h-11 w-full cursor-pointer rounded-full border px-3 py-2 text-left text-[13px] font-semibold transition ${
                           isCurrent

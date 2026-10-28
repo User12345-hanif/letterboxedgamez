@@ -26,7 +26,7 @@ export default function HowToPlayPage() {
       <p>
         Use <strong>all twelve letters</strong> on the board at least once, by building a chain of
         words. A puzzle is solved the moment the last unused letter appears in one of your words.
-        There is no timer and no penalty for extra words — but fewer words makes a neater solve,
+        There is no time limit and no penalty for extra words — but fewer words makes a neater solve,
         and two words is the benchmark to aim for.
       </p>
 

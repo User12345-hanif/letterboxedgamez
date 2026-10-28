@@ -120,9 +120,14 @@ and recorded in `docs/seo-keyword-map.md`:
   Play page only. Strategies and Hints have zero keywords in the
   export and are kept as player-value pages with no keyword-driven
   copy added.
-- No new content page is recommended from this data. The one
-  copy change made from the export is a single generic phrase in
-  the homepage intro ("letter-box word puzzle").
+- No new content page is recommended from this data. The copy
+  changes made from the export are a single generic phrase in
+  the homepage intro ("letter-box word puzzle") and, from the
+  owner-approved October 2026 wording round, the homepage H1
+  ("Play a free letter box word game") and title ("Free Letter
+  Box Word Game – Daily Puzzle | Letterboxed Gamez"), the
+  "no time limit" correction, and a visible unlimited-practice
+  sentence. The meta keywords tag was removed.
 - See `docs/seo-keyword-map.md` for the full page-to-keyword map
   with figures, the brand/intent totals, the audit, and what is
   still missing (Search Console and Core Web Vitals after launch).

@@ -92,7 +92,7 @@ export default function HomePage() {
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-moss">
               Letterboxed Gamez gives you twelve letters arranged around a square — three on each
               side. Your job is to link words together until every letter has been used. There is
-              no timer, no score chasing, and no account to create. Play for three minutes on a
+              no time limit and no account to create. Play for three minutes on a
               coffee break, or take your time over the whole board.
             </p>
             <div className="mt-7 grid gap-4 sm:grid-cols-3">
@@ -143,8 +143,8 @@ export default function HomePage() {
               <p className="mt-2 text-[15px] leading-relaxed text-moss">
                 The daily puzzle is the same for everyone, so you can compare notes with a friend
                 without spoiling anything — just say how many words it took you. Finished it?
-                Practice puzzles keep the same rules with a fresh board, whenever you want one.
-                Every puzzle in the rotation has been checked in advance: a verified solution
+                Play as many practice puzzles as you like, with the same rules and a fresh board,
+                whenever you want one. Every puzzle in the rotation has been checked in advance: a verified solution
                 exists, and every word in that solution is in the curated word list.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">

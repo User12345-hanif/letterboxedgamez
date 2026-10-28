@@ -55,7 +55,7 @@ kbd { background: #fff; border: 1px solid #c9c2a8; border-bottom-width: 2px; bor
 <body>
 <div class="wrap">
   <span class="badge">Playable preview &middot; not a deployment</span>
-  <h1>Today&rsquo;s daily word puzzle</h1>
+  <h1>Play a free letter box word game</h1>
   <p class="sub">Use every letter at least once. Two letters in a row must come from different sides. This preview uses the same puzzles, dictionary and rules as the Next.js site.</p>
   <div class="try"><b>Try it in order:</b> 1. Tap letters to spell a word. 2. Tap <b>Submit</b>. 3. Start the next word with the last letter of the last one. 4. Tap <b>Hint</b> once for a nudge, again to reveal a word. 5. Tap <b>Undo</b> to remove one letter, <b>Clear</b> to start the word again. 6. Keep going until every letter is used. You can also type with your keyboard: letters, <kbd>Enter</kbd> to submit, <kbd>Backspace</kbd> to undo, <kbd>Esc</kbd> to clear.</div>
   <label class="sub" for="puzzleSelect" style="display:block;margin-top:12px;font-weight:700;color:#1e4d2b;">Choose a puzzle</label>
@@ -268,7 +268,7 @@ function render(){
   }
   sel.value=String(puzzleIndex);
   var title=document.querySelector("h1");
-  title.textContent = puzzleIndex===dayIndex() ? "Today\u2019s daily word puzzle" : "Practice word puzzle \u2014 "+p.label;
+  title.textContent = puzzleIndex===dayIndex() ? "Play a free letter box word game" : "Practice word puzzle \u2014 "+p.label;
 }
 $("submitBtn").addEventListener("click", submit);
 $("undoBtn").addEventListener("click", undo);

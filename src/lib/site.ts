@@ -33,5 +33,7 @@ export function canonical(path = "/"): string {
 }
 
 export function pageTitle(title?: string): string {
-  return title ? `${title} | ${SITE.name}` : `${SITE.name} — Daily Word Puzzle`;
+  return title
+    ? `${title} | ${SITE.name}`
+    : "Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez";
 }

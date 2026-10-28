@@ -1,0 +1,14 @@
+# Letterboxed Gamez
+
+> Letterboxed Gamez is a free daily word puzzle. Twelve letters sit on four sides of a square. Players chain words together, changing sides with every letter, until all twelve letters are used. A new puzzle arrives every day at midnight Pakistan time (00:00 Asia/Karachi, 19:00 UTC), and practice puzzles are unlimited. No account and no download are needed.
+
+## Pages
+
+- [Play the daily puzzle](https://letterboxedgamez.com/): Play today's puzzle or a practice puzzle.
+- [How to Play](https://letterboxedgamez.com/how-to-play): The complete rules, controls, and message meanings.
+- [Strategies](https://letterboxedgamez.com/strategies): Habits for solving in fewer words.
+- [Hints](https://letterboxedgamez.com/hints): How hints work, without spoilers.
+- [FAQ](https://letterboxedgamez.com/faq): Straight answers to common questions.
+- [About](https://letterboxedgamez.com/about): How puzzles are made and verified, and contact details.
+- [Privacy Policy](https://letterboxedgamez.com/privacy-policy): No accounts, no tracking; progress stays in the browser.
+- [Terms](https://letterboxedgamez.com/terms): Plain-language terms for free personal play.

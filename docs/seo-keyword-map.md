@@ -189,9 +189,17 @@ serves them.
 added to the homepage intro — "In this letter-box word puzzle, chain
 words around the square…" — plus the existing "Play online in your
 browser — no download, no account" copy, which already serves the
-free/online play phrases. Title and H1 are unchanged (they carry
-the site's own name and the daily-puzzle job, not a generic phrase
-stuffed in for search).
+free/online play phrases. Title and H1 were unchanged in that
+round (they carried the site's own name and the daily-puzzle job,
+not a generic phrase stuffed in for search).
+
+Later change (28 October 2026, owner-approved): the homepage H1
+became "Play a free letter box word game" in daily mode (practice
+mode keeps "Practice word puzzle") and the homepage title became
+"Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez".
+The target phrase reports volume 40 at average position 1.00, so
+no high-volume claim is made; the change was approved on
+relevance and intent match. See §7 item 5.
 
 ### `/how-to-play` — How to Play (P1 generic + P2 demand signal)
 
@@ -277,15 +285,36 @@ cannot win on relevance.
 4. **Records kept:** verbatim export copy, reproducible parser +
    classifier (`scripts/analyze-ahrefs.mjs`), classified CSV with
    all original columns, this map, and the README summary below.
+5. **SEO wording round (28 October 2026, owner-approved):**
+   homepage H1/title as in §5; "no timer" copy corrected to "no
+   time limit" (homepage + How to Play) since a solve timer
+   exists; unlimited practice made visible ("Play as many practice
+   puzzles as you like…"); the meta keywords tag was removed (it
+   contained "letterboxed"); the logo link tagline was hidden
+   from assistive technology (accessible-name fix); viewport and
+   manifest theme colors were aligned (`#faf5e9`); `public/llms.txt`
+   was added as an optional reference file with no ranking or
+   AI-citation claims; basic security headers were added in
+   `next.config.ts` (no CSP, which would need nonce plumbing).
+   No design change, no new pages, no branded terms.
+   `robots.txt` was deliberately left unchanged: search/retrieval
+   crawlers stay allowed and training-crawler permissions were
+   not touched, pending a separate owner decision.
 
 ## 8. Audit (re-checked 28 October 2026, after the export analysis)
 
-- One H1 per page; homepage H1 "Today's daily word puzzle";
+- One H1 per page; homepage H1 "Play a free letter box word game"
+  in daily mode ("Practice word puzzle" in practice mode);
   article H1s are page titles; FAQ questions are H2s.
-- Titles 25–46 chars rendered; descriptions 120–147 chars.
+- Titles 25–60 chars rendered (homepage title 60 chars);
+  descriptions 120–147 chars.
 - Canonical URL on every content page from the single editable
   `SITE.url`; sitemap lists all 8 routes; robots.txt allows all
-  and points at the sitemap.
+  and points at the sitemap. No AI training-crawler rules:
+  deliberately unchanged (see §7 item 5).
+- `llms.txt` is served from `/llms.txt` as an optional reference
+  file; basic security headers are set (HSTS, nosniff, frame
+  options, referrer and permissions policies; no CSP).
 - Open Graph + Twitter cards; OG image 1200×630 with alt text;
   apple touch icon 180×180.
 - Structured data: WebSite (layout), WebApplication + FAQPage

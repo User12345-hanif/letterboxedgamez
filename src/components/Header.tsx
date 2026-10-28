@@ -10,27 +10,32 @@ interface HeaderProps {
 /** Original text-based logo — no copied branding or graphics. */
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
-    <Link
-      href="/"
-      className="group inline-flex min-h-11 items-baseline gap-2 rounded-lg px-1 text-ink no-underline"
-      aria-label="Letterboxed Gamez — home"
-    >
-      <span
-        aria-hidden="true"
-        className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] border-2 border-gold-deep bg-gradient-to-br from-gold-bright to-gold font-display text-[17px] font-bold leading-none text-ink shadow-tile"
+    <span className="inline-flex items-baseline gap-2">
+      <Link
+        href="/"
+        className="group inline-flex min-h-11 items-baseline gap-2 rounded-lg px-1 text-ink no-underline"
+        aria-label="L Letterboxed Gamez — home"
       >
-        L<span className="sr-only">etterboxed</span>
-      </span>
-      <span className="font-display text-[22px] font-bold leading-none tracking-tight text-ink sm:text-[26px]">
-        Letterboxed
-        <span className="text-forest"> Gamez</span>
-      </span>
+        <span
+          aria-hidden="true"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] border-2 border-gold-deep bg-gradient-to-br from-gold-bright to-gold font-display text-[17px] font-bold leading-none text-ink shadow-tile"
+        >
+          L
+        </span>
+        <span className="font-display text-[22px] font-bold leading-none tracking-tight text-ink sm:text-[26px]">
+          {" "}Letterboxed
+          <span className="text-forest"> Gamez</span>
+        </span>
+      </Link>
       {!compact && (
-        <span className="hidden font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-moss md:inline">
+        <span
+          aria-hidden="true"
+          className="hidden font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-moss md:inline"
+        >
           Daily word puzzle
         </span>
       )}
-    </Link>
+    </span>
   );
 }
 
