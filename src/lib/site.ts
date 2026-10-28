@@ -11,7 +11,7 @@ export const SITE = {
     "Letterboxed Gamez is a free daily word puzzle. Use all twelve letters on four sides to build chained words — no two letters in a row from the same side. A new puzzle every day, plus unlimited practice puzzles.",
   /** Short description used for meta descriptions (kept under ~160 characters). */
   shortDescription:
-    "Play Letterboxed Gamez, a free daily word puzzle. Chain words around four sides and use all twelve letters — no account needed.",
+    "Play a free letter-box word puzzle every day. Connect letters around the board, discover words, challenge yourself and enjoy unlimited practice puzzles.",
   url: "https://letterboxedgamez.com",
   domain: "letterboxedgamez.com",
   locale: "en_US",
@@ -35,5 +35,5 @@ export function canonical(path = "/"): string {
 export function pageTitle(title?: string): string {
   return title
     ? `${title} | ${SITE.name}`
-    : "Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez";
+    : "Letter Boxed: Free Daily Word Puzzle & Practice";
 }

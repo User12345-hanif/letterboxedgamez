@@ -87,7 +87,7 @@ export default function HomePage() {
           <section aria-labelledby="how-it-works" className="mt-14 border-t border-line pt-10">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-forest">How it works</p>
             <h2 id="how-it-works" className="mt-2 max-w-2xl font-display text-[28px] font-bold leading-tight tracking-tight text-ink sm:text-[34px]">
-              A small puzzle with a satisfying finish
+              How to Play the Letter Box Word Game
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-moss">
               Letterboxed Gamez gives you twelve letters arranged around a square — three on each
@@ -138,7 +138,7 @@ export default function HomePage() {
             </div>
             <div className="rounded-3xl border border-line bg-cream p-6 shadow-sm sm:p-8">
               <h2 className="font-display text-[26px] font-bold leading-tight text-ink">
-                A new puzzle every day
+                Play Today's Daily Letter Box Puzzle
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-moss">
                 The daily puzzle is the same for everyone, so you can compare notes with a friend
@@ -163,7 +163,7 @@ export default function HomePage() {
 
           <section aria-labelledby="example" className="mt-12">
             <h2 id="example" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
-              What a solve looks like
+              Letter Box Puzzle Tips and Strategies
             </h2>
             <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-moss">
               A strong solve uses just two words. The first word gathers most of the letters; the
@@ -187,7 +187,7 @@ export default function HomePage() {
 
           <section aria-labelledby="home-faq" className="mt-12">
             <h2 id="home-faq" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
-              Questions, answered briefly
+              Frequently Asked Questions
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               {HOME_FAQS.map(([question, answer]) => (

@@ -403,7 +403,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               <span className="font-normal normal-case tracking-normal text-sage">· {puzzle.label}</span>
             </p>
             <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.05] tracking-tight text-cream sm:text-[44px]">
-              {mode === "daily" ? "Play a free letter box word game" : "Practice word puzzle"}
+              {mode === "daily" ? "Letter Boxed — Play a Free Daily Word Puzzle" : "Practice word puzzle"}
             </h1>
             <p className="mt-2 text-sm font-bold uppercase tracking-[0.12em] text-gold-light">
               {formatPuzzleDate(today)} · {puzzle.label}
@@ -744,7 +744,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
 
             {/* Choose a puzzle — all seven, any time, as practice. */}
             <div className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
-              <h2 className="font-display text-lg font-bold text-ink">Choose a puzzle</h2>
+              <h2 className="font-display text-lg font-bold text-ink">Practice More Letter Box Puzzles for Free</h2>
               <p className="mt-1 text-sm leading-relaxed text-moss">
                 Pick any board to play as practice. Your daily puzzle stays untouched.
               </p>

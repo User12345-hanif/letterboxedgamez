@@ -201,6 +201,17 @@ The target phrase reports volume 40 at average position 1.00, so
 no high-volume claim is made; the change was approved on
 relevance and intent match. See §7 item 5.
 
+Second later change (29 October 2026, owner-directed after the
+brand risk was flagged): the homepage H1 became "Letter Boxed —
+Play a Free Daily Word Puzzle" (daily mode; practice mode
+unchanged), the homepage title became "Letter Boxed: Free Daily
+Word Puzzle & Practice", the meta description became the
+152-character "Play a free letter-box word puzzle…" text, and
+five homepage H2s were retitled (see §7 item 6). "Letter Boxed"
+is classified branded in this export; the owner directed this
+targeting knowingly, with the independent-game identification
+and the About non-affiliation statement retained. See §7 item 6.
+
 ### `/how-to-play` — How to Play (P1 generic + P2 demand signal)
 
 | Keyword | Volume | Traffic | Avg pos | Top loc | Class / action |
@@ -300,14 +311,29 @@ cannot win on relevance.
    `robots.txt` was deliberately left unchanged: search/retrieval
    crawlers stay allowed and training-crawler permissions were
    not touched, pending a separate owner decision.
+6. **"Letter Boxed" targeting round (29 October 2026,
+   owner-directed):** homepage H1/title/meta description as in
+   §5 (second later change); homepage H2s retitled to "How to
+   Play the Letter Box Word Game", "Play Today's Daily Letter
+   Box Puzzle", "Letter Box Puzzle Tips and Strategies",
+   "Practice More Letter Box Puzzles for Free" (picker), and
+   "Frequently Asked Questions"; the "Built to be read at a
+   glance", "Your progress", "Words found", and "In short"
+   headings and all article-page headings were left unchanged;
+   no design, gameplay, canonical, or robots change; no sitemap
+   submission. This supersedes the earlier no-brand-targeting
+   stance for the homepage phrase only, by explicit owner
+   decision after the brand-confusion/trademark risk was
+   flagged; the classifier output in §2–§4 is unchanged (the
+   phrase remains branded in the export data).
 
 ## 8. Audit (re-checked 28 October 2026, after the export analysis)
 
-- One H1 per page; homepage H1 "Play a free letter box word game"
-  in daily mode ("Practice word puzzle" in practice mode);
-  article H1s are page titles; FAQ questions are H2s.
-- Titles 25–60 chars rendered (homepage title 60 chars);
-  descriptions 120–147 chars.
+- One H1 per page; homepage H1 "Letter Boxed — Play a Free Daily
+  Word Puzzle" in daily mode ("Practice word puzzle" in practice
+  mode); article H1s are page titles; FAQ questions are H2s.
+- Titles 25–60 chars rendered (homepage title 47 chars);
+  descriptions 120–152 chars (homepage description 152 chars).
 - Canonical URL on every content page from the single editable
   `SITE.url`; sitemap lists all 8 routes; robots.txt allows all
   and points at the sitemap. No AI training-crawler rules:
@@ -331,7 +357,9 @@ cannot win on relevance.
   ≥44 px; E2E check at 390 px finds no horizontal overflow.
 - No image on any page lacks alt text (no `<img>` is used; the
   only images are the OG card and icons).
-- No page targets a branded term, a typo, or a daily-answer term.
+- No page targets a branded term, a typo, or a daily-answer term,
+  except the homepage H1/title, which target "Letter Boxed" by
+  explicit owner direction, 29 October 2026 (see §7 item 6).
   Verified by the classifier output: every P1 keyword is generic,
   and every branded keyword maps to "Excluded".
 

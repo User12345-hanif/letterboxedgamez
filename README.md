@@ -116,6 +116,13 @@ and recorded in `docs/seo-keyword-map.md`:
 - No page targets a branded term ("letter boxed", "letterboxed",
   NYT / New York Times, Letterboxd, Wordle), a typo, or a
   daily-answer/archive term. No daily solutions are published.
+  Exception, owner-directed 29 October 2026 (see
+  `docs/seo-keyword-map.md` §7 item 6): after the
+  brand-confusion/trademark risk was flagged, the owner directed
+  the homepage H1/title to target the branded phrase
+  "Letter Boxed" as the primary phrase, keeping the
+  independent-game identification and the About
+  non-affiliation statement. No other page targets a branded term.
 - The generic phrases map to the existing homepage and How to
   Play page only. Strategies and Hints have zero keywords in the
   export and are kept as player-value pages with no keyword-driven

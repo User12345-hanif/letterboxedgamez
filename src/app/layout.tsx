@@ -35,7 +35,7 @@ const sans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez",
+    default: "Letter Boxed: Free Daily Word Puzzle & Practice",
     template: "%s | Letterboxed Gamez",
   },
   description: SITE.shortDescription,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE.name,
-    title: "Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez",
+    title: "Letter Boxed: Free Daily Word Puzzle & Practice",
     description: SITE.shortDescription,
     url: canonical("/"),
     locale: SITE.locale,
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Letter Box Word Game – Daily Puzzle | Letterboxed Gamez",
+    title: "Letter Boxed: Free Daily Word Puzzle & Practice",
     description: SITE.shortDescription,
     images: ["/opengraph-image"],
   },
