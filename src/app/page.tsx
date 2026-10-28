@@ -22,7 +22,7 @@ const JSON_LD = {
 
 const HOME_FAQS: Array<[string, string]> = [
   [
-    "Is Letterboxed Gamez free?",
+    "Is Letter Box Game free?",
     "Yes. The daily puzzle and practice puzzles are free to play, with no account, no download and no subscription. Your progress is stored only in your own browser.",
   ],
   [
@@ -90,7 +90,7 @@ export default function HomePage() {
               How to Play the Letter Box Word Game
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-moss">
-              Letterboxed Gamez gives you twelve letters arranged around a square — three on each
+              Letter Box Game gives you twelve letters arranged around a square — three on each
               side. Your job is to link words together until every letter has been used. There is
               no time limit and no account to create. Play for three minutes on a
               coffee break, or take your time over the whole board.
@@ -110,7 +110,7 @@ export default function HomePage() {
                   body: "Each new word starts with the last letter of the one before it. When all twelve letters are used, the puzzle is solved — in as few words as you can manage.",
                 },
               ].map((card) => (
-                <article key={card.title} className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
+                <article key={card.title} className="rounded-3xl border border-line bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift">
                   <h3 className="font-display text-lg font-bold text-ink">{card.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-moss">{card.body}</p>
                 </article>
@@ -118,8 +118,8 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section aria-labelledby="why-clear" className="mt-12 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl bg-forest p-6 text-white sm:p-8">
+          <section aria-labelledby="why-clear" className="mt-14 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-3xl bg-forest p-6 text-white shadow-soft sm:p-8">
               <h2 id="why-clear" className="font-display text-[26px] font-bold leading-tight">
                 Built to be read at a glance
               </h2>
@@ -136,7 +136,7 @@ export default function HomePage() {
                 <li>✓ &nbsp;Your progress stays in your browser, and only there</li>
               </ul>
             </div>
-            <div className="rounded-3xl border border-line bg-cream p-6 shadow-sm sm:p-8">
+            <div className="rounded-3xl border border-line bg-cream p-6 shadow-soft sm:p-8">
               <h2 className="font-display text-[26px] font-bold leading-tight text-ink">
                 Play Today's Daily Letter Box Puzzle
               </h2>
@@ -161,7 +161,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section aria-labelledby="example" className="mt-12">
+          <section aria-labelledby="example" className="mt-14">
             <h2 id="example" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
               Letter Box Puzzle Tips and Strategies
             </h2>
@@ -171,7 +171,7 @@ export default function HomePage() {
               not need to find the same two words as anyone else — any chain that uses all twelve
               letters solves the puzzle.
             </p>
-            <figure className="mt-5 overflow-hidden rounded-3xl border border-line bg-cream shadow-sm">
+            <figure className="mt-5 overflow-hidden rounded-3xl border border-line bg-cream shadow-soft">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-2 px-5 py-4 sm:px-6">
                 <span className="rounded-full bg-forest px-3 py-1 font-display text-sm font-bold tracking-wide text-white">CAPTURE</span>
                 <span aria-hidden="true" className="text-xl font-bold text-forest">→</span>
@@ -185,13 +185,13 @@ export default function HomePage() {
             </figure>
           </section>
 
-          <section aria-labelledby="home-faq" className="mt-12">
+          <section aria-labelledby="home-faq" className="mt-14">
             <h2 id="home-faq" className="font-display text-[26px] font-bold tracking-tight text-ink sm:text-[30px]">
               Frequently Asked Questions
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               {HOME_FAQS.map(([question, answer]) => (
-                <article key={question} className="rounded-3xl border border-line bg-cream p-5 shadow-sm">
+                <article key={question} className="rounded-3xl border border-line bg-cream p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lift">
                   <h3 className="font-display text-[18px] font-bold leading-snug text-ink">{question}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-moss">{answer}</p>
                 </article>

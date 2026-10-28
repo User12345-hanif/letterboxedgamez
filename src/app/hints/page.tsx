@@ -6,7 +6,7 @@ import { canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Hints",
   description:
-    "How hints work in Letterboxed Gamez, how to use them without spoiling the puzzle, and gentle, spoiler-free ways to get unstuck.",
+    "How hints work in Letter Box Game, how to use them without spoiling the puzzle, and gentle, spoiler-free ways to get unstuck.",
   alternates: { canonical: canonical("/hints") },
   openGraph: {
     title: "Hints",
@@ -20,7 +20,7 @@ export default function HintsPage() {
     <ArticleClient
       kicker="Hints"
       title="Hints, without spoilers"
-      intro="Hints in Letterboxed Gamez are designed to nudge, not to answer for you. Here is how they work, and what to try before you use one."
+      intro="Hints in Letter Box Game are designed to nudge, not to answer for you. Here is how they work, and what to try before you use one."
     >
       <h2>How the in-game hint works</h2>
       <ol>

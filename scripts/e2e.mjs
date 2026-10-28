@@ -1,5 +1,5 @@
 /**
- * End-to-end tests for Letterboxed Gamez — real Chromium, real server.
+ * End-to-end tests for Letter Box Game — real Chromium, real server.
  *
  * Usage:  npm run test:e2e
  * Requires a production build first (`npm run build`). The script starts

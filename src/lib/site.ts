@@ -4,11 +4,11 @@
  * page, the sitemap and the sharing cards follow.
  */
 export const SITE = {
-  name: "Letterboxed Gamez",
-  shortName: "Letterboxed",
+  name: "Letter Box Game",
+  shortName: "Letter Box",
   tagline: "Twelve letters. Four sides. One clear path.",
   description:
-    "Letterboxed Gamez is a free daily word puzzle. Use all twelve letters on four sides to build chained words — no two letters in a row from the same side. A new puzzle every day, plus unlimited practice puzzles.",
+    "Letter Box Game is a free daily word puzzle. Use all twelve letters on four sides to build chained words — no two letters in a row from the same side. A new puzzle every day, plus unlimited practice puzzles.",
   /** Short description used for meta descriptions (kept under ~160 characters). */
   shortDescription:
     "Play a free letter-box word puzzle every day. Connect letters around the board, discover words, challenge yourself and enjoy unlimited practice puzzles.",

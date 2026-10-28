@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
     default: "Letter Boxed: Free Daily Word Puzzle & Practice",
-    template: "%s | Letterboxed Gamez",
+    template: "%s | Letter Box Game",
   },
   description: SITE.shortDescription,
   authors: [{ name: SITE.name, url: SITE.url }],
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description: SITE.shortDescription,
     url: canonical("/"),
     locale: SITE.locale,
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Letterboxed Gamez — twelve letters, four sides, one clear path." }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Letter Box Game — twelve letters, four sides, one clear path." }],
   },
   twitter: {
     card: "summary_large_image",

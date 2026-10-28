@@ -6,7 +6,7 @@ import { canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
-    "Is Letterboxed Gamez free? Do I need an account? Why was my word rejected? Straight answers about the daily word puzzle.",
+    "Is Letter Box Game free? Do I need an account? Why was my word rejected? Straight answers about the daily word puzzle.",
   alternates: { canonical: canonical("/faq") },
   openGraph: {
     title: "Frequently Asked Questions",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const FAQS: Array<[string, string]> = [
   [
-    "Is Letterboxed Gamez free?",
+    "Is Letter Box Game free?",
     "Yes. The daily puzzle and practice puzzles are free to play, with no account, no download and no subscription. Your progress is stored only in your own browser.",
   ],
   [

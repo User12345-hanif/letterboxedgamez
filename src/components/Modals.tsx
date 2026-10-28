@@ -92,7 +92,7 @@ export function HowToPlayModal({ open, onClose }: { open: boolean; onClose: () =
           <span><strong className="text-ink">Use all 12 letters at least once</strong> to solve the puzzle. Fewer words is better — two words is an excellent solve.</span>
         </li>
       </ol>
-      <p className="mt-5 rounded-xl bg-sage-light p-4 text-sm leading-relaxed text-pine">
+      <p className="mt-5 rounded-xl bg-mint p-4 text-sm leading-relaxed text-pine">
         Keyboard: type letters to pick them, <kbd className="rounded border border-line bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Enter</kbd> to submit,{" "}
         <kbd className="rounded border border-line bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Backspace</kbd> to undo one letter, and{" "}
         <kbd className="rounded border border-line bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Esc</kbd> to clear the current word.
@@ -163,7 +163,7 @@ export function StatsModal({
         ))}
       </dl>
       {stats.gamesPlayed === 0 && (
-        <p className="mt-5 rounded-xl bg-gold-light p-4 text-sm leading-relaxed text-pine">
+        <p className="mt-5 rounded-xl bg-butter p-4 text-sm leading-relaxed text-pine">
           No puzzles played yet. Your first solve will start your streak.
         </p>
       )}

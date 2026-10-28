@@ -179,7 +179,7 @@ export function GameBoard({
                 isSelected
                   ? "border-gold-deep bg-gradient-to-b from-gold-bright to-gold text-ink scale-[1.08]"
                   : pickable
-                    ? "cursor-pointer border-[#e8d9a8] bg-gradient-to-b from-white to-[#fdf3d7] text-ink hover:-translate-y-0.5 hover:border-forest-light"
+                    ? "cursor-pointer border-[#e8d9a8] bg-gradient-to-b from-white to-[#fdf3d7] text-ink hover:-translate-y-0.5 hover:border-forest-light hover:shadow-lift hover:ring-[3px] hover:ring-gold/70 active:scale-[0.97]"
                     : "cursor-not-allowed border-[#8a9a86] bg-[#3d5c46] text-[#eef2e4] saturate-75",
                 isHinted && !isSelected
                   ? "ring-4 ring-gold-bright animate-ring-pulse border-gold"

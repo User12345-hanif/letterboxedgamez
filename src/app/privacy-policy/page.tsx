@@ -5,7 +5,7 @@ import { SITE, canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy Policy for Letterboxed Gamez: no accounts, no tracking, no advertising profiles. Your game progress stays in your own browser.",
+    "Privacy Policy for Letter Box Game: no accounts, no tracking, no advertising profiles. Your game progress stays in your own browser.",
   alternates: { canonical: canonical("/privacy-policy") },
   openGraph: {
     title: "Privacy Policy",
@@ -19,13 +19,13 @@ export default function PrivacyPage() {
     <ArticleClient
       kicker="Privacy Policy"
       title="Privacy Policy"
-      intro="Short version: Letterboxed Gamez has no accounts and does not track you. Your game progress stays in your own browser. The rest of this page is the formal version of the same thing."
+      intro="Short version: Letter Box Game has no accounts and does not track you. Your game progress stays in your own browser. The rest of this page is the formal version of the same thing."
     >
       <p className="text-sm text-moss">Last updated: October 28, 2026.</p>
 
       <h2>What we collect</h2>
       <p>
-        <strong>Nothing that identifies you.</strong> Letterboxed Gamez does not ask for your name,
+        <strong>Nothing that identifies you.</strong> Letter Box Game does not ask for your name,
         email address, or any other personal information to play. We do not run analytics trackers,
         advertising trackers, or fingerprinting on this site.
       </p>

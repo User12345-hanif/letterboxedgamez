@@ -5,7 +5,7 @@ import { SITE, canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms",
   description:
-    "Terms for Letterboxed Gamez: free personal play, fair use, and the limits of the curated word list and puzzle verification.",
+    "Terms for Letter Box Game: free personal play, fair use, and the limits of the curated word list and puzzle verification.",
   alternates: { canonical: canonical("/terms") },
   openGraph: {
     title: "Terms",
@@ -19,13 +19,13 @@ export default function TermsPage() {
     <ArticleClient
       kicker="Terms"
       title="Terms of use"
-      intro="Plain-language terms for a plain, free game. By playing Letterboxed Gamez you agree to the short list below."
+      intro="Plain-language terms for a plain, free game. By playing Letter Box Game you agree to the short list below."
     >
       <p className="text-sm text-moss">Last updated: October 28, 2026.</p>
 
       <h2>1. The game</h2>
       <p>
-        Letterboxed Gamez is a free daily word puzzle provided for personal enjoyment. No account
+        Letter Box Game is a free daily word puzzle provided for personal enjoyment. No account
         is required, and no purchase is necessary to play the daily or practice puzzles. We may
         update the puzzles, the word list, or the site itself at any time.
       </p>
@@ -40,7 +40,7 @@ export default function TermsPage() {
 
       <h2>3. Content and ownership</h2>
       <p>
-        The site&apos;s design, code, copy and puzzles are original works of Letterboxed Gamez.
+        The site&apos;s design, code, copy and puzzles are original works of Letter Box Game.
         You may play, share links to the site, and share your own solve summaries. You may not
         copy the site&apos;s design or copy wholesale, republish the puzzle data as your own, or
         present the game as affiliated with another publisher.

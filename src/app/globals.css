@@ -21,6 +21,8 @@
   --color-gold-deep: #9c7a1d;
   --color-gold-bright: #e3b93e;
   --color-gold-light: #f8ecc9;
+  --color-butter: #fdf1cb;
+  --color-mint: #dcf0e4;
   --color-clay: #b04a1f;
   --color-clay-light: #fce8dc;
   --color-line: #d9cba6;
@@ -38,6 +40,7 @@
   --animate-shimmer: shimmer 2.2s linear infinite;
   --animate-confetti: confetti-fall 2.6s ease-in forwards;
   --animate-glow: glow-pulse 2.4s ease-in-out infinite;
+  --animate-star-pop: star-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes pop {
@@ -77,6 +80,11 @@
 @keyframes glow-pulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
+}
+@keyframes star-pop {
+  0% { transform: scale(0.4) rotate(-14deg); opacity: 0; }
+  70% { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
 html {

@@ -1,6 +1,6 @@
-# Letterboxed Gamez
+# Letter Box Game
 
-> Letterboxed Gamez is a free daily word puzzle. Twelve letters sit on four sides of a square. Players chain words together, changing sides with every letter, until all twelve letters are used. A new puzzle arrives every day at midnight Pakistan time (00:00 Asia/Karachi, 19:00 UTC), and practice puzzles are unlimited. No account and no download are needed.
+> Letter Box Game is a free daily word puzzle. Twelve letters sit on four sides of a square. Players chain words together, changing sides with every letter, until all twelve letters are used. A new puzzle arrives every day at midnight Pakistan time (00:00 Asia/Karachi, 19:00 UTC), and practice puzzles are unlimited. No account and no download are needed.
 
 ## Pages
 

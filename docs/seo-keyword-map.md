@@ -250,7 +250,7 @@ be trademark-sensitive targeting for ~100 volume; it was not done.
 - **About:** the single alternatives keyword ("games like letter
   boxed", 70 volume, 15 traffic, position 1.00, branded) is
   excluded — no comparison page. About already carries the
-  disambiguation that matters: "Letterboxed Gamez is an original
+  disambiguation that matters: "Letter Box Game is an original
   game and site. It is not affiliated with, endorsed by, or
   copied from any other word game or publisher." No change made.
 - **Privacy / Terms:** trust pages, not landing pages. No mapping.
@@ -326,6 +326,19 @@ cannot win on relevance.
    decision after the brand-confusion/trademark risk was
    flagged; the classifier output in §2–§4 is unchanged (the
    phrase remains branded in the export data).
+7. **Brand rename (29 October 2026, owner-approved):**
+   displayed brand name changed from "Letterboxed Gamez" to
+   "Letter Box Game" (short name "Letter Box") via
+   `SITE.name`/`SITE.shortName` plus literal brand references
+   in the logo, footer, share text, OG image, article copy and
+   descriptions, `llms.txt`, and the preview generator. Domain,
+   URLs, canonicals, sitemap, and robots unchanged; SEO title,
+   H1, and meta description unchanged (they contain no brand
+   name); the title template suffix and article meta
+   descriptions now carry the new brand name. No game-logic,
+   dictionary, puzzle, or page-structure change. The About
+   non-affiliation statement is unchanged apart from the brand
+   name.
 
 ## 8. Audit (re-checked 28 October 2026, after the export analysis)
 

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Letterboxed Gamez — twelve letters, four sides, one clear path.";
+export const alt = "Letter Box Game — twelve letters, four sides, one clear path.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -69,10 +69,10 @@ export default function OpenGraphImage() {
             DAILY WORD PUZZLE
           </div>
           <div style={{ marginTop: 16, fontSize: 72, lineHeight: 1.05, fontWeight: 700, color: "#1c261d" }}>
-            Letterboxed
+            Letter Box
           </div>
           <div style={{ fontSize: 72, lineHeight: 1.05, fontWeight: 700, color: "#1e4d2b" }}>
-            Gamez
+            Game
           </div>
           <div style={{ marginTop: 20, fontSize: 28, lineHeight: 1.4, color: "#5c6b5e", fontFamily: "sans-serif" }}>
             Twelve letters. Four sides.

@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
             <p className="font-display text-xl font-bold text-ink">
-              Letterboxed <span className="text-forest">Gamez</span>
+              Letter Box <span className="text-forest">Game</span>
             </p>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-moss">
               A calm, clear daily word puzzle. Twelve letters, four sides,
@@ -32,7 +32,7 @@ export function Footer() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link href="/about" className="text-pine underline-offset-4 hover:text-forest hover:underline">
-                  About Letterboxed Gamez
+                  About Letter Box Game
                 </Link>
               </li>
               <li>

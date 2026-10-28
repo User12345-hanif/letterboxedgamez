@@ -77,7 +77,7 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Letterboxed Gamez — playable preview</title>
+<title>Letter Box Game — playable preview</title>
 <style>
 * { box-sizing: border-box; }
 body { margin: 0; background: #f6eeda; background-image: radial-gradient(700px 380px at 88% -8%, rgba(227,185,62,.22), transparent 60%), radial-gradient(600px 340px at -10% -4%, rgba(26,92,52,.16), transparent 55%); color: #1d2b20; font-family: Georgia, "Times New Roman", serif; }

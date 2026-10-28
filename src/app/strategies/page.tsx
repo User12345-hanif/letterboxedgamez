@@ -6,7 +6,7 @@ import { canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Strategies",
   description:
-    "Strategies for solving Letterboxed Gamez in fewer words: awkward letters first, plan backwards, save flexible letters for the link.",
+    "Strategies for solving Letter Box Game in fewer words: awkward letters first, plan backwards, save flexible letters for the link.",
   alternates: { canonical: canonical("/strategies") },
   openGraph: {
     title: "Strategies",

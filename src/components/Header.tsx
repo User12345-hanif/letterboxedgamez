@@ -14,7 +14,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <Link
         href="/"
         className="group inline-flex min-h-11 items-baseline gap-2 rounded-lg px-1 text-ink no-underline"
-        aria-label="L Letterboxed Gamez — home"
+        aria-label="L Letter Box Game — home"
       >
         <span
           aria-hidden="true"
@@ -23,8 +23,8 @@ export function Logo({ compact = false }: { compact?: boolean }) {
           L
         </span>
         <span className="font-display text-[22px] font-bold leading-none tracking-tight text-ink sm:text-[26px]">
-          {" "}Letterboxed
-          <span className="text-forest"> Gamez</span>
+          {" "}Letter Box
+          <span className="text-forest"> Game</span>
         </span>
       </Link>
       {!compact && (

@@ -6,7 +6,7 @@ import { SITE, canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Letterboxed Gamez: an independent, original daily word puzzle built to be clear, calm and accessible — no account, no tracking.",
+    "About Letter Box Game: an independent, original daily word puzzle built to be clear, calm and accessible — no account, no tracking.",
   alternates: { canonical: canonical("/about") },
   openGraph: {
     title: "About",
@@ -19,8 +19,8 @@ export default function AboutPage() {
   return (
     <ArticleClient
       kicker="About"
-      title="About Letterboxed Gamez"
-      intro="Letterboxed Gamez is an independent daily word puzzle. It was built from scratch — original design, original code, original puzzles — with one idea at its centre: the board should be the clearest thing on the page."
+      title="About Letter Box Game"
+      intro="Letter Box Game is an independent daily word puzzle. It was built from scratch — original design, original code, original puzzles — with one idea at its centre: the board should be the clearest thing on the page."
     >
       <h2>Why another word game?</h2>
       <p>
@@ -68,7 +68,7 @@ export default function AboutPage() {
         and accessibility reports are treated as the highest priority.
       </p>
       <p>
-        Letterboxed Gamez is an original game and site. It is not affiliated with, endorsed by, or
+        Letter Box Game is an original game and site. It is not affiliated with, endorsed by, or
         copied from any other word game or publisher.
       </p>
     </ArticleClient>

@@ -351,7 +351,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
   const shareResult = useCallback(async () => {
     const starLine = "★".repeat(stars) + "☆".repeat(3 - stars);
     const glyphLines = submitted.map((word) => `${word}  ${glyphRow(puzzle, word)}`).join("\n");
-    const text = `Letterboxed Gamez — ${mode === "daily" ? "Daily Puzzle" : "Practice"} (${formatPuzzleDate(today)})\n${starLine} · ${submitted.length} word${submitted.length === 1 ? "" : "s"} · ${formatElapsed(displayTimeMs)}\n${glyphLines}\nhttps://letterboxedgamez.com`;
+    const text = `Letter Box Game — ${mode === "daily" ? "Daily Puzzle" : "Practice"} (${formatPuzzleDate(today)})\n${starLine} · ${submitted.length} word${submitted.length === 1 ? "" : "s"} · ${formatElapsed(displayTimeMs)}\n${glyphLines}\nhttps://letterboxedgamez.com`;
     try {
       await navigator.clipboard.writeText(text);
       setShareCopied(true);
@@ -412,6 +412,10 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
               In this letter-box word puzzle, chain words around the square and use every letter at
               least once. Two letters in a row must come from different sides. Play online in your
               browser — no download, no account.
+            </p>
+            <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-sage sm:text-base">
+              Take your time — there is no time limit, and every puzzle has a verified solution
+              waiting to be found.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -580,7 +584,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                 </button>
               </div>
               <p className="mt-3 text-center text-[13px] leading-relaxed text-moss">
-                Type letters on your keyboard, or tap the board.{" "}
+                Tap the board or type on your keyboard — and take your time: there is no time limit.{" "}
                 <span className="font-semibold text-pine">Enter</span> submits,{" "}
                 <span className="font-semibold text-pine">Backspace</span> undoes one letter,{" "}
                 <span className="font-semibold text-pine">Esc</span> clears.
@@ -603,7 +607,12 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                         : "border-gold/40 bg-gold-light text-pine"
                   }`}
                 >
-                  <p>{feedback.message}</p>
+                  <p>
+                    <span aria-hidden="true" className="mr-2">
+                      {feedback.kind === "error" ? "✕" : feedback.kind === "success" ? "✓" : "💡"}
+                    </span>
+                    {feedback.message}
+                  </p>
                   {hintTarget && hintStage === 2 && (
                     <p className="mt-2 font-display text-lg font-bold text-ink">
                       Suggested word: {hintTarget}
@@ -615,7 +624,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
 
             {/* Win state */}
             {solved && (
-              <div role="status" className="relative overflow-hidden rounded-3xl border-2 border-gold bg-gradient-to-b from-gold-light via-sage-light to-sage-light p-5 shadow-lift animate-fade-up">
+              <div role="status" className="relative overflow-hidden rounded-3xl border-2 border-gold bg-gradient-to-b from-gold-light via-butter to-mint p-5 shadow-lift animate-fade-up">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
                   {CONFETTI_COLORS.map((color, i) => (
                     <span
@@ -633,7 +642,11 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                 <div className="relative">
                   <p aria-hidden="true" className="text-[28px] leading-none tracking-[0.18em]">
                     {[1, 2, 3].map((n) => (
-                      <span key={n} className={n <= stars ? "text-gold-deep" : "text-moss/50"}>
+                      <span
+                        key={n}
+                        className={`animate-star-pop ${n <= stars ? "text-gold-deep" : "text-moss/50"}`}
+                        style={{ animationDelay: `${(n - 1) * 120}ms` }}
+                      >
                         ★
                       </span>
                     ))}
@@ -657,7 +670,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     </p>
                   )}
                   {mode === "daily" && countdown && (
-                    <p className="mt-3 rounded-xl border border-gold/40 bg-cream/80 px-3.5 py-2.5 text-sm font-semibold text-pine">
+                    <p className="mt-3 rounded-xl border border-gold/40 bg-butter/90 px-3.5 py-2.5 text-sm font-semibold text-pine">
                       Next daily puzzle in <span className="tabular-nums text-forest-dark">{countdown}</span> — midnight Pakistan time.
                     </p>
                   )}
@@ -665,7 +678,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
                     <button
                       type="button"
                       onClick={shareResult}
-                      className="min-h-11 cursor-pointer rounded-full bg-gradient-to-b from-forest-light to-forest px-4 text-sm font-bold text-white shadow-sm hover:from-forest hover:to-forest-dark"
+                      className="min-h-11 cursor-pointer rounded-full border-2 border-gold-deep bg-gradient-to-b from-gold-bright to-gold px-4 text-sm font-bold text-ink shadow-lift hover:from-gold hover:to-gold-deep"
                     >
                       {shareCopied ? "Copied ✓" : "Share result"}
                     </button>

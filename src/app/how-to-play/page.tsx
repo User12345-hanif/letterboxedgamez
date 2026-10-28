@@ -6,7 +6,7 @@ import { canonical } from "@/lib/site";
 export const metadata: Metadata = {
   title: "How to Play",
   description:
-    "The rules of Letterboxed Gamez in two minutes: build words, change sides every letter, chain words, and use all twelve letters.",
+    "The rules of Letter Box Game in two minutes: build words, change sides every letter, chain words, and use all twelve letters.",
   alternates: { canonical: canonical("/how-to-play") },
   openGraph: {
     title: "How to Play",
@@ -19,7 +19,7 @@ export default function HowToPlayPage() {
   return (
     <ArticleClient
       kicker="How to Play"
-      title="How to play Letterboxed Gamez"
+      title="How to play Letter Box Game"
       intro="Twelve letters, four sides, and one goal: use every letter. Here are the complete rules, exactly as the game enforces them."
     >
       <h2>The goal</h2>
@@ -49,7 +49,7 @@ export default function HowToPlayPage() {
           in “E”, your next word begins with “E”.
         </li>
         <li>
-          <strong>Words must be in the curated word list.</strong> Letterboxed Gamez checks words
+          <strong>Words must be in the curated word list.</strong> Letter Box Game checks words
           against a curated list of common English words. If a word is not recognised, the game
           says so plainly. That is a limit of the list, not a judgement on the word — and the
           list is expanded over time.

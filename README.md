@@ -1,4 +1,4 @@
-# Letterboxed Gamez
+# Letter Box Game
 
 A premium, original, responsive daily word-puzzle game — Next.js App Router,
 TypeScript, Tailwind CSS v4. Warm ivory, deep forest green, editorial
