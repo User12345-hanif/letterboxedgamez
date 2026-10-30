@@ -65,6 +65,49 @@ export function puzzleForDate(date: Date): Puzzle {
   return PUZZLES[index];
 }
 
+/** The puzzle for a Karachi calendar date given as "YYYY-MM-DD".
+ *  Day numbers are days since the Unix epoch, so a Karachi date's
+ *  day number is simply its UTC midnight day number. Returns null
+ *  for a malformed date. Used by /daily/[date] and /puzzles/[id]
+ *  date lists, so a date page and the game agree on the same board. */
+export function puzzleForKarachiDate(dateIso: string): Puzzle | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateIso);
+  if (!match) return null;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null;
+  const dayNum = Math.floor(Date.UTC(year, month - 1, day) / 86_400_000);
+  // Guard against impossible dates (e.g. 2026-02-30 rolling over).
+  const check = new Date(Date.UTC(year, month - 1, day));
+  if (
+    check.getUTCFullYear() !== year ||
+    check.getUTCMonth() + 1 !== month ||
+    check.getUTCDate() !== day
+  ) {
+    return null;
+  }
+  const index = ((dayNum % PUZZLES.length) + PUZZLES.length) % PUZZLES.length;
+  return PUZZLES[index];
+}
+
+/** Karachi dates (as "YYYY-MM-DD") in a window around today on which
+ *  a given puzzle is the daily puzzle. The rotation is 7 puzzles, so
+ *  every puzzle recurs weekly. */
+export function datesForPuzzle(puzzleId: string, daysBack = 14, daysAhead = 14): string[] {
+  const out: string[] = [];
+  const today = new Date();
+  const todayKey = puzzleDateKey(today);
+  const [y, m, d] = todayKey.split("-").map(Number);
+  const base = Date.UTC(y, m - 1, d);
+  for (let offset = -daysBack; offset <= daysAhead; offset += 1) {
+    const dt = new Date(base + offset * 86_400_000);
+    const iso = dt.toISOString().slice(0, 10);
+    if (puzzleForKarachiDate(iso)?.id === puzzleId) out.push(iso);
+  }
+  return out;
+}
+
 export function todayPuzzle(now = new Date()): Puzzle {
   return puzzleForDate(now);
 }

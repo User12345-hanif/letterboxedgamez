@@ -60,11 +60,23 @@ function flatIndexOf(puzzle: Puzzle, letter: string): number {
   return puzzleLetters(puzzle).indexOf(letter);
 }
 
-export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => void }) {
+export function GameScreen({
+  onStatsChange,
+  initialMode,
+  initialPracticeOffset,
+  ignoreSession,
+}: {
+  onStatsChange?: (s: Stats) => void;
+  /** Start in practice mode (used by /unlimited). Homepage omits this and keeps daily-first behaviour. */
+  initialMode?: Mode;
+  initialPracticeOffset?: number;
+  /** When true, do not restore or save the homepage session — /unlimited must not hijack the daily session. */
+  ignoreSession?: boolean;
+}) {
   const [today] = useState(() => new Date());
   const dailyPuzzle = useMemo(() => puzzleForDate(today), [today]);
-  const [mode, setMode] = useState<Mode>("daily");
-  const [practiceOffset, setPracticeOffset] = useState(1);
+  const [mode, setMode] = useState<Mode>(initialMode ?? "daily");
+  const [practiceOffset, setPracticeOffset] = useState(initialPracticeOffset ?? 1);
   const puzzle: Puzzle = useMemo(
     () =>
       mode === "daily"
@@ -108,6 +120,7 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
   // same daily/practice puzzle instead of always resetting to daily.
   const sessionRestoredRef = useRef(false);
   useEffect(() => {
+    if (ignoreSession) return;
     if (sessionRestoredRef.current) return;
     sessionRestoredRef.current = true;
     const session = loadSession();
@@ -119,8 +132,9 @@ export function GameScreen({ onStatsChange }: { onStatsChange?: (s: Stats) => vo
 
   // Remember the current board for the next visit.
   useEffect(() => {
+    if (ignoreSession) return;
     saveSession({ mode, practiceOffset });
-  }, [mode, practiceOffset]);
+  }, [mode, practiceOffset, ignoreSession]);
 
   // Load saved progress + stats, and validate the puzzle on every change.
   useEffect(() => {

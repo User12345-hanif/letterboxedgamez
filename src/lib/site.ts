@@ -27,6 +27,9 @@ export const SITE = {
   /** Edit this list to add or remove pages from navigation, sitemap and footer. */
   nav: [
     { label: "Play", href: "/" },
+    { label: "Solver", href: "/solver" },
+    { label: "Unlimited", href: "/unlimited" },
+    { label: "Archive", href: "/archive" },
     { label: "How to Play", href: "/how-to-play" },
     { label: "Strategies", href: "/strategies" },
     { label: "Hints", href: "/hints" },

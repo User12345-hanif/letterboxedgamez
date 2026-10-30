@@ -165,6 +165,15 @@ export default function HomePage() {
                 <Link href="/faq" className="min-h-11 inline-flex items-center rounded-full border border-line bg-white px-4 text-sm font-semibold text-pine hover:border-forest/40">
                   Common questions
                 </Link>
+                <Link href="/solver" className="min-h-11 inline-flex items-center rounded-full border border-forest px-4 text-sm font-bold text-forest-dark hover:bg-sage-light">
+                  Use the solver →
+                </Link>
+                <Link href="/unlimited" className="min-h-11 inline-flex items-center rounded-full border border-line bg-white px-4 text-sm font-semibold text-pine hover:border-forest/40">
+                  Unlimited practice
+                </Link>
+                <Link href="/archive" className="min-h-11 inline-flex items-center rounded-full border border-line bg-white px-4 text-sm font-semibold text-pine hover:border-forest/40">
+                  Puzzle archive
+                </Link>
               </div>
             </div>
           </section>

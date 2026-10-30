@@ -11,6 +11,9 @@ import { loadStats, type Stats } from "@/lib/stats";
 import { canonical, SITE } from "@/lib/site";
 
 const RELATED = [
+  { label: "Solver", href: "/solver", blurb: "Solve any 12-letter board, shortest chain first." },
+  { label: "Unlimited", href: "/unlimited", blurb: "More than one board a day, free, no account." },
+  { label: "Archive", href: "/archive", blurb: "All seven boards in the rotation, with hints." },
   { label: "How to Play", href: "/how-to-play", blurb: "The complete rules, with examples and keyboard controls." },
   { label: "Strategies", href: "/strategies", blurb: "Plan a two-word solve without guessing." },
   { label: "Hints", href: "/hints", blurb: "Spoiler-free ways to get unstuck, and how hints work." },
