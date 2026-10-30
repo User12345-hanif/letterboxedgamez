@@ -15,7 +15,7 @@ export const SITE = {
   url: "https://letterboxedgamez.com",
   domain: "letterboxedgamez.com",
   locale: "en_US",
-  email: "hello@letterboxedgamez.com",
+  email: "hu397776@gmail.com",
   /**
    * Google Analytics 4 Measurement ID for the "Letter Box Game"
    * property (account 413903856, property 561327365). This is a
