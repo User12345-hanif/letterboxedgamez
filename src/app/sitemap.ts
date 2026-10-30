@@ -19,6 +19,9 @@ const ROUTES = [
 ] as const;
 
 const GUIDES = [
+  "/games-like-letter-boxed",
+  "/letter-boxed-vs-connections",
+  "/letter-boxed-vs-strands",
   "/two-word-solutions",
   "/rare-letters",
   "/suffixes-and-prefixes",
