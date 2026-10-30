@@ -33,7 +33,7 @@ export function Footer() {
               <span aria-hidden="true">✦</span>
             </span>
           </p>
-          <div className="mt-8 grid gap-8 sm:grid-cols-3">
+          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="flex items-center gap-2 font-display text-[22px] font-bold text-cream">
                 <span
@@ -49,10 +49,16 @@ export function Footer() {
                 and a fresh board every day — free to play, with no account needed.
               </p>
             </div>
-            <nav aria-label="Learn">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">Learn</p>
+            <nav aria-label="Game">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">Game</p>
               <ul className="mt-3 space-y-1.5 text-sm">
-                {SITE.nav.map((item) => (
+                {[
+                  { label: "Play today's puzzle", href: "/" },
+                  { label: "Unlimited practice", href: "/unlimited" },
+                  { label: "Solver", href: "/solver" },
+                  { label: "Puzzle archive", href: "/archive" },
+                  { label: "Daily puzzles by date", href: "/daily" },
+                ].map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className={linkClassName}>
                       <span aria-hidden="true" className="text-[10px] leading-none text-gold">
@@ -64,8 +70,29 @@ export function Footer() {
                 ))}
               </ul>
             </nav>
-            <nav aria-label="About this site">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">About this site</p>
+            <nav aria-label="Learn">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">Learn</p>
+              <ul className="mt-3 space-y-1.5 text-sm">
+                {[
+                  { label: "How to Play", href: "/how-to-play" },
+                  { label: "Strategies", href: "/strategies" },
+                  { label: "Hints", href: "/hints" },
+                  { label: "FAQ", href: "/faq" },
+                  { label: "Games like Letter Boxed", href: "/games-like-letter-boxed" },
+                ].map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className={linkClassName}>
+                      <span aria-hidden="true" className="text-[10px] leading-none text-gold">
+                        ✦
+                      </span>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <nav aria-label="Info">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold-light">Info</p>
               <ul className="mt-3 space-y-1.5 text-sm">
                 <li>
                   <Link href="/about" className={linkClassName}>
