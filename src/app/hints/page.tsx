@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "Three hints per puzzle, in two stages — plus spoiler-free ways to think your way out of a dead end.",
     url: canonical("/hints"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hints",
+    description: "Three hints per puzzle, in two stages — plus spoiler-free ways to think your way out of a dead end.",
+  },
 };
 
 export default function HintsPage() {

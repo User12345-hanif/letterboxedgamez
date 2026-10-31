@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: "Two NYT word games, two different skills: construction versus categorisation.",
     url: canonical("/letter-boxed-vs-connections"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Boxed vs Connections",
+    description: "Two NYT word games, two different skills: construction versus categorisation.",
+  },
 };
 
 export default function LetterBoxedVsConnectionsPage() {

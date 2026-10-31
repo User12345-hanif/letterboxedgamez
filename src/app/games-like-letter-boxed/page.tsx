@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: "Six word games like Letter Boxed, compared by skill, rules and feel — with links back to free Letter Box puzzles.",
     url: canonical("/games-like-letter-boxed"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Games Like Letter Boxed",
+    description: "Six word games like Letter Boxed, compared by skill, rules and feel — with links back to free Letter Box puzzles.",
+  },
 };
 
 export default function GamesLikeLetterBoxedPage() {

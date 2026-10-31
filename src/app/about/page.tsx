@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "An original daily word puzzle, built to be read at a glance and played in minutes.",
     url: canonical("/about"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "About",
+    description: "An original daily word puzzle, built to be read at a glance and played in minutes.",
+  },
 };
 
 export default function AboutPage() {

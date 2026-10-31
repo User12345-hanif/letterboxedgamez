@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: "Two word games, two searches: a chain versus a themed grid.",
     url: canonical("/letter-boxed-vs-strands"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Boxed vs Strands",
+    description: "Two word games, two searches: a chain versus a themed grid.",
+  },
 };
 
 export default function LetterBoxedVsStrandsPage() {

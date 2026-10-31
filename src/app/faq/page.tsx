@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "Is it free? Do I need an account? Why was my word rejected? Straight answers, no jargon.",
     url: canonical("/faq"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Frequently Asked Questions",
+    description: "Is it free? Do I need an account? Why was my word rejected? Straight answers, no jargon.",
+  },
 };
 
 const FAQS: Array<[string, string]> = [

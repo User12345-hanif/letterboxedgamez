@@ -68,7 +68,7 @@ export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderPro
           </button>
         </nav>
       </div>
-      <nav aria-label="Sections" className="border-t border-line/70 md:hidden">
+      <nav aria-label="Sections" className="border-t border-line/70">
         <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-1.5 text-sm font-medium text-pine">
           {SITE.nav.slice(1).map((item) => (
             <li key={item.href} className="shrink-0">

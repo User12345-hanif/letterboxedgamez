@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     description: "All seven puzzles in the Letter Box Game rotation, with boards, par and hints.",
     url: canonical("/archive"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Box Puzzle Archive",
+    description: "All seven puzzles in the Letter Box Game rotation, with boards, par and hints.",
+  },
 };
 
 const SIDE_NAMES = ["Top", "Right", "Bottom", "Left"];

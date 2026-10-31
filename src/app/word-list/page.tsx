@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "What words Letter Box Game accepts, how the curated list works, and why a real word can still be rejected.",
     url: canonical("/word-list"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Letter Box Word List",
+    description: "What words Letter Box Game accepts, how the curated list works, and why a real word can still be rejected.",
+  },
 };
 
 export default function GuidePage() {

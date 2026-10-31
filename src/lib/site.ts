@@ -39,7 +39,10 @@ export const SITE = {
 } as const;
 
 export function canonical(path = "/"): string {
-  const clean = path.startsWith("/") ? path : `/${path}`;
+  let clean = path.startsWith("/") ? path : `/${path}`;
+  // Normalise trailing slashes so a future caller can never emit a
+  // slashful canonical (all current callers already pass clean paths).
+  if (clean.length > 1 && clean.endsWith("/")) clean = clean.slice(0, -1);
   return `${SITE.url}${clean === "/" ? "" : clean}`;
 }
 

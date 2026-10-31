@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "Letter Box and Wordle are both word games, but they test different skills: chaining and coverage versus guessing a hidden word.",
     url: canonical("/letter-boxed-vs-wordle"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Boxed vs Wordle",
+    description: "Letter Box and Wordle are both word games, but they test different skills: chaining and coverage versus guessing a hidden word.",
+  },
 };
 
 export default function GuidePage() {
@@ -27,6 +32,9 @@ export default function GuidePage() {
       </ul>
       <h2>Which to play</h2>
       <p>If you like narrowing down a hidden answer, Wordle is the tighter puzzle. If you like building something from visible pieces, Letter Box is the more creative one. Many players enjoy both, for different reasons, and there is no reason to choose only one. Our version of Letter Box is original and independent — it is not Wordle, and it is not affiliated with the New York Times.</p>
+      <h2>Feedback versus rejection</h2>
+      <p>Wordle teaches through feedback: every guess returns colours that narrow the hidden word. Letter Box teaches through rejection: a word that cannot be played is refused with a reason — too short, same side, wrong starting letter, or not in the word list — and the reason tells you exactly what to fix. One game narrows a hidden answer; the other corrects a visible chain. If you like learning from each guess, Wordle&apos;s feedback loop is satisfying; if you like learning from each refusal, Letter Box&apos;s messages point straight at the rule you broke.</p>
+      <p>Try it yourself: <a href="/">today&apos;s puzzle is free</a>, the <a href="/solver">solver</a> shows the shortest chain for any board, and <a href="/games-like-letter-boxed">games like Letter Boxed</a> compares the other games in the family.</p>
     </ArticleClient>
   );
 }

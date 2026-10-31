@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "How to plan a two-word solve without guessing: awkward letters first, flexible links, and reading the board by sides.",
     url: canonical("/strategies"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Strategies",
+    description: "How to plan a two-word solve without guessing: awkward letters first, flexible links, and reading the board by sides.",
+  },
 };
 
 export default function StrategiesPage() {

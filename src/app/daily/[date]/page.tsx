@@ -42,11 +42,29 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ date: string }> }): Promise<Metadata> {
   const { date } = await params;
   const puzzle = puzzleForKarachiDate(date);
-  if (!puzzle) return { title: "Daily puzzle not found" };
+  // Dates after today (Asia/Karachi) have no puzzle yet: they 404 (see
+  // the page component below) instead of rendering a future board.
+  if (!puzzle || date > puzzleDateKey(new Date())) {
+    return { title: "Daily puzzle not found", robots: { index: false } };
+  }
   return {
     title: `Letter Box puzzle for ${prettyDate(date)} — Hints and Solution`,
     description: `Hints and the checked solution for the Letter Box Game puzzle on ${prettyDate(date)}. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
     alternates: { canonical: canonical(`/daily/${date}`) },
+    openGraph: {
+      title: `Letter Box puzzle for ${prettyDate(date)} — Hints and Solution`,
+      description: `Hints and the checked solution for the Letter Box Game puzzle on ${prettyDate(date)}. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
+      url: canonical(`/daily/${date}`),
+      // Same site image as the layout default: without this, a per-page
+      // openGraph object replaces the layout one and the share image
+      // (and the Twitter image derived from it) disappears.
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Letter Box Game — twelve letters, four sides, one clear path." }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Letter Box puzzle for ${prettyDate(date)} — Hints and Solution`,
+      description: `Hints and the checked solution for the Letter Box Game puzzle on ${prettyDate(date)}. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
+    },
   };
 }
 
@@ -55,7 +73,10 @@ const SIDE_NAMES = ["Top", "Right", "Bottom", "Left"];
 export default async function DailyDatePage({ params }: { params: Promise<{ date: string }> }) {
   const { date } = await params;
   const puzzle = puzzleForKarachiDate(date);
-  if (!puzzle) notFound();
+  const today = puzzleDateKey(new Date());
+  // Dates after today (Asia/Karachi) have no puzzle yet: 404 instead of
+  // rendering a future board. All past dates keep rendering.
+  if (!puzzle || date > today) notFound();
   const playable = playableWords(puzzleToSides(puzzle));
   const prev = shiftDate(date, -1);
   const next = shiftDate(date, 1);
@@ -90,7 +111,9 @@ export default async function DailyDatePage({ params }: { params: Promise<{ date
       </div>
       <nav aria-label="Other daily puzzles" className="mt-8 flex flex-wrap justify-between gap-3 text-sm">
         <Link href={`/daily/${prev}`} className="font-bold text-forest underline underline-offset-2">← {prettyDate(prev)}</Link>
-        <Link href={`/daily/${next}`} className="font-bold text-forest underline underline-offset-2">{prettyDate(next)} →</Link>
+        {next <= today && (
+          <Link href={`/daily/${next}`} className="font-bold text-forest underline underline-offset-2">{prettyDate(next)} →</Link>
+        )}
       </nav>
       <p className="mt-4 text-sm text-moss">
         This is our own original puzzle, not the New York Times puzzle. <Link href="/about" className="font-bold text-forest underline underline-offset-2">How our puzzles are made →</Link>
