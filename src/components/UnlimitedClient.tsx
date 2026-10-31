@@ -9,8 +9,10 @@ import { loadStats, type Stats } from "@/lib/stats";
 
 /** /unlimited: the same game, starting in practice mode, without
  *  touching the homepage daily session. Header/Footer/Modals mirror
- *  the homepage shell so the page looks and behaves like the game. */
-export default function UnlimitedClient() {
+ *  the homepage shell so the page looks and behaves like the game.
+ *  `initialPracticeOffset` lets a puzzle page deep-link to its own
+ *  board (via ?board=<id> on the page); it defaults to 1. */
+export default function UnlimitedClient({ initialPracticeOffset = 1 }: { initialPracticeOffset?: number }) {
   const [showHowTo, setShowHowTo] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState<Stats>(() => loadStats());
@@ -33,7 +35,7 @@ export default function UnlimitedClient() {
         <GameScreen
           onStatsChange={handleStatsChange}
           initialMode="practice"
-          initialPracticeOffset={1}
+          initialPracticeOffset={initialPracticeOffset}
           ignoreSession
         />
       </main>

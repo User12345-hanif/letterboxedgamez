@@ -79,6 +79,10 @@ export function Footer() {
                   { label: "Hints", href: "/hints" },
                   { label: "FAQ", href: "/faq" },
                   { label: "Games like Letter Boxed", href: "/games-like-letter-boxed" },
+                  { label: "Rare Letters", href: "/rare-letters" },
+                  { label: "Common Mistakes", href: "/common-mistakes" },
+                  { label: "History", href: "/history" },
+                  { label: "Word List", href: "/word-list" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className={linkClassName}>

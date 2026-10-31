@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "Why the live boards use 7-letter openers, and how to hunt for a genuine 8-letter opener on a custom board.",
     url: canonical("/8-letter-openers"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "8-Letter Openers for Letter Box",
+    description: "Why the live boards use 7-letter openers, and how to hunt for a genuine 8-letter opener on a custom board.",
+  },
 };
 
 export default function GuidePage() {
@@ -22,7 +27,7 @@ export default function GuidePage() {
       <h2>When 8-letter openers do exist</h2>
       <p>The word list does contain longer words — for example DISCOUNT and GRATEFUL are in the list. Whether one fits a board depends on the board's letters and sides, not on the word alone. Type a custom board into the <a href="/solver">solver</a> and look at its playable-word list: if an 8-letter word appears there, it obeys the side rule and the no-repeat rule for that board, and it is a real opener candidate. If none appears, no amount of wishing makes one fit.</p>
       <h2>How to judge an opener</h2>
-      <p>Length is not the whole story. A good opener uses letters from at least three sides, ends in a letter that starts many words, and leaves a bridge word that can cover the rest. A 7-letter opener that leaves a clean 5-letter bridge beats an 8-letter opener that strands a rare letter. Aim for the chain, not the first word alone.</p>
+      <p>Length is not the whole story. A good opener uses letters from at least three sides, ends in a letter that starts many words, and leaves a bridge word that can cover the rest. A 7-letter opener that leaves a clean 5-letter bridge beats an 8-letter opener that strands a rare letter. Aim for the chain, not the first word alone. For the full method behind judging openers, see <a href="/strategies">Strategies</a>.</p>
     </ArticleClient>
   );
 }

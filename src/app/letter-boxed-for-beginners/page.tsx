@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "A gentle first game of Letter Box: the rules in plain language, worked through on Puzzle 1, CAPTURE → ENJOYS.",
     url: canonical("/letter-boxed-for-beginners"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Boxed for Beginners",
+    description: "A gentle first game of Letter Box: the rules in plain language, worked through on Puzzle 1, CAPTURE → ENJOYS.",
+  },
 };
 
 export default function GuidePage() {
@@ -27,7 +32,7 @@ export default function GuidePage() {
         <li>Check the chain rule before the second word: it must start with the last letter of the first.</li>
         <li>Watch the unused letters, not the word count. A solve is finished when no letters remain unused, however many words it took.</li>
       </ol>
-      <p>Ready to try? <a href="/">Play today's puzzle</a>, or practise without pressure on <a href="/unlimited">unlimited boards</a>. If you get stuck, the <a href="/hints">hints page</a> explains how hints work without spoiling anything.</p>
+      <p>Ready to try? <a href="/">Play today's puzzle</a>, or practise without pressure on <a href="/unlimited">unlimited boards</a>. If you get stuck, the <a href="/hints">hints page</a> explains how hints work without spoiling anything. For the complete rules, see <a href="/how-to-play">How to Play</a>.</p>
     </ArticleClient>
   );
 }

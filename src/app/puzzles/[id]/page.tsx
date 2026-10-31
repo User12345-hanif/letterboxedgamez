@@ -15,11 +15,25 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const puzzle = PUZZLES.find((p) => p.id === id);
-  if (!puzzle) return { title: "Puzzle not found" };
+  if (!puzzle) return { title: "Puzzle not found", robots: { index: false } };
   return {
     title: `${puzzle.label} — Hints and Solution`,
     description: `Hints and the checked solution for ${puzzle.label} in Letter Box Game. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
     alternates: { canonical: canonical(`/puzzles/${id}`) },
+    openGraph: {
+      title: `${puzzle.label} — Hints and Solution`,
+      description: `Hints and the checked solution for ${puzzle.label} in Letter Box Game. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
+      url: canonical(`/puzzles/${id}`),
+      // Same site image as the layout default: without this, a per-page
+      // openGraph object replaces the layout one and the share image
+      // (and the Twitter image derived from it) disappears.
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Letter Box Game — twelve letters, four sides, one clear path." }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${puzzle.label} — Hints and Solution`,
+      description: `Hints and the checked solution for ${puzzle.label} in Letter Box Game. Board letters by side, par ${puzzle.solution.length}, tiered hints and a letter-by-letter reveal.`,
+    },
   };
 }
 
@@ -30,7 +44,7 @@ export default async function PuzzlePage({ params }: { params: Promise<{ id: str
   const puzzle = PUZZLES.find((p) => p.id === id);
   if (!puzzle) notFound();
   const playable = playableWords(puzzleToSides(puzzle));
-  const dates = datesForPuzzle(puzzle.id, 14, 14);
+  const dates = datesForPuzzle(puzzle.id, 14, 0);
   const today = puzzleDateKey(new Date());
 
   return (
@@ -56,14 +70,14 @@ export default async function PuzzlePage({ params }: { params: Promise<{ id: str
       <p className="mt-3">
         <Link href="/" className="inline-block rounded-full bg-forest px-5 py-3 text-sm font-bold text-white">Play today&rsquo;s puzzle →</Link>
         {" "}
-        <Link href="/unlimited" className="inline-block rounded-full border-2 border-forest/25 bg-cream px-5 py-3 text-sm font-bold text-ink">Practise this board →</Link>
+        <Link href={`/unlimited?board=${puzzle.id}`} className="inline-block rounded-full border-2 border-forest/25 bg-cream px-5 py-3 text-sm font-bold text-ink">Practise this board →</Link>
       </p>
       <div className="mt-6">
         <DailyHints puzzle={puzzle} />
       </div>
       <h2>Dates this puzzle appears</h2>
       <p>
-        The daily puzzle cycles through seven boards, so this board returns every week. Recent and upcoming dates for it:
+        The daily puzzle cycles through seven boards, so this board returns every week. Recent dates for it:
       </p>
       <ul className="grid gap-2 sm:grid-cols-2">
         {dates.map((iso) => (

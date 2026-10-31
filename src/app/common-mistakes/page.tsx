@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "The seven mistakes the game itself reports — and how to fix each one before you submit.",
     url: canonical("/common-mistakes"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Common Letter Box Mistakes",
+    description: "The seven mistakes the game itself reports — and how to fix each one before you submit.",
+  },
 };
 
 export default function GuidePage() {
@@ -28,6 +33,7 @@ export default function GuidePage() {
         <li><strong>Unknown letter.</strong> The word uses a letter that is not on this board. Check the board again — it is easy to misread a tile.</li>
       </ul>
       <p>Most mistakes are not vocabulary mistakes at all: they are side-rule or chain-rule slips. Slow down on the second word — that is where wrong-start and same-side errors cluster.</p>
+      <p>The full rules behind these messages are on the <a href="/how-to-play">How to Play</a> page.</p>
     </ArticleClient>
   );
 }

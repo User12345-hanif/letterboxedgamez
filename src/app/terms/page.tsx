@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: "Free personal play, fair use, and honest limits — in plain language.",
     url: canonical("/terms"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms",
+    description: "Free personal play, fair use, and honest limits — in plain language.",
+  },
 };
 
 export default function TermsPage() {

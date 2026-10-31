@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "The full rules, with examples, keyboard controls and what every message means.",
     url: canonical("/how-to-play"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "How to Play",
+    description: "The full rules, with examples, keyboard controls and what every message means.",
+  },
 };
 
 export default function HowToPlayPage() {

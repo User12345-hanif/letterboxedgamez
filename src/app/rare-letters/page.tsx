@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "How to handle J, V and Y on Letter Box boards, and why Q, X and Z need a different approach.",
     url: canonical("/rare-letters"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rare Letters in Letter Box",
+    description: "How to handle J, V and Y on Letter Box boards, and why Q, X and Z need a different approach.",
+  },
 };
 
 export default function GuidePage() {

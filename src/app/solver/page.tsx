@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     description: "Solve any 12-letter Letter Box board, shortest chain first, using this site's word list.",
     url: canonical("/solver"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Box Solver",
+    description: "Solve any 12-letter Letter Box board, shortest chain first, using this site's word list.",
+  },
 };
 
 export default function SolverPage() {

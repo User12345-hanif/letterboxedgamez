@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     description: "Par, stars and solve rate in Letter Box Game: what each number means, and what counts as a good solve.",
     url: canonical("/scoring-and-par"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Letter Box Scoring and Par Explained",
+    description: "Par, stars and solve rate in Letter Box Game: what each number means, and what counts as a good solve.",
+  },
 };
 
 export default function GuidePage() {

@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     description: "No accounts. Anonymous analytics only if you accept. Your progress stays in your browser.",
     url: canonical("/privacy-policy"),
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy",
+    description: "No accounts. Anonymous analytics only if you accept. Your progress stays in your browser.",
+  },
 };
 
 export default function PrivacyPage() {

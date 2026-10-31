@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Daily Letter Box Puzzles by Date",
   description:
     "Find the Letter Box Game puzzle for any date, with its board, par, tiered hints and checked solution. The daily puzzle changes at midnight Pakistan time.",
+  twitter: {
+    card: "summary_large_image",
+    title: "Daily Letter Box Puzzles by Date",
+    description: "Find the Letter Box Game puzzle for any date, with its board, par, tiered hints and checked solution. The daily puzzle changes at midnight Pakistan time.",
+  },
   alternates: { canonical: canonical("/daily") },
 };
 
