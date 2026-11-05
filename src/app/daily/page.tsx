@@ -40,19 +40,19 @@ export default function DailyIndexPage() {
           const puzzle = puzzleForKarachiDate(iso);
           if (!puzzle) return null;
           return (
-            <li key={iso} className="rounded-2xl border-2 border-line bg-cream px-4 py-3">
-              <Link href={`/daily/${iso}`} className="font-bold text-forest hover:underline">
+            <li key={iso} className="rounded-2xl border-2 border-slate-200 bg-white px-4 py-3">
+              <Link href={`/daily/${iso}`} className="font-bold text-emerald-600 hover:underline">
                 {iso}
               </Link>
-              <span className="text-sm text-moss"> — {puzzle.label} · Par {puzzle.solution.length}</span>
+              <span className="text-sm text-slate-500"> — {puzzle.label} · Par {puzzle.solution.length}</span>
             </li>
           );
         })}
       </ul>
-      <p className="mt-6 text-sm text-moss">
-        <Link href="/archive" className="font-bold text-forest underline underline-offset-2">Browse all seven boards →</Link>
+      <p className="mt-6 text-sm text-slate-500">
+        <Link href="/archive" className="font-bold text-emerald-600 underline underline-offset-2">Browse all seven boards →</Link>
         {" · "}
-        <Link href="/solver" className="font-bold text-forest underline underline-offset-2">Solve any board →</Link>
+        <Link href="/solver" className="font-bold text-emerald-600 underline underline-offset-2">Solve any board →</Link>
       </p>
     </ArticleClient>
   );

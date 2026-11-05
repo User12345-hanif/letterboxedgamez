@@ -8,9 +8,9 @@ export function CookieChoicesButton() {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new Event(CONSENT_OPEN_EVENT))}
-      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-cream/90 underline-offset-4 transition hover:bg-white/10 hover:text-gold-light hover:underline"
+      className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-2.5 py-1 text-white/90 underline-offset-4 transition hover:bg-white/10 hover:text-emerald-100 hover:underline"
     >
-      <span aria-hidden="true" className="text-[10px] leading-none text-gold">
+      <span aria-hidden="true" className="text-[10px] leading-none text-emerald-400">
         ✦
       </span>
       Cookie choices

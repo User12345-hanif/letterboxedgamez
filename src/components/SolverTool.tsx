@@ -69,14 +69,14 @@ export default function SolverTool() {
       <div className="grid gap-4 sm:grid-cols-2">
         {(["top", "right", "bottom", "left"] as const).map((key, i) => (
           <div key={key}>
-            <label htmlFor={`side-${key}`} className="text-xs font-bold uppercase tracking-[0.14em] text-forest">
+            <label htmlFor={`side-${key}`} className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-600">
               {SIDE_LABELS[i]} — 3 letters
             </label>
             <input
               id={`side-${key}`}
               value={inputs[key]}
               onChange={(e) => setInputs((s) => ({ ...s, [key]: e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3) }))}
-              className="mt-1.5 w-full rounded-2xl border-2 border-forest/25 bg-cream px-4 py-3 font-mono text-xl font-bold tracking-[0.3em] text-ink"
+              className="mt-1.5 w-full rounded-2xl border-2 border-emerald-600/25 bg-white px-4 py-3 font-mono text-xl font-bold tracking-[0.3em] text-slate-900"
               placeholder="ABC"
               maxLength={3}
               autoComplete="off"
@@ -86,21 +86,21 @@ export default function SolverTool() {
       </div>
       {error && <p role="alert" className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-900">{error}</p>}
       <div className="mt-5 flex flex-wrap gap-2">
-        <button type="button" onClick={run} className="min-h-[52px] rounded-full bg-forest px-6 py-3 text-base font-bold text-white shadow-md transition hover:bg-pine">
+        <button type="button" onClick={run} className="min-h-[52px] rounded-full bg-emerald-600 px-6 py-3 text-base font-bold text-white shadow-md transition hover:bg-slate-700">
           Solve my box
         </button>
-        <button type="button" onClick={() => loadPuzzle(today.id)} className="min-h-[52px] rounded-full border-2 border-forest/25 bg-cream px-4 py-3 text-sm font-bold text-ink">
+        <button type="button" onClick={() => loadPuzzle(today.id)} className="min-h-[52px] rounded-full border-2 border-emerald-600/25 bg-white px-4 py-3 text-sm font-bold text-slate-900">
           Load today&rsquo;s board
         </button>
-        <button type="button" onClick={() => { setInputs({ top: "", right: "", bottom: "", left: "" }); setSolved(null); }} className="min-h-[52px] rounded-full border-2 border-forest/25 bg-cream px-4 py-3 text-sm font-bold text-ink">
+        <button type="button" onClick={() => { setInputs({ top: "", right: "", bottom: "", left: "" }); setSolved(null); }} className="min-h-[52px] rounded-full border-2 border-emerald-600/25 bg-white px-4 py-3 text-sm font-bold text-slate-900">
           Clear
         </button>
       </div>
-      <p className="mt-3 text-sm text-moss">
+      <p className="mt-3 text-sm text-slate-500">
         Or load a board from the rotation:{" "}
         <select
           aria-label="Load a board from the rotation"
-          className="rounded-full border border-forest/25 bg-cream px-2 py-1.5 text-sm font-bold text-ink"
+          className="rounded-full border border-emerald-600/25 bg-white px-2 py-1.5 text-sm font-bold text-slate-900"
           defaultValue=""
           onChange={(e) => e.target.value && loadPuzzle(e.target.value)}
         >
@@ -114,8 +114,8 @@ export default function SolverTool() {
       {results && solved && (
         <div className="mt-8 space-y-6">
           <div>
-            <h2 className="font-display text-2xl font-bold text-ink">Result</h2>
-            <p className="mt-1 text-sm text-moss">
+            <h2 className="font-display text-2xl font-bold text-slate-900">Result</h2>
+            <p className="mt-1 text-sm text-slate-500">
               {results.playable.length} legal words on this board in our word list.{" "}
               {results.chains.length > 0
                 ? `Shortest chain found: ${results.chains[0].length} ${results.chains[0].length === 1 ? "word" : "words"}.`
@@ -124,11 +124,11 @@ export default function SolverTool() {
             {results.chains.length > 0 && (
               <ol className="mt-4 space-y-3">
                 {results.chains.map((chain, i) => (
-                  <li key={i} className="rounded-2xl bg-cream px-4 py-3">
-                    <p className="font-display text-lg font-bold tracking-wide text-ink">
+                  <li key={i} className="rounded-2xl bg-white px-4 py-3">
+                    <p className="font-display text-lg font-bold tracking-wide text-slate-900">
                       {i === 0 ? "🏆 " : ""}{chain.join(" → ")}
                     </p>
-                    <p className="mt-1 text-xs leading-relaxed text-moss">
+                    <p className="mt-1 text-xs leading-relaxed text-slate-500">
                       {chain.map((w) => `${w} (${sidePath(solved, w).join(" → ")})`).join(" · ")}
                     </p>
                   </li>
@@ -136,10 +136,10 @@ export default function SolverTool() {
               </ol>
             )}
           </div>
-          <p className="text-sm text-moss">
-            <Link href="/unlimited" className="font-bold text-forest underline underline-offset-2">Practise on unlimited boards →</Link>
+          <p className="text-sm text-slate-500">
+            <Link href="/unlimited" className="font-bold text-emerald-600 underline underline-offset-2">Practise on unlimited boards →</Link>
             {" · "}
-            <Link href="/archive" className="font-bold text-forest underline underline-offset-2">Browse the archive →</Link>
+            <Link href="/archive" className="font-bold text-emerald-600 underline underline-offset-2">Browse the archive →</Link>
           </p>
         </div>
       )}

@@ -6,7 +6,7 @@ import { ConsentBanner } from "@/components/ConsentBanner";
 import { GoogleTag, PageViewTracker } from "@/components/GoogleTag";
 import "./globals.css";
 
-// Self-hosted fonts (latin variable files, OFL-licensed Fredoka and Nunito).
+// Self-hosted fonts (latin variable files, OFL-licensed Archivo and Manrope).
 // The files are committed as base64 text (`*.woff2.b64`) and decoded to
 // `.woff2` by scripts/prepare-fonts.mjs via the prebuild/predev hooks,
 // because the GitHub snapshot push rejects binary files. The build must
@@ -17,9 +17,10 @@ import "./globals.css";
 // Google Fonts build emits, so the rendered typography is unchanged.
 const display = localFont({
   src: [
-    { path: "./fonts/display-latin.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/display-latin.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/display-latin.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/archivo-latin.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/archivo-latin.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/archivo-latin.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/archivo-latin.woff2", weight: "800", style: "normal" },
   ],
   variable: "--font-display",
   display: "swap",
@@ -27,10 +28,10 @@ const display = localFont({
 
 const sans = localFont({
   src: [
-    { path: "./fonts/sans-latin.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/sans-latin.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/sans-latin.woff2", weight: "700", style: "normal" },
-    { path: "./fonts/sans-latin.woff2", weight: "800", style: "normal" },
+    { path: "./fonts/manrope-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/manrope-latin.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/manrope-latin.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/manrope-latin.woff2", weight: "800", style: "normal" },
   ],
   variable: "--font-sans",
   display: "swap",
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#faf5e9",
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -92,14 +93,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-screen bg-ivory font-sans text-ink antialiased">
+      <body className="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-forest focus:px-4 focus:py-2 focus:font-bold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-emerald-600 focus:px-4 focus:py-2 focus:font-bold focus:text-white"
         >
           Skip to the puzzle
         </a>
