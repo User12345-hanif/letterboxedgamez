@@ -7,9 +7,26 @@ const linkClassName =
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300">
+    <footer className="border-t border-slate-800 bg-[#0B1220] text-slate-300">
       <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-8 sm:px-6">
-        <p className="text-center">
+        <div className="relative overflow-hidden rounded-3xl border border-emerald-500/40 bg-gradient-to-r from-emerald-600/25 via-slate-900 to-amber-500/15 p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.9)] sm:p-8">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/80 to-transparent" />
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="font-display text-2xl font-bold text-white sm:text-[28px]">Ready for today&apos;s board?</h2>
+              <p className="mt-1.5 max-w-lg text-[15px] leading-relaxed text-slate-300">
+                Twelve letters, four sides, one fresh puzzle every day. Free to play, no account needed.
+              </p>
+            </div>
+            <Link
+              href="/#main-content"
+              className="inline-flex min-h-12 items-center rounded-full bg-emerald-500 px-6 font-bold text-white shadow-[0_10px_28px_-8px_rgba(16,185,129,0.8)] transition hover:bg-emerald-400 active:scale-[0.98]"
+            >
+              Play today&apos;s puzzle →
+            </Link>
+          </div>
+        </div>
+        <p className="mt-8 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800 px-4 py-1.5 text-sm font-bold text-emerald-400">
             <span aria-hidden="true">✦</span>
             Thanks for playing
@@ -21,7 +38,7 @@ export function Footer() {
             <p className="flex items-center gap-2 font-display text-[22px] font-bold text-white">
               <span
                 aria-hidden="true"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-600 font-display text-lg font-bold text-white"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-600 font-display text-lg font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.55)]"
               >
                 L
               </span>

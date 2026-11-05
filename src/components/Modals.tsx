@@ -49,7 +49,7 @@ export function ModalShell({
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className="max-h-[88vh] w-full max-w-lg overflow-y-auto rounded-t-2xl border border-slate-200 bg-white p-6 animate-fade-up sm:rounded-2xl sm:p-7"
+        className="max-h-[88vh] w-full max-w-lg overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-900 p-6 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] animate-fade-up sm:rounded-2xl sm:p-7"
       >
         {children}
       </div>
@@ -61,40 +61,40 @@ export function HowToPlayModal({ open, onClose }: { open: boolean; onClose: () =
   return (
     <ModalShell open={open} onClose={onClose} labelledBy="how-to-play-title">
       <div className="flex items-start justify-between gap-4">
-        <h2 id="how-to-play-title" className="font-display text-2xl font-bold text-slate-900">
+        <h2 id="how-to-play-title" className="font-display text-2xl font-bold text-white">
           How to play
         </h2>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close How to Play"
-          className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full border border-slate-200 bg-white text-lg font-bold text-slate-700 hover:bg-slate-50"
+          className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full border border-slate-700/70 bg-slate-900 text-lg font-bold text-slate-300 hover:bg-slate-950"
         >
           ×
         </button>
       </div>
-      <ol className="mt-4 list-none space-y-4 text-[15px] leading-relaxed text-slate-700">
+      <ol className="mt-4 list-none space-y-4 text-[15px] leading-relaxed text-slate-300">
         <li className="flex gap-3">
           <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-600 font-display font-bold text-white">1</span>
-          <span><strong className="text-slate-900">Build a word of 3 or more letters</strong> by tapping letters on the board, or typing on your keyboard.</span>
+          <span><strong className="text-white">Build a word of 3 or more letters</strong> by tapping letters on the board, or typing on your keyboard.</span>
         </li>
         <li className="flex gap-3">
           <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-600 font-display font-bold text-white">2</span>
-          <span><strong className="text-slate-900">Never pick two letters in a row from the same side.</strong> Sides are labelled Top, Right, Bottom and Left — by name, shape and pattern, not colour alone.</span>
+          <span><strong className="text-white">Never pick two letters in a row from the same side.</strong> Sides are labelled Top, Right, Bottom and Left — by name, shape and pattern, not colour alone.</span>
         </li>
         <li className="flex gap-3">
           <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-600 font-display font-bold text-white">3</span>
-          <span><strong className="text-slate-900">Chain your words.</strong> Each new word must start with the last letter of the word before it.</span>
+          <span><strong className="text-white">Chain your words.</strong> Each new word must start with the last letter of the word before it.</span>
         </li>
         <li className="flex gap-3">
           <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-600 font-display font-bold text-white">4</span>
-          <span><strong className="text-slate-900">Use all 12 letters at least once</strong> to solve the puzzle. Fewer words is better — two words is an excellent solve.</span>
+          <span><strong className="text-white">Use all 12 letters at least once</strong> to solve the puzzle. Fewer words is better — two words is an excellent solve.</span>
         </li>
       </ol>
-      <p className="mt-5 rounded-xl bg-emerald-50 p-4 text-sm leading-relaxed text-slate-700">
-        Keyboard: type letters to pick them, <kbd className="rounded border border-slate-200 bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Enter</kbd> to submit,{" "}
-        <kbd className="rounded border border-slate-200 bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Backspace</kbd> to undo one letter, and{" "}
-        <kbd className="rounded border border-slate-200 bg-white px-1.5 py-0.5 font-sans text-xs font-semibold">Esc</kbd> to clear the current word.
+      <p className="mt-5 rounded-xl bg-emerald-500/10 p-4 text-sm leading-relaxed text-slate-300">
+        Keyboard: type letters to pick them, <kbd className="rounded border border-slate-700/70 bg-slate-900 px-1.5 py-0.5 font-sans text-xs font-semibold">Enter</kbd> to submit,{" "}
+        <kbd className="rounded border border-slate-700/70 bg-slate-900 px-1.5 py-0.5 font-sans text-xs font-semibold">Backspace</kbd> to undo one letter, and{" "}
+        <kbd className="rounded border border-slate-700/70 bg-slate-900 px-1.5 py-0.5 font-sans text-xs font-semibold">Esc</kbd> to clear the current word.
       </p>
       <button
         type="button"
@@ -140,29 +140,29 @@ export function StatsModal({
   return (
     <ModalShell open={open} onClose={onClose} labelledBy="stats-title">
       <div className="flex items-start justify-between gap-4">
-        <h2 id="stats-title" className="font-display text-2xl font-bold text-slate-900">Your statistics</h2>
+        <h2 id="stats-title" className="font-display text-2xl font-bold text-white">Your statistics</h2>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close statistics"
-          className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full border border-slate-200 bg-white text-lg font-bold text-slate-700 hover:bg-slate-50"
+          className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full border border-slate-700/70 bg-slate-900 text-lg font-bold text-slate-300 hover:bg-slate-950"
         >
           ×
         </button>
       </div>
-      <p className="mt-2 text-sm leading-relaxed text-slate-500">
+      <p className="mt-2 text-sm leading-relaxed text-slate-400">
         Stored only in this browser. Nothing is sent anywhere, and no account is needed.
       </p>
       <dl className="mt-5 grid grid-cols-2 gap-3">
         {rows.map(([label, value]) => (
-          <div key={label} className="rounded-2xl border border-slate-200 bg-white px-4 py-3">
-            <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</dt>
-            <dd className="mt-1 font-display text-2xl font-bold text-slate-900">{value}</dd>
+          <div key={label} className="rounded-2xl border border-slate-700/70 bg-slate-900 px-4 py-3">
+            <dt className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</dt>
+            <dd className="mt-1 font-display text-2xl font-bold text-white">{value}</dd>
           </div>
         ))}
       </dl>
       {stats.gamesPlayed === 0 && (
-        <p className="mt-5 rounded-xl bg-emerald-50 p-4 text-sm leading-relaxed text-slate-700">
+        <p className="mt-5 rounded-xl bg-emerald-500/10 p-4 text-sm leading-relaxed text-slate-300">
           No puzzles played yet. Your first solve will start your streak.
         </p>
       )}

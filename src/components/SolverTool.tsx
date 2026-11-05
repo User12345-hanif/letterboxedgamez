@@ -69,14 +69,14 @@ export default function SolverTool() {
       <div className="grid gap-4 sm:grid-cols-2">
         {(["top", "right", "bottom", "left"] as const).map((key, i) => (
           <div key={key}>
-            <label htmlFor={`side-${key}`} className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-600">
+            <label htmlFor={`side-${key}`} className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">
               {SIDE_LABELS[i]} — 3 letters
             </label>
             <input
               id={`side-${key}`}
               value={inputs[key]}
               onChange={(e) => setInputs((s) => ({ ...s, [key]: e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3) }))}
-              className="mt-1.5 w-full rounded-2xl border-2 border-emerald-600/25 bg-white px-4 py-3 font-mono text-xl font-bold tracking-[0.3em] text-slate-900"
+              className="mt-1.5 w-full rounded-2xl border-2 border-emerald-600/25 bg-slate-900 px-4 py-3 font-mono text-xl font-bold tracking-[0.3em] text-white"
               placeholder="ABC"
               maxLength={3}
               autoComplete="off"
@@ -84,23 +84,23 @@ export default function SolverTool() {
           </div>
         ))}
       </div>
-      {error && <p role="alert" className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-900">{error}</p>}
+      {error && <p role="alert" className="mt-4 rounded-2xl bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</p>}
       <div className="mt-5 flex flex-wrap gap-2">
-        <button type="button" onClick={run} className="min-h-[52px] rounded-full bg-emerald-600 px-6 py-3 text-base font-bold text-white shadow-md transition hover:bg-slate-700">
+        <button type="button" onClick={run} className="min-h-[52px] rounded-full bg-emerald-600 px-6 py-3 text-base font-bold text-white shadow-[0_10px_24px_-8px_rgba(16,185,129,0.8)] transition hover:bg-emerald-500">
           Solve my box
         </button>
-        <button type="button" onClick={() => loadPuzzle(today.id)} className="min-h-[52px] rounded-full border-2 border-emerald-600/25 bg-white px-4 py-3 text-sm font-bold text-slate-900">
+        <button type="button" onClick={() => loadPuzzle(today.id)} className="min-h-[52px] rounded-full border-2 border-slate-600 bg-slate-800/80 px-4 py-3 text-sm font-bold text-white">
           Load today&rsquo;s board
         </button>
-        <button type="button" onClick={() => { setInputs({ top: "", right: "", bottom: "", left: "" }); setSolved(null); }} className="min-h-[52px] rounded-full border-2 border-emerald-600/25 bg-white px-4 py-3 text-sm font-bold text-slate-900">
+        <button type="button" onClick={() => { setInputs({ top: "", right: "", bottom: "", left: "" }); setSolved(null); }} className="min-h-[52px] rounded-full border-2 border-slate-600 bg-slate-800/80 px-4 py-3 text-sm font-bold text-white">
           Clear
         </button>
       </div>
-      <p className="mt-3 text-sm text-slate-500">
+      <p className="mt-3 text-sm text-slate-400">
         Or load a board from the rotation:{" "}
         <select
           aria-label="Load a board from the rotation"
-          className="rounded-full border border-emerald-600/25 bg-white px-2 py-1.5 text-sm font-bold text-slate-900"
+          className="rounded-full border border-emerald-600/25 bg-slate-900 px-2 py-1.5 text-sm font-bold text-white"
           defaultValue=""
           onChange={(e) => e.target.value && loadPuzzle(e.target.value)}
         >
@@ -114,8 +114,8 @@ export default function SolverTool() {
       {results && solved && (
         <div className="mt-8 space-y-6">
           <div>
-            <h2 className="font-display text-2xl font-bold text-slate-900">Result</h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <h2 className="font-display text-2xl font-bold text-white">Result</h2>
+            <p className="mt-1 text-sm text-slate-400">
               {results.playable.length} legal words on this board in our word list.{" "}
               {results.chains.length > 0
                 ? `Shortest chain found: ${results.chains[0].length} ${results.chains[0].length === 1 ? "word" : "words"}.`
@@ -124,11 +124,11 @@ export default function SolverTool() {
             {results.chains.length > 0 && (
               <ol className="mt-4 space-y-3">
                 {results.chains.map((chain, i) => (
-                  <li key={i} className="rounded-2xl bg-white px-4 py-3">
-                    <p className="font-display text-lg font-bold tracking-wide text-slate-900">
+                  <li key={i} className="rounded-2xl border border-slate-700/70 bg-slate-900 px-4 py-3">
+                    <p className="font-display text-lg font-bold tracking-wide text-white">
                       {i === 0 ? "🏆 " : ""}{chain.join(" → ")}
                     </p>
-                    <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                    <p className="mt-1 text-xs leading-relaxed text-slate-400">
                       {chain.map((w) => `${w} (${sidePath(solved, w).join(" → ")})`).join(" · ")}
                     </p>
                   </li>
@@ -136,10 +136,10 @@ export default function SolverTool() {
               </ol>
             )}
           </div>
-          <p className="text-sm text-slate-500">
-            <Link href="/unlimited" className="font-bold text-emerald-600 underline underline-offset-2">Practise on unlimited boards →</Link>
+          <p className="text-sm text-slate-400">
+            <Link href="/unlimited" className="font-bold text-emerald-400 underline underline-offset-2">Practise on unlimited boards →</Link>
             {" · "}
-            <Link href="/archive" className="font-bold text-emerald-600 underline underline-offset-2">Browse the archive →</Link>
+            <Link href="/archive" className="font-bold text-emerald-400 underline underline-offset-2">Browse the archive →</Link>
           </p>
         </div>
       )}

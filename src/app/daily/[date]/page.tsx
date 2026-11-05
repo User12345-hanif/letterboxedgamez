@@ -90,34 +90,34 @@ export default async function DailyDatePage({ params }: { params: Promise<{ date
       <h2>The board</h2>
       <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {puzzle.sides.map((side, i) => (
-          <div key={i} className="rounded-2xl border-2 border-slate-200 bg-white px-4 py-3">
-            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">{SIDE_NAMES[i]} side</dt>
-            <dd className="mt-1 font-mono text-2xl font-bold tracking-[0.25em] text-slate-900">{side.join(" ")}</dd>
+          <div key={i} className="rounded-2xl border-2 border-slate-700/70 bg-slate-900 px-4 py-3">
+            <dt className="text-xs font-bold uppercase tracking-wider text-slate-400">{SIDE_NAMES[i]} side</dt>
+            <dd className="mt-1 font-mono text-2xl font-bold tracking-[0.25em] text-white">{side.join(" ")}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-4 text-sm text-slate-500">
+      <p className="mt-4 text-sm text-slate-400">
         Rules in brief: words need at least 3 letters, no two consecutive letters from the same side, no repeated letter inside
         one word, and each new word starts with the last letter of the previous one. Use all 12 letters to solve it.
-        <Link href="/how-to-play" className="ml-1 font-bold text-emerald-600 underline underline-offset-2">Full rules →</Link>
+        <Link href="/how-to-play" className="ml-1 font-bold text-emerald-400 underline underline-offset-2">Full rules →</Link>
       </p>
       <p className="mt-3">
         <Link href="/" className="inline-block rounded-full bg-emerald-600 px-5 py-3 text-sm font-bold text-white">Play today&rsquo;s puzzle →</Link>
         {" "}
-        <Link href={`/puzzles/${puzzle.id}`} className="inline-block rounded-full border-2 border-emerald-600/25 bg-white px-5 py-3 text-sm font-bold text-slate-900">This board&rsquo;s puzzle page →</Link>
+        <Link href={`/puzzles/${puzzle.id}`} className="inline-block rounded-full border-2 border-emerald-600/25 bg-slate-900 px-5 py-3 text-sm font-bold text-white">This board&rsquo;s puzzle page →</Link>
       </p>
       <div className="mt-6">
         <DailyHints puzzle={puzzle} />
       </div>
       <nav aria-label="Other daily puzzles" className="mt-8 flex flex-wrap justify-between gap-3 text-sm">
-        <Link href={`/daily/${prev}`} className="font-bold text-emerald-600 underline underline-offset-2">← {prettyDate(prev)}</Link>
+        <Link href={`/daily/${prev}`} className="font-bold text-emerald-400 underline underline-offset-2">← {prettyDate(prev)}</Link>
         {next <= today && (
-          <Link href={`/daily/${next}`} className="font-bold text-emerald-600 underline underline-offset-2">{prettyDate(next)} →</Link>
+          <Link href={`/daily/${next}`} className="font-bold text-emerald-400 underline underline-offset-2">{prettyDate(next)} →</Link>
         )}
       </nav>
-      <p className="mt-4 text-sm text-slate-500">
-        This is our own original puzzle, not the New York Times puzzle. <Link href="/about" className="font-bold text-emerald-600 underline underline-offset-2">How our puzzles are made →</Link>
-        {" · "}Want the full route for any board? <Link href="/solver" className="font-bold text-emerald-600 underline underline-offset-2">Use the solver →</Link>
+      <p className="mt-4 text-sm text-slate-400">
+        This is our own original puzzle, not the New York Times puzzle. <Link href="/about" className="font-bold text-emerald-400 underline underline-offset-2">How our puzzles are made →</Link>
+        {" · "}Want the full route for any board? <Link href="/solver" className="font-bold text-emerald-400 underline underline-offset-2">Use the solver →</Link>
       </p>
     </ArticleClient>
   );

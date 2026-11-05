@@ -462,26 +462,33 @@ export function GameScreen({
   const hintsLeft = MAX_HINTS - hintsUsedInGame;
 
   return (
-    <section ref={gameSectionRef} aria-label="Daily word puzzle game" className={isFullscreen ? "mx-auto w-full max-w-none overflow-y-auto bg-slate-50 px-4 py-6 sm:px-6" : "mx-auto w-full max-w-6xl px-4 sm:px-6"}>
-      {/* Puzzle identity — flat hero with a pill badge. */}
-      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+    <section ref={gameSectionRef} aria-label="Daily word puzzle game" className={isFullscreen ? "relative mx-auto w-full max-w-none overflow-y-auto bg-[#0B1220] px-4 py-6 sm:px-6" : "relative mx-auto w-full max-w-6xl px-4 sm:px-6"}>
+      {/* Soft emerald glow pooled behind the game board. */}
+      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[300px] -z-10 h-[420px] w-[min(860px,120%)] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[100px]" />
+      {/* Puzzle identity — dark glass hero with a glowing daily badge. */}
+      <div className="relative mt-4 overflow-hidden rounded-3xl border border-slate-700/70 bg-slate-900/80 p-4 shadow-[0_24px_70px_-24px_rgba(0,0,0,0.9)] backdrop-blur sm:p-6">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/80 to-transparent" />
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-emerald-300">
+              <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
+              </span>
               {mode === "daily" ? "Daily Puzzle" : "Practice"}
             </p>
-            <h1 className="mt-2 font-display text-[30px] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-[48px]">
+            <h1 className="mt-2 font-display text-[30px] font-bold leading-[1.05] tracking-tight text-white sm:text-[48px]">
               {mode === "daily" ? "Play Letter Box Game Online Free – Daily & Unlimited" : "Practice Letter Box Puzzles – Unlimited & Free"}
             </h1>
-            <p className="mt-1.5 text-sm font-bold uppercase tracking-[0.12em] text-emerald-700">
+            <p className="mt-1.5 text-sm font-bold uppercase tracking-[0.12em] text-emerald-400">
               {formatPuzzleDate(today)} · {puzzle.label}
             </p>
-            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-300 sm:text-base">
               In this letter-box word puzzle, chain words around the square and use every letter at
               least once. Two letters in a row must come from different sides. Play online in your
               browser — no download, no account.
             </p>
-            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-300 sm:text-base">
               Take your time — there is no time limit, and every puzzle has a verified solution
               waiting to be found.
             </p>
@@ -491,7 +498,7 @@ export function GameScreen({
               <button
                 type="button"
                 onClick={backToDaily}
-                className="min-h-11 cursor-pointer rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/50 active:scale-[0.98]"
+                className="min-h-11 cursor-pointer rounded-full border border-slate-600 bg-slate-900 px-4 text-sm font-semibold text-slate-300 transition hover:border-emerald-600/50 active:scale-[0.98]"
               >
                 ← Back to daily
               </button>
@@ -499,7 +506,7 @@ export function GameScreen({
             <button
               type="button"
               onClick={() => setShowHowTo(true)}
-              className="min-h-11 cursor-pointer rounded-full bg-emerald-600 px-4 text-sm font-bold text-white transition hover:bg-emerald-700 active:scale-[0.98]"
+              className="min-h-11 cursor-pointer rounded-full bg-emerald-600 px-4 text-sm font-bold text-white shadow-[0_10px_28px_-8px_rgba(16,185,129,0.8)] transition hover:bg-emerald-500 active:scale-[0.98]"
             >
               How to Play
             </button>
@@ -507,41 +514,42 @@ export function GameScreen({
               type="button"
               onClick={toggleFullscreen}
               aria-pressed={isFullscreen}
-              className="min-h-11 cursor-pointer rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/50 active:scale-[0.98]"
+              className="min-h-11 cursor-pointer rounded-full border border-slate-600 bg-slate-900 px-4 text-sm font-semibold text-slate-300 transition hover:border-emerald-600/50 active:scale-[0.98]"
             >
               {isFullscreen ? "Exit full screen" : "⛶ Full screen"}
             </button>
           </div>
         </div>
-        <dl className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
-          <div className="flex items-center gap-2">
-            <span aria-hidden="true" className="text-sm leading-none text-slate-500">◷</span>
-            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Time</dt>
-            <dd className="font-display text-[15px] font-bold tabular-nums text-slate-900">
+        <dl className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-700/60 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.8)] sm:grid-cols-4">
+          <div className="bg-slate-950/80 px-4 py-3">
+            <dt className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span aria-hidden="true" className="text-sm leading-none text-emerald-400">◷</span>Time
+            </dt>
+            <dd className="mt-1 font-display text-2xl font-bold tabular-nums text-white">
               {formatElapsed(displayTimeMs)}
             </dd>
           </div>
-          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
-          <div className="flex items-center gap-2">
-            <span aria-hidden="true" className="text-sm leading-none text-slate-500">★</span>
-            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Par</dt>
-            <dd className="font-display text-[15px] font-bold text-slate-900">
+          <div className="bg-slate-950/80 px-4 py-3">
+            <dt className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span aria-hidden="true" className="text-sm leading-none text-slate-400">★</span>Par
+            </dt>
+            <dd className="mt-1 font-display text-2xl font-bold text-white">
               {par} word{par === 1 ? "" : "s"}
             </dd>
           </div>
-          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
-          <div className="flex items-center gap-2">
-            <span aria-hidden="true" className="text-sm leading-none text-slate-500">↗</span>
-            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Streak</dt>
-            <dd className="font-display text-[15px] font-bold text-slate-900">
+          <div className="bg-slate-950/80 px-4 py-3">
+            <dt className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span aria-hidden="true" className="text-sm leading-none text-amber-400">↗</span>Streak
+            </dt>
+            <dd className="mt-1 font-display text-2xl font-bold text-amber-300">
               {stats.currentStreak} day{stats.currentStreak === 1 ? "" : "s"}
             </dd>
           </div>
-          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
-          <div className="flex items-center gap-2">
-            <span aria-hidden="true" className="text-sm leading-none text-slate-500">★</span>
-            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Best</dt>
-            <dd className="font-display text-[15px] font-bold text-slate-900">
+          <div className="bg-slate-950/80 px-4 py-3">
+            <dt className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span aria-hidden="true" className="text-sm leading-none text-emerald-400">★</span>Best
+            </dt>
+            <dd className="mt-1 font-display text-2xl font-bold text-emerald-300">
               {stats.fastestSolveMs === null ? "—" : formatElapsed(stats.fastestSolveMs)}
             </dd>
           </div>
@@ -549,9 +557,9 @@ export function GameScreen({
       </div>
 
       {loadError ? (
-        <div role="alert" className="mt-4 rounded-2xl border border-red-600/30 bg-red-50 p-6 sm:p-8">
-          <h2 className="font-display text-2xl font-bold text-slate-900">This puzzle could not be loaded</h2>
-          <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-slate-700">{loadError}</p>
+        <div role="alert" className="mt-4 rounded-2xl border border-red-600/30 bg-red-500/10 p-6 sm:p-8">
+          <h2 className="font-display text-2xl font-bold text-white">This puzzle could not be loaded</h2>
+          <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-slate-300">{loadError}</p>
           <button
             type="button"
             onClick={startNewGame}
@@ -562,16 +570,16 @@ export function GameScreen({
         </div>
       ) : isLoading ? (
         <div aria-busy="true" aria-label="Loading puzzle" className="mt-4 grid gap-6 lg:grid-cols-[1fr_360px]">
-          <div className="aspect-square w-full max-w-[540px] animate-pulse rounded-[28px] bg-slate-100" />
+          <div className="aspect-square w-full max-w-[540px] animate-pulse rounded-[28px] bg-slate-800" />
           <div className="space-y-3">
-            <div className="h-20 animate-pulse rounded-2xl bg-slate-100" />
-            <div className="h-12 animate-pulse rounded-full bg-slate-100" />
-            <div className="h-48 animate-pulse rounded-2xl bg-slate-100" />
+            <div className="h-20 animate-pulse rounded-2xl bg-slate-800" />
+            <div className="h-12 animate-pulse rounded-full bg-slate-800" />
+            <div className="h-48 animate-pulse rounded-2xl bg-slate-800" />
           </div>
           <p className="sr-only">Loading the puzzle…</p>
         </div>
       ) : (
-        <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3 sm:p-5">
+        <div className="mt-4 rounded-[28px] border border-slate-700/70 bg-slate-900/60 p-3 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur sm:p-5">
         <div className="grid items-start gap-6 pb-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
           {/* Board column */}
           <div className="min-w-0">
@@ -586,24 +594,24 @@ export function GameScreen({
 
             {/* Current word */}
             <div className="mx-auto mt-4 w-full max-w-[540px]">
-              <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+              <div className={`rounded-2xl border px-5 py-4 transition-shadow ${feedback?.kind === "error" ? "animate-shake border-red-500/60 bg-slate-950/80" : feedback?.kind === "success" ? "border-emerald-500/60 bg-slate-950/80 shadow-[0_0_30px_-6px_rgba(16,185,129,0.5)]" : "border-slate-700/70 bg-slate-950/80"}`}>
                 <div className="flex items-baseline justify-between gap-3">
-                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Current word</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">Current word</p>
                   {requiredStart && current.length === 0 && !solved && (
-                    <p className="text-[13px] font-semibold text-emerald-700">
+                    <p className="text-[13px] font-semibold text-emerald-400">
                       Next word must start with “{requiredStart}”
                     </p>
                   )}
                 </div>
                 <p
                   aria-live="polite"
-                  className={`mt-2 flex min-h-[52px] flex-wrap items-center gap-1.5 font-display text-[36px] font-bold leading-tight tracking-[0.08em] sm:text-[42px] ${current.length ? "text-slate-900" : "text-slate-400"}`}
+                  className={`mt-2 flex min-h-[52px] flex-wrap items-center gap-1.5 font-display text-[36px] font-bold leading-tight tracking-[0.08em] sm:text-[42px] ${current.length ? "text-white" : "text-slate-400"}`}
                 >
                   {current.length ? (
                     current.map((letter, i) => (
                       <span
                         key={`${letter}-${i}`}
-                        className="grid h-[52px] w-12 shrink-0 place-items-center rounded-lg border-2 border-emerald-700 bg-emerald-600 text-[28px] leading-none text-white animate-tile-pop"
+                        className="grid h-[52px] w-12 shrink-0 place-items-center rounded-lg border border-slate-600 border-b-2 border-b-emerald-500 bg-slate-800 text-[28px] leading-none text-white shadow-[0_3px_0_rgba(0,0,0,0.6)] animate-tile-pop"
                       >
                         {letter}
                       </span>
@@ -612,14 +620,14 @@ export function GameScreen({
                     "—"
                   )}
                   {current.length > 0 && (
-                    <span className="ml-1 align-middle font-sans text-sm font-semibold tracking-normal text-slate-500">
+                    <span className="ml-1 align-middle font-sans text-sm font-semibold tracking-normal text-slate-400">
                       {current.length} letter{current.length === 1 ? "" : "s"}
                     </span>
                   )}
                 </p>
                 {submitted.length > 0 && (
-                  <p className="mt-2 truncate text-[15px] font-medium text-slate-700">
-                    <span className="font-bold text-emerald-800">{submitted.join(" → ")}</span>
+                  <p className="mt-2 truncate text-[15px] font-medium text-slate-300">
+                    <span className="font-bold text-emerald-300">{submitted.join(" → ")}</span>
                     {current.length > 0 && <span aria-hidden="true"> → {current.join("")}</span>}
                   </p>
                 )}
@@ -631,7 +639,7 @@ export function GameScreen({
                   type="button"
                   onClick={submitWord}
                   disabled={current.length < 3 || isChecking || solved}
-                  className="col-span-3 min-h-13 cursor-pointer rounded-full bg-emerald-600 py-3.5 text-[16px] font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98] sm:col-span-1 sm:order-1"
+                  className="col-span-3 min-h-13 cursor-pointer rounded-2xl bg-gradient-to-b from-emerald-400 to-emerald-600 py-3.5 text-[16px] font-bold text-white shadow-[0_5px_0_#065f46,0_16px_32px_-10px_rgba(16,185,129,0.8)] transition hover:brightness-110 active:translate-y-1 active:shadow-[0_1px_0_#065f46] disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-1 sm:order-1"
                 >
                   {isChecking ? "Checking…" : "Submit ✓"}
                 </button>
@@ -639,7 +647,7 @@ export function GameScreen({
                   type="button"
                   onClick={undo}
                   disabled={current.length === 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-slate-200 bg-white px-3 text-[15px] font-semibold text-slate-700 transition hover:border-emerald-600/50 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
+                  className="min-h-12 cursor-pointer rounded-2xl border border-slate-600 bg-slate-800/80 px-3 text-[15px] font-semibold text-slate-100 shadow-[0_3px_0_rgba(0,0,0,0.55)] transition hover:border-emerald-500/60 disabled:cursor-not-allowed disabled:opacity-40 active:translate-y-0.5"
                 >
                   Undo
                 </button>
@@ -647,7 +655,7 @@ export function GameScreen({
                   type="button"
                   onClick={clearCurrent}
                   disabled={current.length === 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-slate-200 bg-white px-3 text-[15px] font-semibold text-slate-700 transition hover:border-emerald-600/50 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
+                  className="min-h-12 cursor-pointer rounded-2xl border border-slate-600 bg-slate-800/80 px-3 text-[15px] font-semibold text-slate-100 shadow-[0_3px_0_rgba(0,0,0,0.55)] transition hover:border-emerald-500/60 disabled:cursor-not-allowed disabled:opacity-40 active:translate-y-0.5"
                 >
                   Clear
                 </button>
@@ -655,29 +663,29 @@ export function GameScreen({
                   type="button"
                   onClick={useHint}
                   disabled={solved || hintsLeft <= 0}
-                  className="min-h-12 cursor-pointer rounded-full border border-emerald-700/50 bg-emerald-50 px-3 text-[15px] font-semibold text-slate-700 transition hover:border-emerald-700 disabled:cursor-not-allowed disabled:opacity-40 active:scale-[0.98]"
+                  className="min-h-12 cursor-pointer rounded-2xl border border-amber-500/50 bg-amber-500/10 px-3 text-[15px] font-semibold text-amber-300 shadow-[0_3px_0_rgba(0,0,0,0.55)] transition hover:border-amber-400 disabled:cursor-not-allowed disabled:opacity-40 active:translate-y-0.5"
                 >
                   Hint ({hintsLeft} left)
                 </button>
                 <button
                   type="button"
                   onClick={startNewGame}
-                  className="col-span-2 min-h-12 cursor-pointer rounded-full border border-slate-300 bg-white px-3 text-[15px] font-bold text-slate-900 transition hover:border-emerald-600/50 sm:col-span-1 active:scale-[0.98]"
+                  className="col-span-2 min-h-12 cursor-pointer rounded-2xl border border-slate-600 bg-slate-800/80 px-3 text-[15px] font-bold text-white shadow-[0_3px_0_rgba(0,0,0,0.55)] transition hover:border-emerald-500/60 sm:col-span-1 active:translate-y-0.5"
                 >
                   New Game
                 </button>
               </div>
-              <p className="mt-3 text-center text-[13px] leading-relaxed text-slate-500">
+              <p className="mt-3 text-center text-[13px] leading-relaxed text-slate-400">
                 Tap the board or type on your keyboard — and take your time: there is no time limit.{" "}
-                <span className="font-semibold text-slate-700">Enter</span> submits,{" "}
-                <span className="font-semibold text-slate-700">Backspace</span> undoes one letter,{" "}
-                <span className="font-semibold text-slate-700">Esc</span> clears.
+                <span className="font-semibold text-slate-300">Enter</span> submits,{" "}
+                <span className="font-semibold text-slate-300">Backspace</span> undoes one letter,{" "}
+                <span className="font-semibold text-slate-300">Esc</span> clears.
               </p>
             </div>
           </div>
 
           {/* Side panel */}
-          <aside className="min-w-0 space-y-3 rounded-[10px] bg-slate-100 p-3 lg:sticky lg:top-24">
+          <aside className="min-w-0 space-y-3 rounded-[10px] bg-slate-900/50 p-3 lg:sticky lg:top-24">
             {/* Feedback */}
             <div aria-live="polite">
               {feedback && (
@@ -685,25 +693,25 @@ export function GameScreen({
                   role={feedback.kind === "error" ? "alert" : "status"}
                   className={`rounded-[10px] border p-4 text-[15px] leading-relaxed animate-fade-up ${
                     feedback.kind === "error"
-                      ? "border-red-600/40 bg-red-50 text-slate-700 animate-shake"
+                      ? "border-red-600/40 bg-red-500/10 text-slate-300 animate-shake"
                       : feedback.kind === "success"
-                        ? "border-emerald-700/30 bg-emerald-50 text-slate-700"
-                        : "border-sky-200 bg-sky-50 text-slate-700"
+                        ? "border-emerald-700/30 bg-emerald-500/10 text-slate-300"
+                        : "border-sky-500/30 bg-sky-500/10 text-slate-300"
                   }`}
                 >
                   <p>
-                    <span aria-hidden="true" className="mr-2">
+                    <span aria-hidden="true" className={`mr-2 font-display font-bold ${feedback.kind === "error" ? "text-red-400" : "text-emerald-400"}`}>
                       {feedback.kind === "error" ? "✕" : feedback.kind === "success" ? "✓" : "i"}
                     </span>
                     {feedback.message}
                   </p>
                   {feedback.kind === "error" && (
-                    <p className="mt-2 text-sm font-semibold text-red-700">
+                    <p className="mt-2 text-sm font-semibold text-red-400">
                       Every miss narrows it down — try a different angle.
                     </p>
                   )}
                   {hintTarget && hintStage === 2 && (
-                    <p className="mt-2 font-display text-lg font-bold text-slate-900">
+                    <p className="mt-2 font-display text-lg font-bold text-white">
                       Suggested word: {hintTarget}
                     </p>
                   )}
@@ -713,23 +721,23 @@ export function GameScreen({
 
             {/* Win state */}
             {solved && (
-              <div role="status" className="rounded-[10px] border-2 border-emerald-600 bg-white p-5 animate-fade-up">
+              <div role="status" className="rounded-[10px] border border-emerald-500/60 bg-gradient-to-b from-emerald-500/25 via-slate-900 to-slate-900 p-5 shadow-[0_0_70px_-12px_rgba(16,185,129,0.7)] animate-fade-up">
                 <div className="relative">
                   <p aria-hidden="true" className="text-[34px] leading-none tracking-[0.18em]">
                     {[1, 2, 3].map((n) => (
                       <span
                         key={n}
-                        className={`animate-star-pop ${n <= stars ? "text-emerald-600" : "text-slate-300"}`}
+                        className={`animate-star-pop ${n <= stars ? "text-amber-400 drop-shadow-[0_0_12px_rgba(251,191,36,0.7)]" : "text-slate-600"}`}
                         style={{ animationDelay: `${(n - 1) * 120}ms` }}
                       >
                         ★
                       </span>
                     ))}
                   </p>
-                  <h2 className="mt-1 font-display text-[26px] font-bold leading-tight text-slate-900">
+                  <h2 className="mt-1 font-display text-[26px] font-bold leading-tight text-white">
                     Puzzle solved!
                   </h2>
-                  <p className="mt-1.5 text-[15px] leading-relaxed text-slate-700">
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-slate-300">
                     You used every letter in <strong>{submitted.length} word{submitted.length === 1 ? "" : "s"}</strong>{" "}
                     and <strong>{formatElapsed(solveTimeMs ?? 0)}</strong> — a{" "}
                     <strong>
@@ -737,40 +745,40 @@ export function GameScreen({
                     </strong>
                     : {submitted.join(", ")}.
                   </p>
-                  <p className="mt-2 text-[15px] font-semibold text-emerald-800">
+                  <p className="mt-2 text-[15px] font-semibold text-emerald-300">
                     <span aria-hidden="true">✦ </span>Every letter found — what a journey!<span aria-hidden="true"> ✦</span>
                   </p>
                   {puzzle.solution.join(" ") !== submitted.join(" ") && (
-                    <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
                       One verified two-word route was{" "}
-                      <strong className="text-slate-900">{puzzle.solution.join(" → ")}</strong> — yours
+                      <strong className="text-white">{puzzle.solution.join(" → ")}</strong> — yours
                       counts just the same.
                     </p>
                   )}
                   {mode === "daily" && countdown && (
-                    <p className="mt-3 rounded-xl border border-emerald-600/40 bg-emerald-50 px-3.5 py-2.5 text-sm font-semibold text-slate-700">
-                      Next daily puzzle in <span className="tabular-nums text-emerald-800">{countdown}</span> — midnight Pakistan time.
+                    <p className="mt-3 rounded-xl border border-emerald-600/40 bg-emerald-500/10 px-3.5 py-2.5 text-sm font-semibold text-slate-300">
+                      Next daily puzzle in <span className="tabular-nums text-emerald-300">{countdown}</span> — midnight Pakistan time.
                     </p>
                   )}
                   <div className="mt-4 flex flex-wrap gap-2">
                     <button
                       type="button"
                       onClick={shareResult}
-                      className="min-h-11 cursor-pointer rounded-full border-2 border-emerald-700 bg-emerald-600 px-4 text-sm font-bold text-white transition hover:bg-emerald-700 active:scale-[0.98]"
+                      className="min-h-11 cursor-pointer rounded-full border-2 border-emerald-700 bg-emerald-600 px-4 text-sm font-bold text-white shadow-[0_8px_20px_-6px_rgba(16,185,129,0.7)] transition hover:bg-emerald-500 active:scale-[0.98]"
                     >
                       {shareCopied ? "Copied ✓" : "Share result"}
                     </button>
                     <button
                       type="button"
                       onClick={startNewGame}
-                      className="min-h-11 cursor-pointer rounded-full border border-slate-300 bg-white px-4 text-sm font-bold text-slate-900 transition hover:border-emerald-600/50 active:scale-[0.98]"
+                      className="min-h-11 cursor-pointer rounded-full border border-slate-600 bg-slate-900 px-4 text-sm font-bold text-white transition hover:border-emerald-600/50 active:scale-[0.98]"
                     >
                       Play a practice puzzle
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowStats(true)}
-                      className="min-h-11 cursor-pointer rounded-full border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-emerald-600/50 active:scale-[0.98]"
+                      className="min-h-11 cursor-pointer rounded-full border border-slate-700/70 bg-slate-900 px-4 text-sm font-semibold text-slate-300 transition hover:border-emerald-600/50 active:scale-[0.98]"
                     >
                       View statistics
                     </button>
@@ -780,31 +788,48 @@ export function GameScreen({
             )}
 
             {/* Progress */}
-            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
-              <div className="flex items-baseline justify-between">
-                <h2 className="font-display text-lg font-bold text-slate-900">Your progress</h2>
-                <p className="text-sm font-bold text-emerald-700">{percent}%</p>
-              </div>
-              <div
-                role="progressbar"
-                aria-valuenow={percent}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-label={`${used.size} of 12 letters used`}
-                className="mt-3 h-2 overflow-hidden bg-slate-200"
-              >
+            <div className="rounded-[10px] border border-slate-700/70 bg-slate-900 p-5">
+              <div className="flex items-center gap-4">
                 <div
-                  className="h-full bg-emerald-600 transition-all duration-300"
-                  style={{ width: `${percent}%` }}
-                />
+                  className="relative h-[104px] w-[104px] shrink-0"
+                  role="progressbar"
+                  aria-valuenow={percent}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`${used.size} of 12 letters used`}
+                >
+                  <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90" aria-hidden="true">
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="#1e293b" strokeWidth="10" />
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="52"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                      strokeDasharray={2 * Math.PI * 52}
+                      strokeDashoffset={2 * Math.PI * 52 * (1 - percent / 100)}
+                      className="transition-all duration-500"
+                    />
+                  </svg>
+                  <p className="absolute inset-0 grid place-items-center font-display text-2xl font-bold text-emerald-400">
+                    {percent}%
+                  </p>
+                </div>
+                <div className="min-w-0">
+                  <h2 className="font-display text-lg font-bold text-white">Your progress</h2>
+                  <p className="mt-1 text-sm text-slate-400">
+                    <strong className="text-white">{used.size} of 12</strong> letters used ·{" "}
+                    <strong className="text-white">{remaining.length}</strong> remaining
+                  </p>
+                  <p className="mt-1 text-sm text-slate-400">
+                    <strong className="text-white">{submitted.length}</strong> word{submitted.length === 1 ? "" : "s"} (par {par}) ·{" "}
+                    <strong className="tabular-nums text-white">{formatElapsed(displayTimeMs)}</strong>
+                  </p>
+                </div>
               </div>
-              <p className="mt-2 text-sm text-slate-500">
-                <strong className="text-slate-900">{used.size} of 12</strong> letters used ·{" "}
-                <strong className="text-slate-900">{remaining.length}</strong> remaining ·{" "}
-                <strong className="text-slate-900">{submitted.length}</strong> word{submitted.length === 1 ? "" : "s"} (par {par}) ·{" "}
-                <strong className="tabular-nums text-slate-900">{formatElapsed(displayTimeMs)}</strong>
-              </p>
-              <p className="mt-2 text-sm font-semibold text-emerald-800">
+              <p className="mt-3 text-sm font-semibold text-amber-300">
                 <span aria-hidden="true" className="mr-1.5">✦</span>
                 {solved
                   ? "All twelve letters found!"
@@ -817,7 +842,7 @@ export function GameScreen({
                         : "Warming up — nice chaining!"}
               </p>
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Letters used</p>
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-400">Letters used</p>
                 <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Letters used">
                   {letters.map((letter) => {
                     const isUsed = used.has(letter);
@@ -828,7 +853,7 @@ export function GameScreen({
                         className={`grid h-9 w-9 place-items-center rounded-lg border font-display text-[15px] font-bold ${
                           isUsed
                             ? "border-emerald-700 bg-emerald-600 text-white"
-                            : "border-slate-200 bg-white text-slate-700"
+                            : "border-slate-700/70 bg-slate-900 text-slate-300"
                         }`}
                       >
                         {letter}
@@ -838,17 +863,17 @@ export function GameScreen({
                   })}
                 </ul>
                 {remaining.length > 0 && (
-                  <p className="mt-3 text-[15px] text-slate-700">
-                    Still to use: <strong className="font-display font-bold tracking-[0.06em] text-emerald-800">{remaining.join(", ")}</strong>
+                  <p className="mt-3 text-[15px] text-slate-300">
+                    Still to use: <strong className="font-display font-bold tracking-[0.06em] text-emerald-300">{remaining.join(", ")}</strong>
                   </p>
                 )}
               </div>
             </div>
 
             {/* Choose a puzzle — all seven, any time, as practice. */}
-            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
-              <h2 className="font-display text-lg font-bold text-slate-900">Practice More Letter Box Puzzles for Free</h2>
-              <p className="mt-1 text-sm leading-relaxed text-slate-700">
+            <div className="rounded-[10px] border border-slate-700/70 bg-slate-900 p-5">
+              <h2 className="font-display text-lg font-bold text-white">Practice More Letter Box Puzzles for Free</h2>
+              <p className="mt-1 text-sm leading-relaxed text-slate-300">
                 Pick any board to play as practice. Your daily puzzle stays untouched.
               </p>
               <p aria-hidden="true" className="mt-2 text-sm tracking-[0.3em] text-slate-400">● ◆ ▲ ■</p>
@@ -865,7 +890,7 @@ export function GameScreen({
                         className={`min-h-11 w-full cursor-pointer rounded-full border px-3 py-2 text-left text-[13px] font-semibold transition active:scale-[0.98] ${
                           isCurrent
                             ? "border-emerald-700 bg-emerald-600 text-white"
-                            : "border-slate-200 bg-white text-slate-700 hover:border-emerald-600/50 hover:bg-slate-50"
+                            : "border-slate-700/70 bg-slate-900 text-slate-300 hover:border-emerald-600/50 hover:bg-slate-950"
                         }`}
                       >
                         <span className="font-display font-bold">{index + 1}.</span> {candidate.label}
@@ -880,12 +905,12 @@ export function GameScreen({
             </div>
 
             {/* Submitted words */}
-            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
-              <h2 className="font-display text-lg font-bold text-slate-900">
-                Words found <span className="text-sm font-sans font-semibold text-slate-500">({submitted.length})</span>
+            <div className="rounded-[10px] border border-slate-700/70 bg-slate-900 p-5">
+              <h2 className="font-display text-lg font-bold text-white">
+                Words found <span className="text-sm font-sans font-semibold text-slate-400">({submitted.length})</span>
               </h2>
               {submitted.length === 0 ? (
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   No words yet. Your first word can start with any letter — every word
                   after it must start with the previous word&apos;s last letter.
                 </p>
@@ -897,17 +922,17 @@ export function GameScreen({
                     return (
                       <li
                         key={`${word}-${i}`}
-                        className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 animate-fade-up"
+                        className="flex items-center justify-between gap-3 rounded-xl border border-slate-700/70 bg-slate-900 px-3.5 py-2.5 animate-fade-up"
                       >
                         <span className="flex items-center gap-2.5">
                           <span aria-hidden="true" className="grid h-6 w-6 place-items-center rounded-full bg-emerald-600 text-xs font-bold text-white">
                             {i + 1}
                           </span>
-                          <span className="font-display text-[19px] font-bold tracking-[0.06em] text-emerald-800">
+                          <span className="font-display text-[19px] font-bold tracking-[0.06em] text-emerald-300">
                             {word}
                           </span>
                         </span>
-                        <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">
+                        <span className="shrink-0 rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-bold text-emerald-400">
                           {fresh.length} new letter{fresh.length === 1 ? "" : "s"}
                         </span>
                       </li>
@@ -915,7 +940,7 @@ export function GameScreen({
                   })}
                 </ol>
               )}
-              <p className="mt-4 border-t border-slate-200 pt-3 text-[13px] leading-relaxed text-slate-500">
+              <p className="mt-4 border-t border-slate-700/70 pt-3 text-[13px] leading-relaxed text-slate-400">
                 Words are checked against a curated list of common words. If a word you
                 know is not recognised, try a more common alternative — the list is
                 still growing.
@@ -923,9 +948,9 @@ export function GameScreen({
             </div>
 
             {/* Quick rules */}
-            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
-              <h2 className="font-display text-lg font-bold text-slate-900">In short</h2>
-              <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-700 marker:text-emerald-700">
+            <div className="rounded-[10px] border border-slate-700/70 bg-slate-900 p-5">
+              <h2 className="font-display text-lg font-bold text-white">In short</h2>
+              <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-300 marker:text-emerald-400">
                 <li>Words need at least 3 letters.</li>
                 <li>Two in a row cannot share a side.</li>
                 <li>Chain: start each word with the last letter of the one before.</li>
@@ -935,7 +960,7 @@ export function GameScreen({
               <button
                 type="button"
                 onClick={() => setShowHowTo(true)}
-                className="mt-3 min-h-11 cursor-pointer text-sm font-bold text-emerald-700 underline underline-offset-4 hover:text-emerald-800"
+                className="mt-3 min-h-11 cursor-pointer text-sm font-bold text-emerald-400 underline underline-offset-4 hover:text-emerald-300"
               >
                 Read the full How to Play →
               </button>

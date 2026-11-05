@@ -51,9 +51,9 @@ export function ConsentBanner() {
       aria-label="Cookie consent"
       className="fixed inset-x-0 bottom-0 z-40 px-4 pb-4 sm:px-6 sm:pb-5"
     >
-      <div className="mx-auto max-w-3xl rounded-[24px] border-2 border-emerald-600/60 bg-white p-5 shadow-lift">
-        <h2 className="font-display text-lg font-bold text-slate-900">Your privacy, your choice</h2>
-        <p className="mt-1 text-sm leading-relaxed text-slate-700">
+      <div className="mx-auto max-w-3xl rounded-[24px] border-2 border-emerald-600/60 bg-slate-900 p-5 shadow-lift">
+        <h2 className="font-display text-lg font-bold text-white">Your privacy, your choice</h2>
+        <p className="mt-1 text-sm leading-relaxed text-slate-300">
           We use Google Analytics to understand, in aggregate, how the site is used — which
           pages are visited and what kinds of devices people play on. It never receives the
           words you type or anything that identifies you, and we use no advertising features.
@@ -61,7 +61,7 @@ export function ConsentBanner() {
           collected. See the{" "}
           <Link
             href="/privacy-policy"
-            className="font-semibold text-emerald-600 underline underline-offset-4"
+            className="font-semibold text-emerald-400 underline underline-offset-4"
           >
             Privacy Policy
           </Link>
@@ -80,12 +80,12 @@ export function ConsentBanner() {
             type="button"
             onClick={() => choose("rejected")}
             aria-label="Reject analytics"
-            className="min-h-11 cursor-pointer rounded-full border-2 border-emerald-600 bg-white px-5 text-sm font-bold text-emerald-800 transition hover:bg-emerald-100 active:scale-[0.98]"
+            className="min-h-11 cursor-pointer rounded-full border-2 border-emerald-600 bg-slate-900 px-5 text-sm font-bold text-emerald-300 transition hover:bg-emerald-500/15 active:scale-[0.98]"
           >
             Reject
           </button>
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-slate-500">
+        <p className="mt-3 text-xs leading-relaxed text-slate-400">
           You can change your choice at any time using “Cookie choices” in the footer.
         </p>
       </div>

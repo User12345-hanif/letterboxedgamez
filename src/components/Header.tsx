@@ -18,7 +18,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       >
         <span
           aria-hidden="true"
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-600 font-display text-[17px] font-bold leading-none text-white"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-600 font-display text-[17px] font-bold leading-none text-white shadow-[0_0_20px_rgba(16,185,129,0.55)]"
         >
           L
         </span>
@@ -41,20 +41,20 @@ export function Logo({ compact = false }: { compact?: boolean }) {
 
 export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-900">
+    <header className="sticky top-0 z-40 border-b border-slate-800/80 bg-[#0B1220]/85 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)] backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-4 py-3 sm:px-6">
         <Logo />
         <nav aria-label="Main" className="ml-auto flex items-center gap-1 sm:gap-2">
           <Link
             href="/how-to-play"
-            className="hidden min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white sm:inline-flex"
+            className="hidden min-h-11 items-center rounded-full px-3 text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white sm:inline-flex"
           >
             How to Play
           </Link>
           <button
             type="button"
             onClick={onHowToPlay}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-lg border border-slate-600 bg-transparent px-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 active:scale-[0.98] sm:px-4"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-slate-600 bg-white/5 px-3.5 text-sm font-semibold text-white transition hover:bg-white/10 active:scale-[0.98] sm:px-4"
           >
             <span aria-hidden="true">?</span> How to Play
           </button>
@@ -62,17 +62,23 @@ export function Header({ onHowToPlay, onStatistics, solvedCount = 0 }: HeaderPro
             type="button"
             onClick={onStatistics}
             aria-label={`Statistics${solvedCount ? `, ${solvedCount} puzzles solved` : ""}`}
-            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 text-sm font-semibold text-white transition hover:bg-emerald-700 active:scale-[0.98] sm:px-4"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border border-slate-600 bg-white/5 px-3.5 text-sm font-semibold text-white transition hover:bg-white/10 active:scale-[0.98] sm:px-4"
           >
             <span aria-hidden="true">▦</span> Statistics
           </button>
+          <Link
+            href="/#main-content"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-emerald-500 px-4 text-sm font-bold text-white shadow-[0_8px_20px_-6px_rgba(16,185,129,0.7)] transition hover:bg-emerald-400 active:scale-[0.98]"
+          >
+            <span aria-hidden="true">▶</span> Play now
+          </Link>
         </nav>
       </div>
       <nav aria-label="Sections" className="border-t border-slate-800">
         <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-1.5 text-sm font-medium text-slate-300">
           {SITE.nav.slice(1).map((item) => (
             <li key={item.href} className="shrink-0">
-              <Link href={item.href} className="inline-block rounded-lg px-3 py-1.5 hover:bg-slate-800 hover:text-white">
+              <Link href={item.href} className="inline-block rounded-full px-3 py-1.5 hover:bg-white/10 hover:text-white">
                 {item.label}
               </Link>
             </li>

@@ -26,7 +26,7 @@ export default function TermsPage() {
       title="Terms of use"
       intro="Plain-language terms for a plain, free game. By playing Letter Box Game you agree to the short list below."
     >
-      <p className="text-sm text-slate-500">Last updated: October 28, 2026.</p>
+      <p className="text-sm text-slate-400">Last updated: October 28, 2026.</p>
 
       <h2>1. The game</h2>
       <p>

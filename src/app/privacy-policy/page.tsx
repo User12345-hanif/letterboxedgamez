@@ -26,7 +26,7 @@ export default function PrivacyPage() {
       title="Privacy Policy"
       intro="Short version: Letter Box Game has no accounts, and your game progress stays in your own browser. We use anonymous analytics only if you accept cookies for that purpose — you can reject, and you can change your choice at any time. The rest of this page is the formal version of the same thing."
     >
-      <p className="text-sm text-slate-500">Last updated: October 29, 2026.</p>
+      <p className="text-sm text-slate-400">Last updated: October 29, 2026.</p>
 
       <h2>What we collect</h2>
       <p>
