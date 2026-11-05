@@ -464,26 +464,24 @@ export function GameScreen({
   return (
     <section ref={gameSectionRef} aria-label="Daily word puzzle game" className={isFullscreen ? "mx-auto w-full max-w-none overflow-y-auto bg-slate-50 px-4 py-6 sm:px-6" : "mx-auto w-full max-w-6xl px-4 sm:px-6"}>
       {/* Puzzle identity — flat hero with a pill badge. */}
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">
-              <span aria-hidden="true">✳</span>
-              {mode === "daily" ? "Daily Puzzle" : "Practice Puzzle"}
-              <span className="font-normal normal-case tracking-normal text-slate-500">· {puzzle.label}</span>
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">
+              {mode === "daily" ? "Daily Puzzle" : "Practice"}
             </p>
-            <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-[48px]">
+            <h1 className="mt-2 font-display text-[30px] font-bold leading-[1.05] tracking-tight text-slate-900 sm:text-[48px]">
               {mode === "daily" ? "Play Letter Box Game Online Free – Daily & Unlimited" : "Practice Letter Box Puzzles – Unlimited & Free"}
             </h1>
-            <p className="mt-2 text-sm font-bold uppercase tracking-[0.12em] text-emerald-700">
+            <p className="mt-1.5 text-sm font-bold uppercase tracking-[0.12em] text-emerald-700">
               {formatPuzzleDate(today)} · {puzzle.label}
             </p>
-            <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
               In this letter-box word puzzle, chain words around the square and use every letter at
               least once. Two letters in a row must come from different sides. Play online in your
               browser — no download, no account.
             </p>
-            <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+            <p className="mt-1.5 max-w-xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
               Take your time — there is no time limit, and every puzzle has a verified solution
               waiting to be found.
             </p>
@@ -515,32 +513,35 @@ export function GameScreen({
             </button>
           </div>
         </div>
-        <dl className="mt-5 flex flex-wrap gap-2">
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5">
+        <dl className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
+          <div className="flex items-center gap-2">
             <span aria-hidden="true" className="text-sm leading-none text-slate-500">◷</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Time</dt>
             <dd className="font-display text-[15px] font-bold tabular-nums text-slate-900">
               {formatElapsed(displayTimeMs)}
             </dd>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5">
+          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
+          <div className="flex items-center gap-2">
             <span aria-hidden="true" className="text-sm leading-none text-slate-500">★</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Par</dt>
             <dd className="font-display text-[15px] font-bold text-slate-900">
               {par} word{par === 1 ? "" : "s"}
             </dd>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5">
+          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
+          <div className="flex items-center gap-2">
             <span aria-hidden="true" className="text-sm leading-none text-slate-500">↗</span>
             <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Streak</dt>
             <dd className="font-display text-[15px] font-bold text-slate-900">
               {stats.currentStreak} day{stats.currentStreak === 1 ? "" : "s"}
             </dd>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-50 px-3.5 py-1.5">
-            <span aria-hidden="true" className="text-sm leading-none text-emerald-700">★</span>
-            <dt className="text-xs font-bold uppercase tracking-wider text-emerald-700">Best</dt>
-            <dd className="font-display text-[15px] font-bold text-emerald-700">
+          <span aria-hidden="true" className="h-4 w-px bg-slate-300" />
+          <div className="flex items-center gap-2">
+            <span aria-hidden="true" className="text-sm leading-none text-slate-500">★</span>
+            <dt className="text-xs font-bold uppercase tracking-wider text-slate-500">Best</dt>
+            <dd className="font-display text-[15px] font-bold text-slate-900">
               {stats.fastestSolveMs === null ? "—" : formatElapsed(stats.fastestSolveMs)}
             </dd>
           </div>
@@ -548,7 +549,7 @@ export function GameScreen({
       </div>
 
       {loadError ? (
-        <div role="alert" className="mt-8 rounded-2xl border border-red-600/30 bg-red-50 p-6 sm:p-8">
+        <div role="alert" className="mt-4 rounded-2xl border border-red-600/30 bg-red-50 p-6 sm:p-8">
           <h2 className="font-display text-2xl font-bold text-slate-900">This puzzle could not be loaded</h2>
           <p className="mt-2 max-w-lg text-[15px] leading-relaxed text-slate-700">{loadError}</p>
           <button
@@ -560,7 +561,7 @@ export function GameScreen({
           </button>
         </div>
       ) : isLoading ? (
-        <div aria-busy="true" aria-label="Loading puzzle" className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
+        <div aria-busy="true" aria-label="Loading puzzle" className="mt-4 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="aspect-square w-full max-w-[540px] animate-pulse rounded-[28px] bg-slate-100" />
           <div className="space-y-3">
             <div className="h-20 animate-pulse rounded-2xl bg-slate-100" />
@@ -570,7 +571,7 @@ export function GameScreen({
           <p className="sr-only">Loading the puzzle…</p>
         </div>
       ) : (
-        <div className="mt-7 rounded-2xl border border-slate-200 bg-white p-3 sm:p-5">
+        <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-3 sm:p-5">
         <div className="grid items-start gap-6 pb-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
           {/* Board column */}
           <div className="min-w-0">
@@ -584,7 +585,7 @@ export function GameScreen({
             />
 
             {/* Current word */}
-            <div className="mx-auto mt-5 w-full max-w-[540px]">
+            <div className="mx-auto mt-4 w-full max-w-[540px]">
               <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Current word</p>
@@ -676,18 +677,18 @@ export function GameScreen({
           </div>
 
           {/* Side panel */}
-          <aside className="min-w-0 space-y-4 lg:sticky lg:top-24">
+          <aside className="min-w-0 space-y-3 rounded-[10px] bg-slate-100 p-3 lg:sticky lg:top-24">
             {/* Feedback */}
             <div aria-live="polite">
               {feedback && (
                 <div
                   role={feedback.kind === "error" ? "alert" : "status"}
-                  className={`rounded-2xl border p-4 text-[15px] leading-relaxed animate-fade-up ${
+                  className={`rounded-[10px] border p-4 text-[15px] leading-relaxed animate-fade-up ${
                     feedback.kind === "error"
                       ? "border-red-600/40 bg-red-50 text-slate-700 animate-shake"
                       : feedback.kind === "success"
                         ? "border-emerald-700/30 bg-emerald-50 text-slate-700"
-                        : "border-slate-300 bg-slate-100 text-slate-700"
+                        : "border-sky-200 bg-sky-50 text-slate-700"
                   }`}
                 >
                   <p>
@@ -712,7 +713,7 @@ export function GameScreen({
 
             {/* Win state */}
             {solved && (
-              <div role="status" className="rounded-2xl border-2 border-emerald-600 bg-white p-5 animate-fade-up">
+              <div role="status" className="rounded-[10px] border-2 border-emerald-600 bg-white p-5 animate-fade-up">
                 <div className="relative">
                   <p aria-hidden="true" className="text-[34px] leading-none tracking-[0.18em]">
                     {[1, 2, 3].map((n) => (
@@ -779,7 +780,7 @@ export function GameScreen({
             )}
 
             {/* Progress */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
               <div className="flex items-baseline justify-between">
                 <h2 className="font-display text-lg font-bold text-slate-900">Your progress</h2>
                 <p className="text-sm font-bold text-emerald-700">{percent}%</p>
@@ -790,10 +791,10 @@ export function GameScreen({
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-label={`${used.size} of 12 letters used`}
-                className="mt-3 h-3.5 overflow-hidden rounded-full border border-slate-200 bg-slate-100"
+                className="mt-3 h-2 overflow-hidden bg-slate-200"
               >
                 <div
-                  className="h-full rounded-full bg-emerald-600 transition-all duration-300"
+                  className="h-full bg-emerald-600 transition-all duration-300"
                   style={{ width: `${percent}%` }}
                 />
               </div>
@@ -845,7 +846,7 @@ export function GameScreen({
             </div>
 
             {/* Choose a puzzle — all seven, any time, as practice. */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
               <h2 className="font-display text-lg font-bold text-slate-900">Practice More Letter Box Puzzles for Free</h2>
               <p className="mt-1 text-sm leading-relaxed text-slate-700">
                 Pick any board to play as practice. Your daily puzzle stays untouched.
@@ -879,7 +880,7 @@ export function GameScreen({
             </div>
 
             {/* Submitted words */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
               <h2 className="font-display text-lg font-bold text-slate-900">
                 Words found <span className="text-sm font-sans font-semibold text-slate-500">({submitted.length})</span>
               </h2>
@@ -922,7 +923,7 @@ export function GameScreen({
             </div>
 
             {/* Quick rules */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <div className="rounded-[10px] border border-slate-200 bg-white p-5">
               <h2 className="font-display text-lg font-bold text-slate-900">In short</h2>
               <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-700 marker:text-emerald-700">
                 <li>Words need at least 3 letters.</li>

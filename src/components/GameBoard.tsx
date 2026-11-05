@@ -16,7 +16,7 @@ export const SIDE_META: SideMeta[] = [
     label: "Top",
     glyph: "●",
     patternClass: "side-pattern-top",
-    description: "Solid edge",
+    description: "Solid",
     tintClass: "bg-slate-50",
   },
   {
@@ -24,7 +24,7 @@ export const SIDE_META: SideMeta[] = [
     label: "Right",
     glyph: "◆",
     patternClass: "side-pattern-right",
-    description: "Diagonal stripes",
+    description: "Dashed",
     tintClass: "bg-slate-50",
   },
   {
@@ -32,7 +32,7 @@ export const SIDE_META: SideMeta[] = [
     label: "Bottom",
     glyph: "▲",
     patternClass: "side-pattern-bottom",
-    description: "Dotted edge",
+    description: "Dotted",
     tintClass: "bg-slate-50",
   },
   {
@@ -40,7 +40,7 @@ export const SIDE_META: SideMeta[] = [
     label: "Left",
     glyph: "■",
     patternClass: "side-pattern-left",
-    description: "Crosshatch edge",
+    description: "Double",
     tintClass: "bg-slate-50",
   },
 ];
@@ -104,8 +104,8 @@ export function GameBoard({
               {side.glyph}
             </span>
             <span className="text-left leading-tight">
-              <span className="block text-[13px] font-bold text-slate-900">{side.label}</span>
-              <span className="block text-[11px] text-slate-700">{side.description}</span>
+              <span className="block text-[13px] font-bold text-slate-900">{side.description}</span>
+              <span className="block text-[11px] text-slate-700">edge</span>
             </span>
           </div>
         ))}
@@ -118,11 +118,12 @@ export function GameBoard({
           aria-label="Puzzle board. Twelve letters on four sides. Use Tab to move between letters, Enter or Space to pick one."
           className="relative aspect-square w-full overflow-hidden rounded-xl bg-slate-900"
         >
-        {/* Edge treatments — one distinct treatment per side. */}
+        {/* Edge treatments — one distinct treatment per side: solid emerald
+            top, dashed gold right, dotted muted-gold bottom, double slate left. */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-8 top-0 h-[5px] rounded-b bg-slate-400" />
-          <div className="absolute inset-y-8 right-0 w-[5px] rounded-l [background:repeating-linear-gradient(0deg,#94a3b8_0_6px,transparent_6px_11px)]" />
-          <div className="absolute inset-x-8 bottom-0 h-[5px] rounded-t [background:radial-gradient(#cbd5e1_1.6px,transparent_1.7px)] [background-size:10px_5px] [background-position:center]" />
+          <div className="absolute inset-x-8 top-0 h-[5px] rounded-b bg-emerald-600" />
+          <div className="absolute inset-y-8 right-0 w-[5px] rounded-l [background:repeating-linear-gradient(0deg,#d97706_0_6px,transparent_6px_11px)]" />
+          <div className="absolute inset-x-8 bottom-0 h-[5px] rounded-t [background:radial-gradient(#c9a227_1.6px,transparent_1.7px)] [background-size:10px_5px] [background-position:center]" />
           <div className="absolute inset-y-8 left-0 w-[5px] rounded-r [background:repeating-linear-gradient(0deg,#cbd5e1_0_3px,transparent_3px_8px),repeating-linear-gradient(90deg,#cbd5e1_0_3px,transparent_3px_8px)]" />
           <div className="absolute inset-[13%] rounded-xl border border-dashed border-slate-600" />
         </div>
@@ -209,10 +210,10 @@ export function GameBoard({
       </div>
 
       <p className="mt-3 text-center text-[13px] leading-relaxed text-slate-500">
-        Sides are labelled by name, shape and pattern — <span className="font-semibold text-slate-700">Top ●</span>,{" "}
-        <span className="font-semibold text-slate-700">Right ◆</span>,{" "}
-        <span className="font-semibold text-slate-700">Bottom ▲</span>,{" "}
-        <span className="font-semibold text-slate-700">Left ■</span>. Two letters in a row must come from
+        Each side has its own pattern, shape and glyph — <span className="font-semibold text-slate-700">Solid ●</span>,{" "}
+        <span className="font-semibold text-slate-700">Dashed ◆</span>,{" "}
+        <span className="font-semibold text-slate-700">Dotted ▲</span>,{" "}
+        <span className="font-semibold text-slate-700">Double ■</span>. Two letters in a row must come from
         different sides.
       </p>
     </div>
