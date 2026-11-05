@@ -104,6 +104,32 @@ export function GameScreen({
   const [elapsedMs, setElapsedMs] = useState(0);
   const [solveTimeMs, setSolveTimeMs] = useState<number | null>(null);
   const [countdown, setCountdown] = useState("");
+  const gameSectionRef = useRef<HTMLElement | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(document.fullscreenElement !== null);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+      return;
+    }
+    const el = gameSectionRef.current;
+    if (!el) return;
+    try {
+      const result = el.requestFullscreen() as unknown as Promise<void> | void;
+      if (result && typeof (result as Promise<void>).catch === "function") {
+        (result as Promise<void>).catch(() => {});
+      }
+    } catch {
+      // Fullscreen is unavailable in this browser (e.g. some iOS browsers);
+      // the game simply stays at its normal size.
+    }
+  }, []);
   const solvedRecordedRef = useRef(false);
   const startedRecordedRef = useRef<string | null>(null);
   const startedAtRef = useRef<number | null>(null);
@@ -425,6 +451,7 @@ export function GameScreen({
         e.preventDefault();
         undo();
       } else if (e.key === "Escape") {
+        if (document.fullscreenElement) return;
         clearCurrent();
       } else if (/^[a-zA-Z]$/.test(e.key)) {
         const idx = letters.indexOf(e.key.toUpperCase());
@@ -438,7 +465,7 @@ export function GameScreen({
   const hintsLeft = MAX_HINTS - hintsUsedInGame;
 
   return (
-    <section aria-label="Daily word puzzle game" className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <section ref={gameSectionRef} aria-label="Daily word puzzle game" className={isFullscreen ? "mx-auto w-full max-w-none overflow-y-auto bg-cream px-4 py-6 sm:px-6" : "mx-auto w-full max-w-6xl px-4 sm:px-6"}>
       {/* Puzzle identity — deep forest storybook masthead with gold accents. */}
       <div className="relative mt-8 overflow-hidden rounded-[32px] border-[3px] border-gold/60 bg-gradient-to-br from-forest-deep via-forest-dark to-forest p-6 text-cream shadow-lift sm:p-8">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -488,6 +515,14 @@ export function GameScreen({
               className="min-h-11 cursor-pointer rounded-full bg-cream px-4 text-sm font-bold text-forest-dark shadow-sm transition hover:bg-gold-light active:scale-[0.98]"
             >
               How to Play
+            </button>
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              aria-pressed={isFullscreen}
+              className="min-h-11 cursor-pointer rounded-full border border-cream/40 bg-transparent px-4 text-sm font-semibold text-cream shadow-sm transition hover:bg-white/10 active:scale-[0.98]"
+            >
+              {isFullscreen ? "Exit full screen" : "⛶ Full screen"}
             </button>
           </div>
         </div>
