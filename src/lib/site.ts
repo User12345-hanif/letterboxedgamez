@@ -11,7 +11,7 @@ export const SITE = {
     "Letter Box Game is a free daily word puzzle. Use all twelve letters on four sides to build chained words — no two letters in a row from the same side. A new puzzle every day, plus unlimited practice puzzles.",
   /** Short description used for meta descriptions (kept under ~160 characters). */
   shortDescription:
-    "Play Letter Box Game — a free letter-box word puzzle every day. Connect letters around the board, discover words, and enjoy unlimited practice puzzles.",
+    "Play Letter Boxed — a free letter-box word puzzle every day. Connect letters around the board, discover words, and enjoy unlimited practice puzzles.",
   url: "https://letterboxedgamez.com",
   domain: "letterboxedgamez.com",
   locale: "en_US",

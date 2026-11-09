@@ -478,7 +478,7 @@ export function GameScreen({
               {mode === "daily" ? "Daily Puzzle" : "Practice"}
             </p>
             <h1 className="mt-2 font-display text-[30px] font-bold leading-[1.05] tracking-tight text-white sm:text-[48px]">
-              {mode === "daily" ? "Play Letter Box Game Online Free – Daily & Unlimited" : "Practice Letter Box Puzzles – Unlimited & Free"}
+              {mode === "daily" ? "Play Letter Boxed Online Free – Daily Puzzle & Unlimited Practice" : "Practice Letter Boxed Puzzles – Unlimited & Free"}
             </h1>
             <p className="mt-1.5 text-sm font-bold uppercase tracking-[0.12em] text-emerald-400">
               {formatPuzzleDate(today)} · {puzzle.label}

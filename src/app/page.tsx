@@ -125,17 +125,18 @@ export default function HomePage() {
           <nav aria-label="On this page" className="mt-8 rounded-3xl border border-slate-700/70 bg-slate-900/70 p-6 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.8)]">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">On this page — jump to a section</p>
             <ul className="mt-3 grid gap-1.5 text-sm sm:grid-cols-2">
-              <li><a href="#play-now" className="font-semibold text-emerald-400 underline underline-offset-4">Play Letter Box Game Now</a></li>
-              <li><a href="#what-is" className="font-semibold text-emerald-400 underline underline-offset-4">What is Letter Box Game?</a></li>
-              <li><a href="#how-to-play-home" className="font-semibold text-emerald-400 underline underline-offset-4">How to Play</a></li>
-              <li><a href="#different" className="font-semibold text-emerald-400 underline underline-offset-4">What makes it different?</a></li>
-              <li><a href="#fits-now" className="font-semibold text-emerald-400 underline underline-offset-4">Why it fits right now</a></li>
-              <li><a href="#two-modes" className="font-semibold text-emerald-400 underline underline-offset-4">Two Modes, One Puzzle</a></li>
-              <li><a href="#offers" className="font-semibold text-emerald-400 underline underline-offset-4">Everything it offers</a></li>
+              <li><a href="#play-now" className="font-semibold text-emerald-400 underline underline-offset-4">Play Letter Boxed Game Now</a></li>
+              <li><a href="#what-is" className="font-semibold text-emerald-400 underline underline-offset-4">What Is Letter Boxed?</a></li>
+              <li><a href="#how-to-play-home" className="font-semibold text-emerald-400 underline underline-offset-4">How to Play Letter Boxed</a></li>
+              <li><a href="#different" className="font-semibold text-emerald-400 underline underline-offset-4">What Makes Letter Boxed Different?</a></li>
+              <li><a href="#fits-now" className="font-semibold text-emerald-400 underline underline-offset-4">Why Letter Boxed Fits Right Now</a></li>
+              <li><a href="#two-modes" className="font-semibold text-emerald-400 underline underline-offset-4">Letter Boxed Daily vs Unlimited</a></li>
+              <li><a href="#offers" className="font-semibold text-emerald-400 underline underline-offset-4">Everything Letter Boxed Offers</a></li>
               <li><a href="#rules-home" className="font-semibold text-emerald-400 underline underline-offset-4">Rules &amp; Winning Conditions</a></li>
               <li><a href="#daily-challenge" className="font-semibold text-emerald-400 underline underline-offset-4">Daily Challenge</a></li>
               <li><a href="#strategies-home" className="font-semibold text-emerald-400 underline underline-offset-4">Strategies</a></li>
               <li><a href="#solver-home" className="font-semibold text-emerald-400 underline underline-offset-4">Solver Tool</a></li>
+              <li><a href="#hints-answers-home" className="font-semibold text-emerald-400 underline underline-offset-4">Hints &amp; Answers</a></li>
               <li><a href="#practice-home" className="font-semibold text-emerald-400 underline underline-offset-4">Unlimited Practice</a></li>
               <li><a href="#facts-home" className="font-semibold text-emerald-400 underline underline-offset-4">Facts</a></li>
               <li><a href="#beginners-home" className="font-semibold text-emerald-400 underline underline-offset-4">Tips for Beginners</a></li>
@@ -153,7 +154,7 @@ export default function HomePage() {
           <section aria-labelledby="play-now" className="mt-10">
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6 sm:p-8">
             <h2 id="play-now" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Play Letter Box Game Now
+              Play Letter Boxed Game Now
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
               The game is right above, ready to play. Tap letters, build words, and use all twelve letters. No download, no account, no waiting.
@@ -172,7 +173,7 @@ export default function HomePage() {
             <div className="mt-10">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">Start here</p>
             <h2 id="what-is" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              What is Letter Box Game?
+              What Is Letter Boxed?
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
               Letter Box Game is a word puzzle with twelve letters around a square, three on each side. You link words together until every letter has been used. That is the whole game — simple to learn, tricky to master. It is quick, it is calm, and it fits into a day. Anyone who likes words can play — no account, no age gate, no special knowledge, just twelve letters and a few minutes.
@@ -207,7 +208,7 @@ export default function HomePage() {
             <div className="mt-10">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">How to play</p>
             <h2 id="how-to-play-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              How to Play
+              How to Play Letter Boxed
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
               Pick letters in order, change sides every letter, and chain your words. The first word can start anywhere. Every word after it must start with the last letter of the previous word. When all twelve letters are used, you win.
@@ -244,7 +245,7 @@ export default function HomePage() {
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6 sm:p-8">
               <div>
                 <h2 id="different" className="font-display text-[26px] font-bold leading-tight">
-                  What makes it different?
+                  What Makes Letter Boxed Different?
                 </h2>
                 <p className="mt-2 text-[15px] leading-relaxed text-slate-400">
                   Most word games hide the answer or hide the letters. Here, every letter is visible, the board is the centrepiece, and the puzzle is the chain you build. Large letters, generous spacing, and a progress bar that always tells you which letters remain.
@@ -257,7 +258,7 @@ export default function HomePage() {
             </div>
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6 sm:p-8">
               <h2 className="font-display text-[26px] font-bold leading-tight text-white">
-                How Letter Box Game Differs from Other NYT Games
+                How Letter Boxed Differs from Other NYT Games
               </h2>
               <p className="mt-2 text-[15px] leading-relaxed text-slate-400">
                 Wordle asks you to guess a hidden word. Spelling Bee asks for as many words as you can find from seven letters. Connections asks you to sort words into hidden groups. Strands asks you to hunt theme words in a grid. Letter Box asks you to build a chain that uses everything. Same love of words, different puzzle. <Link href="/games-like-letter-boxed" className="font-semibold text-emerald-400 underline underline-offset-4">Compare all the games →</Link>
@@ -265,7 +266,7 @@ export default function HomePage() {
             </div>
             </div>
             <div className="mt-10">
-            <h3 className="font-display text-xl font-bold text-white">Letter Box Game vs other word games, at a glance</h3>
+            <h3 className="font-display text-xl font-bold text-white">Letter Boxed vs other word games, at a glance</h3>
             <div className="mt-3 overflow-x-auto rounded-2xl border border-slate-700/70 bg-slate-900">
               <table className="w-full min-w-[560px] border-collapse text-left text-sm leading-relaxed">
                 <thead>
@@ -288,7 +289,7 @@ export default function HomePage() {
             </div>
             <div className="mt-10">
             <h2 id="fits-now" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Why it fits right now
+              Why Letter Boxed Fits Right Now
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-400">The New York Times version sits behind a subscription. This independent version is free, with no account — so anyone can play a letter-box puzzle without paying first.</p>
             </div>
@@ -298,7 +299,7 @@ export default function HomePage() {
 
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">Modes</p>
             <h2 id="two-modes" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Two Modes, One Puzzle
+              Letter Boxed Daily vs Unlimited
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <article className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
@@ -326,7 +327,7 @@ export default function HomePage() {
             </div>
             <div className="mt-10">
             <h2 id="offers" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Everything it offers
+              Everything Letter Boxed Offers
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <article className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
@@ -357,7 +358,7 @@ export default function HomePage() {
 
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">Rules</p>
             <h2 id="rules-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Letter Box Game Rules (Complete Guide)
+              Letter Boxed Rules (Complete Guide)
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <article className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
@@ -371,7 +372,7 @@ export default function HomePage() {
             </div>
             <div className="mt-10">
             <h2 id="daily-challenge" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Daily Letter Box Challenge (How It Works)
+              Daily Letter Boxed Challenge (How It Works)
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-400">It is shared: everyone sees the same board on the same Pakistan calendar day, so friends can compare word counts without spoiling answers. It also changes on a clock you can trust — midnight Pakistan time, every day.</p>
             <p className="mt-4">
@@ -386,7 +387,7 @@ export default function HomePage() {
 
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">Strategy</p>
             <h2 id="strategies-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Letter Box Strategies
+              Letter Boxed Strategies
             </h2>
             <h3 className="mt-6 font-display text-xl font-bold text-white">Choosing an Ending Letter</h3>
             <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-400">End your first word in a letter that starts many common words — E, S, N, Y and L are friendly. A first word ending in a rare letter can strand you, because few words start there.</p>
@@ -397,16 +398,29 @@ export default function HomePage() {
             <p className="mt-4 text-[15px] text-slate-400">Full strategies, with the whole method: <Link href="/strategies" className="font-semibold text-emerald-400 underline underline-offset-4">Strategies →</Link> · <Link href="/8-letter-openers" className="font-semibold text-emerald-400 underline underline-offset-4">Long openers, honestly →</Link></p>
             <div className="mt-10 rounded-2xl border border-slate-700/70 bg-slate-900 p-6 sm:p-8">
             <h2 id="solver-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Letter Box Solver Tool (Free Assistant)
+              Letter Boxed Solver Tool (Free Assistant)
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
               Enter any twelve-letter board, three letters per side, and the solver finds the shortest chain that uses every letter — using only this site&apos;s word list, so every result is a chain the game itself would accept.
             </p>
             <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-slate-400">It lists every legal word for the board, groups them by first letter, then searches by chain length: one word, then two, then three, then four. The first length with a complete chain is the shortest available in this list. <Link href="/solver" className="font-semibold text-emerald-400 underline underline-offset-4">Try the solver →</Link></p>
             </div>
+            <div className="mt-10 rounded-2xl border border-slate-700/70 bg-slate-900 p-6 sm:p-8">
+            <h2 id="hints-answers-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
+              Letter Boxed Hints & Answers
+            </h2>
+            <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
+              Stuck on today&apos;s board? Every daily puzzle has tiered hints — a letter and a word length first, then the full word if you need it — and every board has a checked two-word solution. Hints teach; they never spoil the whole puzzle at once.
+            </p>
+            <p className="mt-4">
+              <Link href="/daily" className="min-h-11 inline-flex items-center rounded-full bg-emerald-600 px-5 shadow-[0_8px_20px_-8px_rgba(16,185,129,0.7)] text-sm font-bold text-white">Today&apos;s hints &amp; answers →</Link>
+              {" "}
+              <Link href="/solver" className="min-h-11 inline-flex items-center rounded-full border-2 border-slate-600 bg-slate-800/80 px-5 text-sm font-bold text-white">Try the solver →</Link>
+            </p>
+            </div>
             <div className="mt-10">
             <h2 id="practice-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              How to Practice with Unlimited Letter Box Puzzles
+              How to Practice with Unlimited Letter Boxed Puzzles
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-400">Finished the daily? Keep playing. Unlimited practice uses the same seven boards with a different starting point, and you can pick any board, any time, as often as you like. Your daily puzzle is never touched by practice play.</p>
             <p className="mt-4">
@@ -419,7 +433,7 @@ export default function HomePage() {
 
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-400">The facts</p>
             <h2 id="facts-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Letter Box Game Facts
+              Letter Boxed Facts
             </h2>
             <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-400">
               These are facts about this site&apos;s own game, measured from its boards and word list — not guesses, and not figures borrowed from another publisher.
@@ -438,7 +452,7 @@ export default function HomePage() {
             </p>
             <div className="mt-10">
             <h2 id="beginners-home" className="font-display text-[30px] font-bold leading-tight tracking-tight text-white sm:text-[38px]">
-              Letter Box Tips for Beginners
+              Letter Boxed Tips for Beginners
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-400">In your first week, expect three- and four-word solves, a few rejected words, and a lot of &quot;oh, that word works!&quot; moments. That is normal. Use hints when you are stuck — they are there to teach, not to punish.</p>
             <p className="mt-4 text-[15px] text-slate-400"><Link href="/letter-boxed-for-beginners" className="font-semibold text-emerald-400 underline underline-offset-4">Beginner&apos;s guide →</Link> · <Link href="/suffixes-and-prefixes" className="font-semibold text-emerald-400 underline underline-offset-4">Suffixes and prefixes that win →</Link></p>
@@ -478,7 +492,7 @@ export default function HomePage() {
           <section aria-labelledby="find-way" className="mt-16">
             <div className="grid gap-6 sm:grid-cols-3">
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
-              <h2 id="find-way" className="font-display text-xl font-bold text-white">GAME</h2>
+              <p id="find-way" className="font-display text-xl font-bold text-white">GAME</p>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed">
                 <li><Link href="/" className="font-semibold text-emerald-400 underline underline-offset-4">Play today&apos;s puzzle</Link></li>
                 <li><Link href="/unlimited" className="font-semibold text-emerald-400 underline underline-offset-4">Unlimited practice</Link></li>
@@ -488,7 +502,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
-              <h2 className="font-display text-xl font-bold text-white">LEARN</h2>
+              <p className="font-display text-xl font-bold text-white">LEARN</p>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed">
                 <li><Link href="/how-to-play" className="font-semibold text-emerald-400 underline underline-offset-4">How to play</Link></li>
                 <li><Link href="/strategies" className="font-semibold text-emerald-400 underline underline-offset-4">Strategies</Link></li>
@@ -502,7 +516,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div className="rounded-2xl border border-slate-700/70 bg-slate-900 p-6">
-              <h2 className="font-display text-xl font-bold text-white">INFO</h2>
+              <p className="font-display text-xl font-bold text-white">INFO</p>
               <ul className="mt-3 space-y-2 text-sm leading-relaxed">
                 <li><Link href="/about" className="font-semibold text-emerald-400 underline underline-offset-4">About Letter Box Game</Link></li>
                 <li><Link href="/faq" className="font-semibold text-emerald-400 underline underline-offset-4">Frequently asked questions</Link></li>
